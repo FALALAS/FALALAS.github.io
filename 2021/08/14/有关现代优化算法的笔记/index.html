@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>有关现代优化算法的笔记 - Leo Lee&#39;s blog</title>
+  
+    <meta name="keywords" content="算法">
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            Leo Lee's Blog
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post search' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://z3.ax1x.com/2021/08/06/fn4CB8.png"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Leo Lee's Blog</p>
+    
+    
+      <p class="subtitle">Welcome everyone</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <i class="icon fas fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              id="home">
+              <p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              id="categories">
+              <p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              id="tags">
+              <p>标签</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <p>归档</p>
+            </a>
+          
+            <a href="/friends/"
+              
+              
+              id="friends">
+              <p>友链</p>
+            </a>
+          
+            <a href="/about/"
+              
+              
+              id="about">
+              <p>关于</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        有关现代优化算法的笔记
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://www.hualigs.cn/image/610d277ae201d.jpg">
+    <p>李傲</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年8月14日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="有关现代优化算法的笔记" data-path="/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>已知100个目标的经度、纬度</p>
+<table>
+<thead>
+<tr>
+<th>纬度</th>
+<th>经度</th>
+<th>纬度</th>
+<th>经度</th>
+<th>纬度</th>
+<th>经度</th>
+<th>纬度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>53.7121</td>
+<td>46.3253</td>
+<td>28.2753</td>
+<td>46.3253</td>
+<td>28.2753</td>
+<td>30.3313</td>
+<td>6.9348</td>
+</tr>
+<tr>
+<td>56.5432</td>
+<td>22.7891</td>
+<td>23.1045</td>
+<td>22.7891</td>
+<td>23.1045</td>
+<td>10.1584</td>
+<td>12.4819</td>
+</tr>
+<tr>
+<td>20.1050</td>
+<td>26.4951</td>
+<td>22.1221</td>
+<td>26.4951</td>
+<td>22.1221</td>
+<td>31.4847</td>
+<td>8.9640</td>
+</tr>
+<tr>
+<td>26.2418</td>
+<td>28.9836</td>
+<td>25.9879</td>
+<td>28.9836</td>
+<td>25.9879</td>
+<td>38.4722</td>
+<td>20.1731</td>
+</tr>
+<tr>
+<td>28.2694</td>
+<td>36.4863</td>
+<td>29.7284</td>
+<td>36.4863</td>
+<td>29.7284</td>
+<td>0.9718</td>
+<td>28.1477</td>
+</tr>
+<tr>
+<td>8.9586</td>
+<td>10.5597</td>
+<td>15.1178</td>
+<td>10.5597</td>
+<td>15.1178</td>
+<td>50.2111</td>
+<td>10.2944</td>
+</tr>
+<tr>
+<td>8.1519</td>
+<td>0.1215</td>
+<td>18.8726</td>
+<td>0.1215</td>
+<td>18.8726</td>
+<td>48.2077</td>
+<td>16.8889</td>
+</tr>
+<tr>
+<td>31.9499</td>
+<td>47.4134</td>
+<td>23.7783</td>
+<td>47.4134</td>
+<td>23.7783</td>
+<td>41.8671</td>
+<td>3.5667</td>
+</tr>
+<tr>
+<td>43.5474</td>
+<td>30.8165</td>
+<td>13.4595</td>
+<td>30.8165</td>
+<td>13.4595</td>
+<td>27.7133</td>
+<td>5.0706</td>
+</tr>
+<tr>
+<td>23.9222</td>
+<td>12.7938</td>
+<td>15.7307</td>
+<td>12.7938</td>
+<td>15.7307</td>
+<td>4.9568</td>
+<td>8.3669</td>
+</tr>
+<tr>
+<td>21.5051</td>
+<td>6.2070</td>
+<td>5.1442</td>
+<td>6.2070</td>
+<td>5.1442</td>
+<td>49.2430</td>
+<td>16.7044</td>
+</tr>
+<tr>
+<td>17.1168</td>
+<td>9.4402</td>
+<td>3.9200</td>
+<td>9.4402</td>
+<td>3.9200</td>
+<td>11.5812</td>
+<td>14.5677</td>
+</tr>
+<tr>
+<td>52.1181</td>
+<td>24.4509</td>
+<td>6.5634</td>
+<td>24.4509</td>
+<td>6.5634</td>
+<td>26.7213</td>
+<td>28.5667</td>
+</tr>
+<tr>
+<td>37.5848</td>
+<td>24.4654</td>
+<td>3.1644</td>
+<td>24.4654</td>
+<td>3.1644</td>
+<td>0.7775</td>
+<td>6.9576</td>
+</tr>
+<tr>
+<td>14.4703</td>
+<td>3.1616</td>
+<td>4.2428</td>
+<td>3.1616</td>
+<td>4.2428</td>
+<td>18.5245</td>
+<td>14.3598</td>
+</tr>
+<tr>
+<td>58.6849</td>
+<td>56.5089</td>
+<td>13.7090</td>
+<td>56.5089</td>
+<td>13.7090</td>
+<td>52.5211</td>
+<td>15.7957</td>
+</tr>
+<tr>
+<td>38.4300</td>
+<td>8.9983</td>
+<td>23.6440</td>
+<td>8.9983</td>
+<td>23.6440</td>
+<td>50.1156</td>
+<td>23.7816</td>
+</tr>
+<tr>
+<td>13.7909</td>
+<td>23.0624</td>
+<td>8.4319</td>
+<td>23.0624</td>
+<td>8.4319</td>
+<td>19.9857</td>
+<td>5.7902</td>
+</tr>
+<tr>
+<td>40.8801</td>
+<td>18.6635</td>
+<td>6.7436</td>
+<td>18.6635</td>
+<td>6.7436</td>
+<td>52.8423</td>
+<td>27.2880</td>
+</tr>
+<tr>
+<td>39.9494</td>
+<td>10.1121</td>
+<td>27.2662</td>
+<td>10.1121</td>
+<td>27.2662</td>
+<td>28.7812</td>
+<td>27.6659</td>
+</tr>
+<tr>
+<td>8.0831</td>
+<td>53.7989</td>
+<td>0.2199</td>
+<td>53.7989</td>
+<td>0.2199</td>
+<td>33.6490</td>
+<td>0.3980</td>
+</tr>
+<tr>
+<td>1.3496</td>
+<td>19.3635</td>
+<td>17.6622</td>
+<td>19.3635</td>
+<td>17.6622</td>
+<td>36.9545</td>
+<td>23.0265</td>
+</tr>
+<tr>
+<td>15.7320</td>
+<td>44.0398</td>
+<td>16.2635</td>
+<td>44.0398</td>
+<td>16.2635</td>
+<td>39.7139</td>
+<td>28.4203</td>
+</tr>
+<tr>
+<td>6.9909</td>
+<td>24.6543</td>
+<td>19.6057</td>
+<td>24.6543</td>
+<td>19.6057</td>
+<td>36.9980</td>
+<td>24.3992</td>
+</tr>
+<tr>
+<td>4.1591</td>
+<td>23.9876</td>
+<td>9.4030</td>
+<td>23.9876</td>
+<td>9.4030</td>
+<td>41.1084</td>
+<td>27.7149</td>
+</tr>
+</tbody></table>
+<p>我方有一个基地，经度和纬度为(70,40)。假设我方飞机的速度为1000km/h。我方派一架飞机从基地出发，侦察完所有目标，再返回原来的基地。在每一个目标的侦察时间不计，求该架飞机所花费的最短时间。</p>
+<h4 id="模拟退火算法"><a href="#模拟退火算法" class="headerlink" title="模拟退火算法"></a>模拟退火算法</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">clc, clear, close all</span><br><span class="line">sj0=load(<span class="string">&#x27;data12_1.txt&#x27;</span>);</span><br><span class="line">x=sj0(:,[<span class="number">1</span>:<span class="number">2</span>:<span class="number">7</span>]); x=x(:);</span><br><span class="line">y=sj0(:,[<span class="number">2</span>:<span class="number">2</span>:<span class="number">8</span>]); y=y(:);</span><br><span class="line">sj=[x y]; d1=[<span class="number">70</span>,<span class="number">40</span>]; </span><br><span class="line">xy=[d1;sj;d1]; sj=xy*<span class="built_in">pi</span>/<span class="number">180</span>; <span class="comment">%角度化成弧度</span></span><br><span class="line">d=<span class="built_in">zeros</span>(<span class="number">102</span>); <span class="comment">%距离矩阵d初始化</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">101</span></span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">j</span>=<span class="built_in">i</span>+<span class="number">1</span>:<span class="number">102</span></span><br><span class="line">       d(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">6370</span>*<span class="built_in">acos</span>(<span class="built_in">cos</span>(sj(<span class="built_in">i</span>,<span class="number">1</span>)-sj(<span class="built_in">j</span>,<span class="number">1</span>))*<span class="built_in">cos</span>(sj(<span class="built_in">i</span>,<span class="number">2</span>))*...</span><br><span class="line">           <span class="built_in">cos</span>(sj(<span class="built_in">j</span>,<span class="number">2</span>))+<span class="built_in">sin</span>(sj(<span class="built_in">i</span>,<span class="number">2</span>))*<span class="built_in">sin</span>(sj(<span class="built_in">j</span>,<span class="number">2</span>)));</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">d=d+d&#x27;;</span><br><span class="line">path=[];long=<span class="built_in">inf</span>; <span class="comment">%巡航路径及长度初始化</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="number">1000</span>  <span class="comment">%求较好的初始解</span></span><br><span class="line">    path0=[<span class="number">1</span>,<span class="number">1</span>+randperm(<span class="number">100</span>),<span class="number">102</span>]; temp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">101</span></span><br><span class="line">        temp=temp+d(path0(<span class="built_in">i</span>),path0(<span class="built_in">i</span>+<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> temp&lt;long</span><br><span class="line">        path=path0; long=temp;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">e=<span class="number">0.1</span>^<span class="number">30</span>;L=<span class="number">20000</span>;at=<span class="number">0.999</span>;T=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:L  <span class="comment">%退火过程</span></span><br><span class="line">    c=<span class="number">2</span>+<span class="built_in">floor</span>(<span class="number">100</span>*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">2</span>));  <span class="comment">%产生新解</span></span><br><span class="line">    c=<span class="built_in">sort</span>(c); c1=c(<span class="number">1</span>);c2=c(<span class="number">2</span>);</span><br><span class="line">    <span class="comment">%计算代价函数值的增量</span></span><br><span class="line">    df=d(path(c1<span class="number">-1</span>),path(c2))+d(path(c1),path(c2+<span class="number">1</span>))-...</span><br><span class="line">        d(path(c1<span class="number">-1</span>),path(c1))-d(path(c2),path(c2+<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">if</span> df&lt;<span class="number">0</span> <span class="comment">%接受准则</span></span><br><span class="line">        path=[path(<span class="number">1</span>:c1<span class="number">-1</span>),path(c2:<span class="number">-1</span>:c1),path(c2+<span class="number">1</span>:<span class="number">102</span>)]; long=long+df;</span><br><span class="line">    <span class="keyword">elseif</span> <span class="built_in">exp</span>(-df/T)&gt;=<span class="built_in">rand</span></span><br><span class="line">        path=[path(<span class="number">1</span>:c1<span class="number">-1</span>),path(c2:<span class="number">-1</span>:c1),path(c2+<span class="number">1</span>:<span class="number">102</span>)]; long=long+df;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    T=T*at;</span><br><span class="line">    <span class="keyword">if</span> T&lt;e</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">path, long <span class="comment">% 输出巡航路径及路径长度</span></span><br><span class="line">xx=xy(path,<span class="number">1</span>); yy=xy(path,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(xx,yy,<span class="string">&#x27;-*&#x27;</span>) <span class="comment">%画出巡航路径</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">clc,clear, close all</span><br><span class="line">sj0=load(<span class="string">&#x27;data12_1.txt&#x27;</span>);</span><br><span class="line">x=sj0(:,<span class="number">1</span>:<span class="number">2</span>:<span class="number">8</span>); x=x(:);</span><br><span class="line">y=sj0(:,<span class="number">2</span>:<span class="number">2</span>:<span class="number">8</span>); y=y(:);</span><br><span class="line">sj=[x y]; d1=[<span class="number">70</span>,<span class="number">40</span>]; </span><br><span class="line">xy=[d1;sj;d1]; sj=xy*<span class="built_in">pi</span>/<span class="number">180</span>;  <span class="comment">%单位化成弧度</span></span><br><span class="line">d=<span class="built_in">zeros</span>(<span class="number">102</span>); <span class="comment">%距离矩阵d的初始值</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">101</span></span><br><span class="line">  <span class="keyword">for</span> <span class="built_in">j</span>=<span class="built_in">i</span>+<span class="number">1</span>:<span class="number">102</span></span><br><span class="line">      d(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">6370</span>*<span class="built_in">acos</span>(<span class="built_in">cos</span>(sj(<span class="built_in">i</span>,<span class="number">1</span>)-sj(<span class="built_in">j</span>,<span class="number">1</span>))*<span class="built_in">cos</span>(sj(<span class="built_in">i</span>,<span class="number">2</span>))*...</span><br><span class="line">          <span class="built_in">cos</span>(sj(<span class="built_in">j</span>,<span class="number">2</span>))+<span class="built_in">sin</span>(sj(<span class="built_in">i</span>,<span class="number">2</span>))*<span class="built_in">sin</span>(sj(<span class="built_in">j</span>,<span class="number">2</span>)));</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">d=d+d&#x27;; w=<span class="number">50</span>; g=<span class="number">100</span>; <span class="comment">%w为种群的个数，g为进化的代数</span></span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:w  <span class="comment">%通过改良圈算法选取初始种群</span></span><br><span class="line">    c=randperm(<span class="number">100</span>); <span class="comment">%产生1，...，100的一个全排列  </span></span><br><span class="line">    c1=[<span class="number">1</span>,c+<span class="number">1</span>,<span class="number">102</span>]; <span class="comment">%生成初始解</span></span><br><span class="line">    <span class="keyword">for</span> t=<span class="number">1</span>:<span class="number">102</span> <span class="comment">%该层循环是修改圈 </span></span><br><span class="line">        flag=<span class="number">0</span>; <span class="comment">%修改圈退出标志</span></span><br><span class="line">    <span class="keyword">for</span> m=<span class="number">1</span>:<span class="number">100</span></span><br><span class="line">      <span class="keyword">for</span> n=m+<span class="number">2</span>:<span class="number">101</span></span><br><span class="line">        <span class="keyword">if</span> d(c1(m),c1(n))+d(c1(m+<span class="number">1</span>),c1(n+<span class="number">1</span>))&lt;...</span><br><span class="line">                d(c1(m),c1(m+<span class="number">1</span>))+d(c1(n),c1(n+<span class="number">1</span>))</span><br><span class="line">           c1(m+<span class="number">1</span>:n)=c1(n:<span class="number">-1</span>:m+<span class="number">1</span>);  flag=<span class="number">1</span>; <span class="comment">%修改圈</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">if</span> flag==<span class="number">0</span></span><br><span class="line">      J(k,c1)=<span class="number">1</span>:<span class="number">102</span>; <span class="keyword">break</span> <span class="comment">%记录下较好的解并退出当前层循环</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">J(:,<span class="number">1</span>)=<span class="number">0</span>; J=J/<span class="number">102</span>; <span class="comment">%把整数序列转换成[0,1]区间上的实数，即转换成染色体编码</span></span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:g  <span class="comment">%该层循环进行遗传算法的操作 </span></span><br><span class="line">    A=J; <span class="comment">%交配产生子代A的初始染色体</span></span><br><span class="line">    c=randperm(w); <span class="comment">%产生下面交叉操作的染色体对 </span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">2</span>:w  </span><br><span class="line">        F=<span class="number">2</span>+<span class="built_in">floor</span>(<span class="number">100</span>*<span class="built_in">rand</span>(<span class="number">1</span>)); <span class="comment">%产生交叉操作的地址</span></span><br><span class="line">        temp=A(c(<span class="built_in">i</span>),[F:<span class="number">102</span>]); <span class="comment">%中间变量的保存值</span></span><br><span class="line">        A(c(<span class="built_in">i</span>),[F:<span class="number">102</span>])=A(c(<span class="built_in">i</span>+<span class="number">1</span>),[F:<span class="number">102</span>]); <span class="comment">%交叉操作</span></span><br><span class="line">        A(c(<span class="built_in">i</span>+<span class="number">1</span>),F:<span class="number">102</span>)=temp;  </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    by=[];  <span class="comment">%为了防止下面产生空地址，这里先初始化</span></span><br><span class="line"><span class="keyword">while</span> ~<span class="built_in">length</span>(by)</span><br><span class="line">    by=<span class="built_in">find</span>(<span class="built_in">rand</span>(<span class="number">1</span>,w)&lt;<span class="number">0.1</span>); <span class="comment">%产生变异操作的地址</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">B=A(by,:); <span class="comment">%产生变异操作的初始染色体</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:<span class="built_in">length</span>(by)</span><br><span class="line">   bw=<span class="built_in">sort</span>(<span class="number">2</span>+<span class="built_in">floor</span>(<span class="number">100</span>*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">3</span>)));  <span class="comment">%产生变异操作的3个地址</span></span><br><span class="line">   B(<span class="built_in">j</span>,:)=B(<span class="built_in">j</span>,[<span class="number">1</span>:bw(<span class="number">1</span>)<span class="number">-1</span>,bw(<span class="number">2</span>)+<span class="number">1</span>:bw(<span class="number">3</span>),bw(<span class="number">1</span>):bw(<span class="number">2</span>),bw(<span class="number">3</span>)+<span class="number">1</span>:<span class="number">102</span>]); <span class="comment">%交换位置</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">   G=[J;A;B]; <span class="comment">%父代和子代种群合在一起</span></span><br><span class="line">   [SG,ind1]=<span class="built_in">sort</span>(G,<span class="number">2</span>); <span class="comment">%把染色体翻译成1，...,102的序列ind1</span></span><br><span class="line">   num=<span class="built_in">size</span>(G,<span class="number">1</span>); long=<span class="built_in">zeros</span>(<span class="number">1</span>,num); <span class="comment">%路径长度的初始值</span></span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num</span><br><span class="line">       <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">101</span></span><br><span class="line">           long(<span class="built_in">j</span>)=long(<span class="built_in">j</span>)+d(ind1(<span class="built_in">j</span>,<span class="built_in">i</span>),ind1(<span class="built_in">j</span>,<span class="built_in">i</span>+<span class="number">1</span>)); <span class="comment">%计算每条路径长度</span></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">     [slong,ind2]=<span class="built_in">sort</span>(long); <span class="comment">%对路径长度按照从小到大排序</span></span><br><span class="line">     J=G(ind2(<span class="number">1</span>:w),:); <span class="comment">%精选前w个较短的路径对应的染色体</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">path=ind1(ind2(<span class="number">1</span>),:), flong=slong(<span class="number">1</span>)  <span class="comment">%解的路径及路径长度</span></span><br><span class="line">xx=xy(path,<span class="number">1</span>);yy=xy(path,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(xx,yy,<span class="string">&#x27;-o&#x27;</span>) <span class="comment">%画出路径</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="改进的遗传算法"><a href="#改进的遗传算法" class="headerlink" title="改进的遗传算法"></a>改进的遗传算法</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">tic  <span class="comment">%计时开始</span></span><br><span class="line">clc,clear, close all</span><br><span class="line">sj0=load(<span class="string">&#x27;data12_1.txt&#x27;</span>); </span><br><span class="line">x=sj0(:,<span class="number">1</span>:<span class="number">2</span>:<span class="number">8</span>); x=x(:);</span><br><span class="line">y=sj0(:,<span class="number">2</span>:<span class="number">2</span>:<span class="number">8</span>); y=y(:);</span><br><span class="line">sj=[x y]; d1=[<span class="number">70</span>,<span class="number">40</span>]; </span><br><span class="line">xy=[d1;sj;d1]; sj=xy*<span class="built_in">pi</span>/<span class="number">180</span>;  <span class="comment">%单位化成弧度</span></span><br><span class="line">d=<span class="built_in">zeros</span>(<span class="number">102</span>); <span class="comment">%距离矩阵d的初始值</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">101</span></span><br><span class="line">  <span class="keyword">for</span> <span class="built_in">j</span>=<span class="built_in">i</span>+<span class="number">1</span>:<span class="number">102</span></span><br><span class="line">      d(<span class="built_in">i</span>,<span class="built_in">j</span>)=<span class="number">6370</span>*<span class="built_in">acos</span>(<span class="built_in">cos</span>(sj(<span class="built_in">i</span>,<span class="number">1</span>)-sj(<span class="built_in">j</span>,<span class="number">1</span>))*<span class="built_in">cos</span>(sj(<span class="built_in">i</span>,<span class="number">2</span>))*...</span><br><span class="line">             <span class="built_in">cos</span>(sj(<span class="built_in">j</span>,<span class="number">2</span>))+<span class="built_in">sin</span>(sj(<span class="built_in">i</span>,<span class="number">2</span>))*<span class="built_in">sin</span>(sj(<span class="built_in">j</span>,<span class="number">2</span>)));</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">d=d+d&#x27;; w=<span class="number">50</span>; g=<span class="number">100</span>; <span class="comment">%w为种群的个数，g为进化的代数</span></span><br><span class="line"><span class="built_in">rand</span>(<span class="string">&#x27;state&#x27;</span>,sum(clock)); <span class="comment">%初始化随机数发生器</span></span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:w  <span class="comment">%通过改良圈算法选取初始种群</span></span><br><span class="line">    c=randperm(<span class="number">100</span>); <span class="comment">%产生1，...，100的一个全排列  </span></span><br><span class="line">    c1=[<span class="number">1</span>,c+<span class="number">1</span>,<span class="number">102</span>]; <span class="comment">%生成初始解</span></span><br><span class="line">    <span class="keyword">for</span> t=<span class="number">1</span>:<span class="number">102</span> <span class="comment">%该层循环是修改圈 </span></span><br><span class="line">        flag=<span class="number">0</span>; <span class="comment">%修改圈退出标志</span></span><br><span class="line">    <span class="keyword">for</span> m=<span class="number">1</span>:<span class="number">100</span></span><br><span class="line">      <span class="keyword">for</span> n=m+<span class="number">2</span>:<span class="number">101</span></span><br><span class="line">        <span class="keyword">if</span> d(c1(m),c1(n))+d(c1(m+<span class="number">1</span>),c1(n+<span class="number">1</span>))&lt;...</span><br><span class="line">                d(c1(m),c1(m+<span class="number">1</span>))+d(c1(n),c1(n+<span class="number">1</span>))</span><br><span class="line">           c1(m+<span class="number">1</span>:n)=c1(n:<span class="number">-1</span>:m+<span class="number">1</span>);  flag=<span class="number">1</span>; <span class="comment">%修改圈</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">if</span> flag==<span class="number">0</span></span><br><span class="line">      J(k,c1)=<span class="number">1</span>:<span class="number">102</span>; <span class="keyword">break</span> <span class="comment">%记录下较好的解并退出当前层循环</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">J(:,<span class="number">1</span>)=<span class="number">0</span>; J=J/<span class="number">102</span>; <span class="comment">%把整数序列转换成[0,1]区间上的实数，即转换成染色体编码</span></span><br><span class="line"><span class="keyword">for</span> k=<span class="number">1</span>:g  <span class="comment">%该层循环进行遗传算法的操作 </span></span><br><span class="line">    A=J; <span class="comment">%交配产生子代A的初始染色体</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">2</span>:w</span><br><span class="line">        ch1(<span class="number">1</span>)=<span class="built_in">rand</span>; <span class="comment">%混沌序列的初始值</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:<span class="number">50</span></span><br><span class="line">            ch1(<span class="built_in">j</span>)=<span class="number">4</span>*ch1(<span class="built_in">j</span><span class="number">-1</span>)*(<span class="number">1</span>-ch1(<span class="built_in">j</span><span class="number">-1</span>)); <span class="comment">%产生混沌序列</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        ch1=<span class="number">2</span>+<span class="built_in">floor</span>(<span class="number">100</span>*ch1); <span class="comment">%产生交叉操作的地址</span></span><br><span class="line">        temp=A(<span class="built_in">i</span>,ch1); <span class="comment">%中间变量的保存值</span></span><br><span class="line">        A(<span class="built_in">i</span>,ch1)=A(<span class="built_in">i</span>+<span class="number">1</span>,ch1); <span class="comment">%交叉操作</span></span><br><span class="line">        A(<span class="built_in">i</span>+<span class="number">1</span>,ch1)=temp;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    by=[];  <span class="comment">%为了防止下面产生空地址，这里先初始化</span></span><br><span class="line"><span class="keyword">while</span> ~<span class="built_in">length</span>(by)</span><br><span class="line">    by=<span class="built_in">find</span>(<span class="built_in">rand</span>(<span class="number">1</span>,w)&lt;<span class="number">0.1</span>); <span class="comment">%产生变异操作的地址</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">num1=<span class="built_in">length</span>(by); B=J(by,:); <span class="comment">%产生变异操作的初始染色体</span></span><br><span class="line">ch2=<span class="built_in">rand</span>;  <span class="comment">%产生混沌序列的初始值</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="number">2</span>:<span class="number">2</span>*num1 </span><br><span class="line">       ch2(t)=<span class="number">4</span>*ch2(t<span class="number">-1</span>)*(<span class="number">1</span>-ch2(t<span class="number">-1</span>)); <span class="comment">%产生混沌序列</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num1</span><br><span class="line">   bw=<span class="built_in">sort</span>(<span class="number">2</span>+<span class="built_in">floor</span>(<span class="number">100</span>*<span class="built_in">rand</span>(<span class="number">1</span>,<span class="number">2</span>)));  <span class="comment">%产生变异操作的2个地址</span></span><br><span class="line">   B(<span class="built_in">j</span>,bw)=ch2([<span class="built_in">j</span>,<span class="built_in">j</span>+<span class="number">1</span>]); <span class="comment">%bw处的两个基因发生了变异</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">   G=[J;A;B]; <span class="comment">%父代和子代种群合在一起</span></span><br><span class="line">   [SG,ind1]=<span class="built_in">sort</span>(G,<span class="number">2</span>); <span class="comment">%把染色体翻译成1，...,102的序列ind1</span></span><br><span class="line">   num2=<span class="built_in">size</span>(G,<span class="number">1</span>); long=<span class="built_in">zeros</span>(<span class="number">1</span>,num2); <span class="comment">%路径长度的初始值</span></span><br><span class="line">   <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:num2</span><br><span class="line">       <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:<span class="number">101</span></span><br><span class="line">           long(<span class="built_in">j</span>)=long(<span class="built_in">j</span>)+d(ind1(<span class="built_in">j</span>,<span class="built_in">i</span>),ind1(<span class="built_in">j</span>,<span class="built_in">i</span>+<span class="number">1</span>)); <span class="comment">%计算每条路径长度</span></span><br><span class="line">       <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">     [slong,ind2]=<span class="built_in">sort</span>(long); <span class="comment">%对路径长度按照从小到大排序</span></span><br><span class="line">     J=G(ind2(<span class="number">1</span>:w),:); <span class="comment">%精选前w个较短的路径对应的染色体</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">path=ind1(ind2(<span class="number">1</span>),:), flong=slong(<span class="number">1</span>)  <span class="comment">%解的路径及路径长度</span></span><br><span class="line">toc  <span class="comment">%计时结束</span></span><br><span class="line">xx=xy(path,<span class="number">1</span>);yy=xy(path,<span class="number">2</span>);</span><br><span class="line"><span class="built_in">plot</span>(xx,yy,<span class="string">&#x27;-o&#x27;</span>) <span class="comment">%画出路径</span></span><br></pre></td></tr></table></figure>
+
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-08-14T23:32:33+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年8月14日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%AE%97%E6%B3%95/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>算法</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关现代优化算法的笔记 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关现代优化算法的笔记 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关现代优化算法的笔记 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/'>
+          <p class='title'>有关于FASTQ文件中的碱基序列压缩问题的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>目前 FASTQ 文件的无损压缩算法主要分为四类。第一类即使用普适的压缩软件 对文件进行压缩存储，例如 Gzip 以及 Bzip2，该类方法将 FASTQ 文件看做普通的字 符输入，不对其做任何...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95"><span class="toc-text">模拟退火算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="toc-text">遗传算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E7%9A%84%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="toc-text">改进的遗传算法</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="有关现代优化算法的笔记";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2021 李傲</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+
+<script>
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+    let pagePlaceholder = pdata.commentPlaceholder || "快来评论吧~";
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    var valine = new Valine();
+    valine.init(Object.assign({"js":"https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js","path":null,"placeholder":"快来评论吧~","appId":"MWQrxu8b3KFPpdL0lcGw9wzA-gzGzoHsz","appKey":"sXrj3aemj3UxvOw5CmCyvxjv","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"enableQQ":true,"recordIP":false,"avatar":"robohash","pageSize":10,"lang":"zh-cn","highlight":true,"mathJax":false}, {
+      el: '#valine_container',
+      path: path,
+      placeholder: pagePlaceholder,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps,
+    }))
+  }
+  $(function () {
+    pjax_valine();
+  });
+  volantis.pjax.push(pjax_valine);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+		document.addEventListener("pjax:success", listenSearch);
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'http://example.com' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+ 
+	   
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+ 
+	  
+    </div>
+  </body>
+</html>
