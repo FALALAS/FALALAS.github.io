@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
+
+  <!-- 页面元数据 -->
+  
+  <title>有关多臂老虎机问题的一些算法 - Leo Lee&#39;s blog</title>
+  
+    <meta name="keywords" content="算法,机器学习,数学">
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
+
+
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+    </div>
+</noscript>
+
+</head>
+
+  <body>
+    
+
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+            Leo Lee's Blog
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper post search' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://z3.ax1x.com/2021/08/06/fn4CB8.png"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Leo Lee's Blog</p>
+    
+    
+      <p class="subtitle">Welcome everyone</p>
+    
+  </div>
+  <div class='bottom'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <i class="icon fas fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              id="home">
+              <p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              id="categories">
+              <p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              id="tags">
+              <p>标签</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <p>归档</p>
+            </a>
+          
+            <a href="/friends/"
+              
+              
+              id="friends">
+              <p>友链</p>
+            </a>
+          
+            <a href="/about/"
+              
+              
+              id="about">
+              <p>关于</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
+          
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        有关多臂老虎机问题的一些算法
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://www.hualigs.cn/image/610d277ae201d.jpg">
+    <p>李傲</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年12月2日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="有关多臂老虎机问题的一些算法" data-path="/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  <h1 id="用数理统计方法解决多臂老虎机问题"><a href="#用数理统计方法解决多臂老虎机问题" class="headerlink" title="用数理统计方法解决多臂老虎机问题"></a>用数理统计方法解决多臂老虎机问题</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>多臂老虎机问题（Multi-Armed Bandit<br>problem，简称MAB问题）是概率论与数理统计中一个经典问题，也属于机器学习中强化学习的范畴。</p>
+<p>在这个问题中，赌徒必须决定在一系列试验中使用不同的老虎机中的哪一个，以最大化他的回报。这一经典问题之所以受到广泛关注，是因为它提供了一个简单的模型，在探索（尝试每个机器以找到回报最好的一台）、利用（使用带来最好回报的老虎机）之间进行权衡。强化学习现在也面对着同样的困境，即探索和利用(<br>Explore ＆ Exploit，简称 E＆E) 问题。</p>
+<p>下文我将建立MAB问题的数学模型，并探讨一些基于数理统计方法的多臂老虎机问题的近似最优解决方案。</p>
+<p>关键词：概率论 数理统计 强化学习 贪心算法 假设检验 汤普森抽样</p>
+<h2 id="1简介"><a href="#1简介" class="headerlink" title="1简介"></a>1简介</h2><p>用科学的语言来阐述这个问题，即为我们必须以最大化其预期收益的方式在备选选择之间分配固定的有限资源，而每个选择的属性在分配时仅部分已知，通过将资源分配给选择并得到结果后，我们会对每种选择有更深入的了解，以此不断优化自己的选择。</p>
+<p>多臂老虎机这个名字来自一个设想，一个赌徒面前有个老虎机，事先他不知道每台老虎机的真实盈利情况，他只能根据每次玩老虎机的结果来选择下次拉哪台老虎机的摇杆（Arm）或者停止赌博，来最大化自己整个过程中的收益。</p>
+<p>每台机器都会根据特定于该机器的概率分布提供一个随机奖励，分布对于赌徒是未知的。赌徒的目标是通过一系列摇杆拉动来最大化获得的奖励总额。赌徒在每次试验中面临的关键权衡是利用（Explosit）预期收益最高的机器，和探索（Explore）以获得更多关于其他机器预期收益的信息。</p>
+<p>机器学习中的强化学习（Reinforcement<br>Learning，RL），用于描述和解决<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%99%BA%E8%83%BD%E4%BD%93/9446647">智能体</a>（Agent）在与环境的交互过程中通过学习策略以达成回报最大化或实现特定目标的问题，即为复杂的MAB问题，赌徒可以看作智能体，拉动摇杆可以视作与环境的交互。</p>
+<p>![图 1：拉斯维加斯的一排老虎机](C:/Users/Leo Lee/Desktop/media/ba9d9ef00362aa92b32c9331f00b0ece.jpeg)</p>
+<h2 id="2模型建立"><a href="#2模型建立" class="headerlink" title="2模型建立"></a>2模型建立</h2><p>多臂老虎机问题可以看作是一组真实分布，每个分配都与其中一个提供的奖励相关联。是与这些奖励分布相关的平均值。赌徒每轮重复地玩一个老虎机并观察相关的奖励，目标是最大化收集到的奖励的总和。是剩余的回合数。多臂老虎机在形式上等价于单状态马尔可夫决策过程。轮后，我们定义遗憾为最佳策略相奖励总和与收集的奖励总和之间的差：</p>
+<p>其中是最大奖励均值，，是第轮的实际奖励。</p>
+<p>我们的目标可以近似转化为：</p>
+<h2 id="3模型假设"><a href="#3模型假设" class="headerlink" title="3模型假设"></a>3模型假设</h2><p>（1）假设每台老虎机每轮提供的奖励总体服从正态分布。</p>
+<p>（2）假设老虎机可能会产生负的奖励。</p>
+<p>（3）假设赌徒是理性的。</p>
+<h2 id="4解决问题前的准备"><a href="#4解决问题前的准备" class="headerlink" title="4解决问题前的准备"></a>4解决问题前的准备</h2><h3 id="4-1-normrnd-函数"><a href="#4-1-normrnd-函数" class="headerlink" title="4.1 normrnd()函数"></a>4.1 normrnd()函数</h3><p>下文中的代码主要是MATLAB语言，我选择使用normrnd()函数来生成正态分布随机数，在使用之前先测试实验多少次会具有显著的正态分布特征。</p>
+<p><strong>注意：</strong>该函数的使用需要安装Statistics and Machine Learning Toolbox</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/fc2d13ad75a9d0694898e0ecb2ad759b.png)</p>
+<p>图 2：10次实验</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/b6b9be00a46baa9aebfaeaf129aabbd2.png)</p>
+<p>图 3：100次实验</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/f508d30337f2e95d254cd8be675f63ad.png)</p>
+<p>图 4：1000次实验</p>
+<p>我们可以显著看到当试验次数达到1000次及以上时，抽样结果非常接近于正态分布。</p>
+<p>4.2 randn()函数</p>
+<p>生成平均奖励值主要使用randn()函数，我测试了10000次，其中函数生成的最大值与最小值如下图所示</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/a9a68ca3447e5f037d1fd869dd4ca3dd.png)</p>
+<p>图 5：randn函数生成的最大值与最小值</p>
+<h2 id="5-MAB问题的解决方案"><a href="#5-MAB问题的解决方案" class="headerlink" title="5 MAB问题的解决方案"></a>5 MAB问题的解决方案</h2><h3 id="5-1-ϵ-greedy算法"><a href="#5-1-ϵ-greedy算法" class="headerlink" title="5.1 ϵ-greedy算法"></a>5.1 ϵ-greedy算法</h3><p><strong>Step 1：</strong>选定一个之间的基准，记为。</p>
+<p><strong>Step 2：</strong>先进行一定次数的探索，选定一个当前平均回报较高的选择。</p>
+<p><strong>Step<br>3：</strong>开始利用，每次先生成一个随机数，若，则选择当前最优选择，反之，从个选择中任选。</p>
+<p><strong>Step 4：</strong>利用结束之后更新每个选择的平均回报，并返回Step 4，直到全部试验结束。</p>
+<p>在这个算法中，每次利用时，当前最优选择会有的概率会被选中，随着时间的流逝，最好的机器会越来越频繁地被选择。</p>
+<p>简而言之，ϵ-greedy策略意味着大多数时候都选择当前最佳选项（“贪婪”），但有时选择概率很小的随机选项</p>
+<h4 id="一些变体："><a href="#一些变体：" class="headerlink" title="一些变体："></a><strong>一些变体：</strong></h4><ul>
+<li>  ϵ-decreasing算法</li>
+</ul>
+<p>类似于ϵ-greedy算法，不同之处在于随着实验的进行而减少，导致开始时的高度探索行为和结束时的高度剥削行为。</p>
+<ul>
+<li>  ϵ-first算法</li>
+</ul>
+<p>类似于ϵ-greedy算法，不同之处在于纯探索阶段之后是纯开发阶段。{\displaystyle<br>N}探索阶段占据试验，利用阶段占据次{\displaystyle (1-\epsilon<br>)N}试验。在探索阶段，随机选择一个选项（概率均匀），在开发阶段，总是选择最好的选项。</p>
+<p>这几种算法的比较如下图，每种情况下算法的优劣不一定相同，下图仅随机列举一种，但是我们可以发现所有的算法都会比完全随机的情况要好。</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/501f8b2b9225211e8af23fa76b267d6a.png)</p>
+<p>图 6：不同算法间的累计获利</p>
+<h3 id="5-2-UCB算法"><a href="#5-2-UCB算法" class="headerlink" title="5.2 UCB算法"></a>5.2 UCB算法</h3><p>UCB算法全称是Upper Confidence<br>Bound（置信区间上界），该算法的精神被认为是乐观地面对不确定性。</p>
+<p><strong>Step 1：</strong>在前轮，每个摇杆各选择一次。</p>
+<p><strong>Step 2：</strong>在轮中，选择指数最大的选项，指数定义为：</p>
+<p>其中，是选项当前的奖励均值，是选项当前累计被选择的次数。</p>
+<p><strong>Step 3：</strong>记录获得的奖励,并更新和。</p>
+<p>其中叫做Bonus，本质上是均值的标准差。这个公式反映：均值越大，标准差越小，被选中的概率会越来越大，起到了Exploit的作用。同时那些些被选次数较少的臂也会得到试验机会，起到了Explore的作用。</p>
+<h3 id="一些变体：-1"><a href="#一些变体：-1" class="headerlink" title="一些变体："></a><strong>一些变体：</strong></h3><ul>
+<li>  LCB算法</li>
+</ul>
+<p>LCB算法的全称是Upper Confidence<br>Bound(置信区间上界)，相较于UCB算法，它会选择置信区间下界，即把UCB算法中的更新为：</p>
+<p>LCB算法是一种悲观保守的算法。不过随着时间的流逝，它的效果会逐渐趋近于UCB算法。</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/4a894c44705a49f4c921dd9d1cc2dcce.jpeg)</p>
+<p>图 7：不同算法间的累计获利</p>
+<h3 id="5-3-汤普森采样（Thompson-sampling）算法"><a href="#5-3-汤普森采样（Thompson-sampling）算法" class="headerlink" title="5.3 汤普森采样（Thompson sampling）算法"></a>5.3 汤普森采样（Thompson sampling）算法</h3><p>假设每个摇杆是否产生收益，其背后有一个概率分布，产生的平均收益的为p。我们只要不断的实验，去估计出一个置信度较高的“的概率分布”就可以了，而分布就可以看作是概率的概率分布，可以给出所有概率出现的可能性大小。</p>
+<p><strong>Step 1：</strong>设每个摇杆都维护一个分布的概率密度函数，初始都设置为。</p>
+<p><strong>Step<br>2：</strong>先进行一定次数的探索，若被选中的摇杆的收益大于1（条件可以根据不同的多臂老虎机条件来设定），<br>则，反之。</p>
+<p><strong>Step<br>3：</strong>在利用阶段，用每个摇杆现在的分布产生一个随机数，选择所有摇杆产生的随机数中最大的那个摇杆去摇，并更新分布的参数。</p>
+<p>![](C:/Users/Leo Lee/Desktop/media/bcd45523bd995c2216a6ac6cb3f2c351.jpeg)</p>
+<p>图 8：不同算法间的累计获利</p>
+<h2 id="6解决方案的优缺点"><a href="#6解决方案的优缺点" class="headerlink" title="6解决方案的优缺点"></a>6解决方案的优缺点</h2><h3 id="6-1方案的优点"><a href="#6-1方案的优点" class="headerlink" title="6.1方案的优点"></a>6.1方案的优点</h3><p>1）所有的算法均达到了预期效果，即比随机情况要好。</p>
+<p>2）所有的算法的复杂度都在可接受的范围内，耗时较短。</p>
+<h3 id="6-2方案的缺点"><a href="#6-2方案的缺点" class="headerlink" title="6.2方案的缺点"></a>6.2方案的缺点</h3><p>1）找不到最优解。</p>
+<p>2）不同算法之间的差别没体现出来，或许是条件设置不够。</p>
+<p>7总结</p>
+<p>通过这次自主探索，我学习到了强化学习和数理统计相关的知识，并深刻地认识到了概率论在人工智能领域的重要作用。</p>
+<h2 id="8参考文献"><a href="#8参考文献" class="headerlink" title="8参考文献"></a>8参考文献</h2><ol>
+<li><p>Wikipedia，Multi-armed bandit，<br> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multi-armed_bandit/#cite_note-29%EF%BC%8C2021-12-2%E3%80%82">https://en.wikipedia.org/wiki/Multi-armed_bandit\#cite_note-29，2021-12-2。</a></p>
+</li>
+<li><p> 刑无刀，专治选择困难症—bandit算法，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21388070%EF%BC%8C2021-12-2">https://zhuanlan.zhihu.com/p/21388070，2021-12-2</a>。</p>
+</li>
+<li><p>用户5753894，小孩都看得懂的多臂老虎机和汤姆森采样，<br> <a href="%20https://cloud.tencent.com/developer/article/1853831%EF%BC%8C2021-12-2">https://cloud.tencent.com/developer/article/1853831，2021-12-2</a>。</p>
+</li>
+</ol>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="1、测试normrnd-与·randn-函数："><a href="#1、测试normrnd-与·randn-函数：" class="headerlink" title="1、测试normrnd()与·randn()函数："></a>1、测试normrnd()与·randn()函数：</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">clc,clear</span><br><span class="line"></span><br><span class="line">N=<span class="number">10</span>;<span class="comment">%这里可以改变</span></span><br><span class="line"></span><br><span class="line">answer=<span class="built_in">zeros</span>(<span class="number">1</span>,N);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:N</span><br><span class="line"></span><br><span class="line">answer(n)=normrnd(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">normplot(answer);</span><br><span class="line"></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">hist(answer);</span><br><span class="line"></span><br><span class="line">K = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:<span class="number">100000</span></span><br><span class="line"></span><br><span class="line">    AverReward = <span class="built_in">randn</span>([<span class="number">1</span> K]);</span><br><span class="line">    </span><br><span class="line">    maxx(n)=<span class="built_in">max</span>(AverReward);</span><br><span class="line">    </span><br><span class="line">    minn(n)=<span class="built_in">min</span>(AverReward);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">max</span>(maxx)</span><br><span class="line"></span><br><span class="line"><span class="built_in">min</span>(minn)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、-ϵ-greedy算法："><a href="#2、-ϵ-greedy算法：" class="headerlink" title="2、  ϵ-greedy算法："></a>2、  ϵ-greedy算法：</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 10-Armed Bandit</span></span><br><span class="line"></span><br><span class="line">K = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">AverReward = <span class="built_in">randn</span>([<span class="number">1</span> K]);</span><br><span class="line"></span><br><span class="line">N = <span class="number">10000</span>; <span class="comment">% 10000 experiments</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%epsilon-greedy策略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epsilon=[<span class="number">0</span>,<span class="number">0.1</span>:<span class="number">0.2</span>:<span class="number">0.9</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">%当epsilon=0时近似看作epsilon-decreasing策略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%当epsilon=1时为完全随机策略</span></span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N);</span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:<span class="number">1000</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Q=SumReward./n;</span><br><span class="line"></span><br><span class="line"><span class="comment">%Q为经过探索后获得的平均奖励序列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n = <span class="number">1000</span>:N</span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(Q);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(maxx\~=<span class="number">0</span> &amp;&amp; <span class="built_in">rand</span>(<span class="number">1</span>) \&lt; <span class="number">1</span> - epsilon)</span><br><span class="line"></span><br><span class="line">Action = <span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line">Q(Action) = SumReward(Action)/n;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1</span>:N,SumSum,<span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;\$\\epsilon\$=&#x27;</span> num2str(epsilon)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%epsilon-first策略</span></span><br><span class="line"></span><br><span class="line">epsilon=<span class="number">0.1</span>;</span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N);</span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:N\*epsilon</span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Q=SumReward./n;</span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(Q);</span><br><span class="line"></span><br><span class="line">action=<span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=N\*epsilon:N</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1</span>:N,SumSum,LineWidth=<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;\$epsilon\$=&#x27;</span> num2str(<span class="built_in">j</span>)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、UCB算法："><a href="#3、UCB算法：" class="headerlink" title="3、UCB算法："></a>3、UCB算法：</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 10-Armed Bandit</span></span><br><span class="line"></span><br><span class="line">K = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">AverReward = <span class="built_in">randn</span>([<span class="number">1</span> K]);</span><br><span class="line"></span><br><span class="line">N = <span class="number">10000</span>; <span class="comment">% 10000 experiments</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%UCB策略</span></span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N+K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:K</span><br><span class="line"></span><br><span class="line">Action=n;</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">I=SumReward;</span><br><span class="line"></span><br><span class="line">T=<span class="built_in">ones</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="comment">%前K次实验之后</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:N</span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(I);</span><br><span class="line"></span><br><span class="line">Action=<span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n+K)=sum(SumReward);</span><br><span class="line"></span><br><span class="line">T(Action)=T(Action)+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">I(Action)=SumReward(Action)/T(Action)+<span class="number">2</span>\*<span class="built_in">sqrt</span>(<span class="number">2</span>\*<span class="built_in">log</span>(n+K)/T(Action));</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(SumSum,LineWidth=<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;UCB&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epsilon=[<span class="number">0</span>,<span class="number">0.1</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">%当epsilon=0时近似看作epsilon-decreasing策略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%当epsilon=1时为完全随机策略</span></span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N);</span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:<span class="number">1000</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Q=SumReward./n;</span><br><span class="line"></span><br><span class="line"><span class="comment">%Q为经过探索后获得的平均奖励序列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n = <span class="number">1000</span>:N</span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(Q);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(maxx\~=<span class="number">0</span> &amp;&amp; <span class="built_in">rand</span>(<span class="number">1</span>) \&lt; <span class="number">1</span> - epsilon)</span><br><span class="line"></span><br><span class="line">Action = <span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line">Q(Action) = SumReward(Action)/n;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1</span>:N,SumSum,<span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;\$\\epsilon\$=&#x27;</span> num2str(epsilon)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、汤普森抽样算法（Thompson-Sampling）"><a href="#4、汤普森抽样算法（Thompson-Sampling）" class="headerlink" title="4、汤普森抽样算法（Thompson Sampling）"></a>4、汤普森抽样算法（Thompson Sampling）</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 10-Armed Bandit</span></span><br><span class="line"></span><br><span class="line">K = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">AverReward = <span class="built_in">randn</span>([<span class="number">1</span> K]);</span><br><span class="line"></span><br><span class="line">N = <span class="number">10000</span>; <span class="comment">% 10000 experiments</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%汤普森策略</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">beta</span>=<span class="built_in">ones</span>(K,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:<span class="number">1000</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(Reward(Action)\&gt;<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">beta</span>(Action,<span class="number">1</span>)=<span class="built_in">beta</span>(Action,<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">beta</span>(Action,<span class="number">2</span>)=<span class="built_in">beta</span>(Action,<span class="number">2</span>)+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">ch=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="comment">%前1000次实验之后</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1000</span>:N</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> choice=<span class="number">1</span>:K</span><br><span class="line"></span><br><span class="line">ch(choice)=betarnd(<span class="built_in">beta</span>(choice,<span class="number">1</span>),<span class="built_in">beta</span>(choice,<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(ch);</span><br><span class="line"></span><br><span class="line">Action=<span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(Reward(Action)\&gt;<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">beta</span>(Action,<span class="number">1</span>)=<span class="built_in">beta</span>(Action,<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">beta</span>(Action,<span class="number">2</span>)=<span class="built_in">beta</span>(Action,<span class="number">2</span>)+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n+K)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(SumSum,LineWidth=<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;Thompson Sampling&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N+K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:K</span><br><span class="line"></span><br><span class="line">Action=n;</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">I=SumReward;</span><br><span class="line"></span><br><span class="line">T=<span class="built_in">ones</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="comment">%前K次实验之后</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:N</span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(I);</span><br><span class="line"></span><br><span class="line">Action=<span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n+K)=sum(SumReward);</span><br><span class="line"></span><br><span class="line">T(Action)=T(Action)+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">I(Action)=SumReward(Action)/T(Action)+<span class="number">2</span>\*<span class="built_in">sqrt</span>(<span class="number">2</span>\*<span class="built_in">log</span>(n+K)/T(Action));</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(SumSum,LineWidth=<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;UCB&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epsilon=[<span class="number">0</span>,<span class="number">0.1</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">%当epsilon=0时近似看作epsilon-decreasing策略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%当epsilon=1时为完全随机策略</span></span><br><span class="line"></span><br><span class="line">SumSum=<span class="built_in">zeros</span>(<span class="number">1</span>,N);</span><br><span class="line"></span><br><span class="line">SumReward=<span class="built_in">zeros</span>(<span class="number">1</span>,K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n=<span class="number">1</span>:<span class="number">1000</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Q=SumReward./n;</span><br><span class="line"></span><br><span class="line"><span class="comment">%Q为经过探索后获得的平均奖励序列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> n = <span class="number">1000</span>:N</span><br><span class="line"></span><br><span class="line">[maxx, <span class="built_in">i</span>] = <span class="built_in">max</span>(Q);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(maxx\~=<span class="number">0</span> &amp;&amp; <span class="built_in">rand</span>(<span class="number">1</span>) \&lt; <span class="number">1</span> - epsilon)</span><br><span class="line"></span><br><span class="line">Action = <span class="built_in">i</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"></span><br><span class="line">Action = unidrnd(K);</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">Reward(Action) = normrnd(AverReward(Action), <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">SumReward(Action)=SumReward(Action)+Reward(Action);</span><br><span class="line"></span><br><span class="line">SumSum(n)=sum(SumReward);</span><br><span class="line"></span><br><span class="line">Q(Action) = SumReward(Action)/n;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">plot</span>(<span class="number">1</span>:N,SumSum,<span class="string">&#x27;LineWidth&#x27;</span>,<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">hold</span> on;</span><br><span class="line"></span><br><span class="line">legend_str&#123;<span class="built_in">j</span>&#125;=[<span class="string">&#x27;\$\\epsilon\$=&#x27;</span> num2str(epsilon)];</span><br><span class="line"></span><br><span class="line"><span class="built_in">j</span>=<span class="built_in">j</span>+<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">legend</span>(legend_str);</span><br></pre></td></tr></table></figure>
+
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-12-03T00:09:13+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年12月3日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%AE%97%E6%B3%95/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>算法</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%95%B0%E5%AD%A6/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>数学</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/&title=有关多臂老虎机问题的一些算法 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/&title=有关多臂老虎机问题的一些算法 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/&title=有关多臂老虎机问题的一些算法 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/11/02/%E6%9C%89%E5%85%B3%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%80%92%E6%95%B0%E9%80%9F%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%8F%E6%84%9F%E6%83%B3/'>
+          <p class='title'>有关平方根倒数速算法的小感想<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>​        今天偶然看到了一个来自《Quake III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square Root），不得不感叹卡神的智慧。
+123456...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E7%AE%80%E4%BB%8B"><span class="toc-text">1简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E6%A8%A1%E5%9E%8B%E5%BB%BA%E7%AB%8B"><span class="toc-text">2模型建立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="toc-text">3模型假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">4解决问题前的准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-normrnd-%E5%87%BD%E6%95%B0"><span class="toc-text">4.1 normrnd()函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-MAB%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">5 MAB问题的解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%CF%B5-greedy%E7%AE%97%E6%B3%95"><span class="toc-text">5.1 ϵ-greedy算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%8F%98%E4%BD%93%EF%BC%9A"><span class="toc-text">一些变体：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-UCB%E7%AE%97%E6%B3%95"><span class="toc-text">5.2 UCB算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%8F%98%E4%BD%93%EF%BC%9A-1"><span class="toc-text">一些变体：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E6%B1%A4%E6%99%AE%E6%A3%AE%E9%87%87%E6%A0%B7%EF%BC%88Thompson-sampling%EF%BC%89%E7%AE%97%E6%B3%95"><span class="toc-text">5.3 汤普森采样（Thompson sampling）算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">6解决方案的优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E6%96%B9%E6%A1%88%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-text">6.1方案的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2%E6%96%B9%E6%A1%88%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-text">6.2方案的缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">8参考文献</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%B5%8B%E8%AF%95normrnd-%E4%B8%8E%C2%B7randn-%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-text">1、测试normrnd()与·randn()函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81-%CF%B5-greedy%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-text">2、  ϵ-greedy算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81UCB%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-text">3、UCB算法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E6%B1%A4%E6%99%AE%E6%A3%AE%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95%EF%BC%88Thompson-Sampling%EF%BC%89"><span class="toc-text">4、汤普森抽样算法（Thompson Sampling）</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
+
+<script>
+  window.pdata={}
+  pdata.ispage=true;
+  pdata.postTitle="有关多臂老虎机问题的一些算法";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
+</script>
+
+        </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作为主题
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2021 李傲</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
+      </div>
+    </div>
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
+
+
+
+
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+
+
+  
+
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+
+<script>
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+    let pagePlaceholder = pdata.commentPlaceholder || "快来评论吧~";
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    var valine = new Valine();
+    valine.init(Object.assign({"js":"https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js","path":null,"placeholder":"快来评论吧~","appId":"MWQrxu8b3KFPpdL0lcGw9wzA-gzGzoHsz","appKey":"sXrj3aemj3UxvOw5CmCyvxjv","meta":["nick","mail","link"],"requiredFields":["nick","mail"],"enableQQ":true,"recordIP":false,"avatar":"robohash","pageSize":10,"lang":"zh-cn","highlight":true,"mathJax":false}, {
+      el: '#valine_container',
+      path: path,
+      placeholder: pagePlaceholder,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps,
+    }))
+  }
+  $(function () {
+    pjax_valine();
+  });
+  volantis.pjax.push(pjax_valine);
+</script>
+
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+		document.addEventListener("pjax:success", listenSearch);
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'http://example.com' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'http://example.com' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+ 
+	   
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+ 
+	  
+    </div>
+  </body>
+</html>
