@@ -504,28 +504,76 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h4 id="电场强度"><a href="#电场强度" class="headerlink" title="电场强度"></a>电场强度</h4><p>库仑定律：<br>$$<br>F=\frac{1}{4 \pi \varepsilon_{0}} \frac{q \cdot q_{0}}{r^{2}}<br>$$<br>真空介电常量：<br>$$<br>\varepsilon_{0}=8.85 \times 10^{-12} C^{2} /\left(N \cdot m^{2}\right)<br>$$<br>电场强度：<br>$$<br>E=\frac{1}{4 \pi \varepsilon_{0}} \cdot \frac{q}{r^{2}}<br>$$<br>连续型：<br>$$<br>d E=\frac{1}{4 \pi \varepsilon_{0}} \cdot \frac{d q}{r^{2}}<br>$$</p>
-<p>$$<br>E=\int d E=\int \frac{1}{4 \pi \varepsilon_{0}} \frac{d q}{r^{2}}<br>$$</p>
+  <h4 id="电场强度">电场强度</h4>
+<p>库仑定律： <span class="math display">\[
+F=\frac{1}{4 \pi \varepsilon_{0}} \frac{q \cdot q_{0}}{r^{2}}
+\]</span> 真空介电常量： <span class="math display">\[
+\varepsilon_{0}=8.85 \times 10^{-12} C^{2} /\left(N \cdot m^{2}\right)
+\]</span> 电场强度： <span class="math display">\[
+E=\frac{1}{4 \pi \varepsilon_{0}} \cdot \frac{q}{r^{2}}
+\]</span> 连续型： <span class="math display">\[
+d E=\frac{1}{4 \pi \varepsilon_{0}} \cdot \frac{d q}{r^{2}}
+\]</span></p>
+<p><span class="math display">\[
+E=\int d E=\int \frac{1}{4 \pi \varepsilon_{0}} \frac{d q}{r^{2}}
+\]</span></p>
 <p>一些结论：</p>
-<p>均匀带电无限大平面：<br>$$<br>E=\frac{\sigma}{2 \varepsilon_{0}}<br>$$<br>均匀带电无限长直线：<br>$$<br>E=\frac{\lambda}{2 \pi \varepsilon_{0} x}<br>$$</p>
-<h4 id="电通量、高斯定理"><a href="#电通量、高斯定理" class="headerlink" title="电通量、高斯定理"></a>电通量、高斯定理</h4><p>电场线几点注意事项:<br>(1)电场线总是起自正电荷，终止于负电荷。<br>(2)电场线不会自成闭合线，任意两条电场线也不会相交。<br>(3)电场线密度大的地方，电场强度E越大。</p>
-<h5 id="1、电通量"><a href="#1、电通量" class="headerlink" title="1、电通量"></a>1、电通量</h5><p>电通量：<br>$$<br>\Phi_{e}=E \cdot S<br>$$<br>(1)E和S必须是垂直关系<br>(2)对于曲面，向外穿出为正，向内穿入为负</p>
-<h5 id="2、静电场中的高斯定理"><a href="#2、静电场中的高斯定理" class="headerlink" title="2、静电场中的高斯定理"></a>2、静电场中的高斯定理</h5><p>$$<br>\Phi_{e}=\oint \vec{E} \cdot d \vec{S}=\frac{1}{\varepsilon_{0}} \sum q_{\text {内 }}<br>$$</p>
-<p>(1)电通量与高斯面内电荷有关，与电荷的位置以及高斯面外电荷无关<br>(2)$\sum{q_{内}}$是指高斯面内的净电荷（所有正负电荷的代数和)<br>(3)高斯面上的场强E，不仅由面内电荷影响，还由面外电荷影响</p>
-<h4 id="电势、电势能"><a href="#电势、电势能" class="headerlink" title="电势、电势能"></a>电势、电势能</h4><h5 id="1、电势"><a href="#1、电势" class="headerlink" title="1、电势"></a>1、电势</h5><p>静电场中电势<br>(1)电势是标量，有大小正负，无方向<br>(2）零势能点可以任意选取，不同的零势能点对应的电势不同<br>(3)电势在数值上等于单位正电荷从该点沿任意路径到零势能点电场力做功</p>
-<p>求电势三种类型（无穷远为零势能点):<br>(1)离散型: $V=\frac{q}{4\pi\epsilon_{0}r}$<br>(2)连续性: $dV=\frac{dq}{4\pi\epsilon_{0}r}$ $V=\int\frac{dq}{4\pi\epsilon_{0}r}$<br>(3)已知场强求电势:$V=\int^{∞}_{起点}\vec{E}\cdot d\vec{l}$</p>
-<h5 id="2、电势能"><a href="#2、电势能" class="headerlink" title="2、电势能"></a>2、电势能</h5><p>$$<br>W=V\cdot q<br>$$</p>
-<h5 id="3、电场和电势关系"><a href="#3、电场和电势关系" class="headerlink" title="3、电场和电势关系"></a>3、电场和电势关系</h5><p>(1)$E=0\nLeftrightarrow V=0$，$V=E大小\nLeftrightarrow V大小$<br>(2)电场线越密的地方电场强度越大<br>(3)电势沿电场线方向减小<br>(4)某点电势随电势零点不同而不同<br>(5)$\vec{E}=-\left(\frac{\partial V}{\partial x}, \frac{\partial V}{\partial y}, \frac{\partial V}{\partial z}\right)$</p>
-<h4 id="导体"><a href="#导体" class="headerlink" title="导体"></a>导体</h4><h5 id="1、静电平衡"><a href="#1、静电平衡" class="headerlink" title="1、静电平衡"></a>1、静电平衡</h5><p>(1)电荷分布在表面，内部场强处处为零<br>(2)导体表面电场强度$E=\frac{\sigma}{\varepsilon_{0}}$<br>(3)导体是等势体，表面是等势面，但场强并非处处相等<br>(4)导体表面曲率越大(尖锐)，电荷密度越大</p>
-<h5 id="2、导体中的电场和电势"><a href="#2、导体中的电场和电势" class="headerlink" title="2、导体中的电场和电势"></a>2、导体中的电场和电势</h5><p>有一外半径为$R_3$，内半径为$R_2$的金属球壳，在球壳内放一半径为$R_1$的同心金属球，若使金属球均带有$q$的正电荷。求：<br>(1)电荷分布;(2)电场分布;(3)电势分布。</p>
+<p>均匀带电无限大平面： <span class="math display">\[
+E=\frac{\sigma}{2 \varepsilon_{0}}
+\]</span> 均匀带电无限长直线： <span class="math display">\[
+E=\frac{\lambda}{2 \pi \varepsilon_{0} x}
+\]</span></p>
+<h4 id="电通量高斯定理">电通量、高斯定理</h4>
+<p>电场线几点注意事项: (1)电场线总是起自正电荷，终止于负电荷。 (2)电场线不会自成闭合线，任意两条电场线也不会相交。 (3)电场线密度大的地方，电场强度E越大。</p>
+<h5 id="电通量">1、电通量</h5>
+<p>电通量： <span class="math display">\[
+\Phi_{e}=E \cdot S
+\]</span> (1)E和S必须是垂直关系 (2)对于曲面，向外穿出为正，向内穿入为负</p>
+<h5 id="静电场中的高斯定理">2、静电场中的高斯定理</h5>
+<p><span class="math display">\[
+\Phi_{e}=\oint \vec{E} \cdot d \vec{S}=\frac{1}{\varepsilon_{0}} \sum q_{\text {内 }}
+\]</span></p>
+<p>(1)电通量与高斯面内电荷有关，与电荷的位置以及高斯面外电荷无关 (2)<span class="math inline">\(\sum{q_{内}}\)</span>是指高斯面内的净电荷（所有正负电荷的代数和) (3)高斯面上的场强E，不仅由面内电荷影响，还由面外电荷影响</p>
+<h4 id="电势电势能">电势、电势能</h4>
+<h5 id="电势">1、电势</h5>
+<p>静电场中电势 (1)电势是标量，有大小正负，无方向 (2）零势能点可以任意选取，不同的零势能点对应的电势不同 (3)电势在数值上等于单位正电荷从该点沿任意路径到零势能点电场力做功</p>
+<p>求电势三种类型（无穷远为零势能点): (1)离散型: <span class="math inline">\(V=\frac{q}{4\pi\epsilon_{0}r}\)</span> (2)连续性: <span class="math inline">\(dV=\frac{dq}{4\pi\epsilon_{0}r}\)</span> <span class="math inline">\(V=\int\frac{dq}{4\pi\epsilon_{0}r}\)</span> (3)已知场强求电势:<span class="math inline">\(V=\int^{∞}_{起点}\vec{E}\cdot d\vec{l}\)</span></p>
+<h5 id="电势能">2、电势能</h5>
+<p><span class="math display">\[
+W=V\cdot q
+\]</span></p>
+<h5 id="电场和电势关系">3、电场和电势关系</h5>
+<p>(1)<span class="math inline">\(E=0\nLeftrightarrow V=0\)</span>，<span class="math inline">\(V=E大小\nLeftrightarrow V大小\)</span> (2)电场线越密的地方电场强度越大 (3)电势沿电场线方向减小 (4)某点电势随电势零点不同而不同 (5)<span class="math inline">\(\vec{E}=-\left(\frac{\partial V}{\partial x}, \frac{\partial V}{\partial y}, \frac{\partial V}{\partial z}\right)\)</span></p>
+<h4 id="导体">导体</h4>
+<h5 id="静电平衡">1、静电平衡</h5>
+<p>(1)电荷分布在表面，内部场强处处为零 (2)导体表面电场强度<span class="math inline">\(E=\frac{\sigma}{\varepsilon_{0}}\)</span> (3)导体是等势体，表面是等势面，但场强并非处处相等 (4)导体表面曲率越大(尖锐)，电荷密度越大</p>
+<h5 id="导体中的电场和电势">2、导体中的电场和电势</h5>
+<p>有一外半径为<span class="math inline">\(R_3\)</span>，内半径为<span class="math inline">\(R_2\)</span>的金属球壳，在球壳内放一半径为<span class="math inline">\(R_1\)</span>的同心金属球，若使金属球均带有<span class="math inline">\(q\)</span>的正电荷。求： (1)电荷分布;(2)电场分布;(3)电势分布。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph </span><br><span class="line">D((.))</span><br></pre></td></tr></table></figure>
+<p>解：(1)金属球表面：<span class="math inline">\(+q\)</span>；球壳内表面：<span class="math inline">\(-q\)</span>；球壳外表面：<span class="math inline">\(+q\)</span> (2)由<span class="math inline">\(\oint \vec{E} d \vec{S}=E \cdot 4 \pi r^{2}=\frac{1}{\varepsilon_{0}} \sum q_{\text {内 }} \Rightarrow E=\frac{\sum q_{\text {内 }}}{4 \pi \varepsilon_{0} r^{2}}\)</span> $$ r&lt;R_{1} 时 q_{}=0 E_{1}=0 \</p>
+<p>R_{1}&lt;r&lt;R_{2} 时 q_{}=q E_{2}=\</p>
+R_{2}&lt;r&lt;R_{3} 时 q_{}=q-q=0 E_{3}=0\ R_{3}&lt;r 时 q_{}=q-q+q=q E_{4}=\ <span class="math display">\[
+​        (3)根据球壳内外电势的叠加：
+\]</span>
+<span class="math display">\[\begin{array}{ll}
+r&lt;R_{1} \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} R_{1}}-\frac{q}{4 \pi \varepsilon_{0} R_{2}}+\frac{q}{4 \pi \varepsilon_{0} R_{3}}=\frac{q}{4 \pi \varepsilon_{0}}\left(\frac{1}{R_{1}}-\frac{1}{R_{2}}+\frac{1}{R_{3}}\right) \\
+R_{1}&lt;r&lt;R_{2} \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} r}-\frac{q}{4 \pi \varepsilon_{0} R_{2}}+\frac{q}{4 \pi \varepsilon_{0} R_{3}}=\frac{q}{4 \pi \varepsilon_{0}}\left(\frac{1}{r}-\frac{1}{R_{2}}+\frac{1}{R_{3}}\right) \\
+R_{2}&lt;r&lt;R_{3} \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} r}-\frac{q}{4 \pi \varepsilon_{0} r}+\frac{q}{4 \pi \varepsilon_{0} R_{3}}=\frac{q}{4 \pi \varepsilon_{0} R_{3}} \\
+R_{3}&lt;r \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} r}-\frac{q}{4 \pi \varepsilon_{0} r}+\frac{q}{4 \pi \varepsilon_{0} r}=\frac{q}{4 \pi \varepsilon_{0} r}
+\end{array}\]</span>
+<p>$$</p>
+<h4 id="电容">电容</h4>
+<p><span class="math inline">\(C=\frac{q}{U}\)</span>，单位：<span class="math inline">\(F\)</span>(法拉) 常用换算：<span class="math inline">\(1\mu F=10^{-6}F\quad 1pF=10^{-12} F\)</span></p>
+<p>(1)电容器是由导体构成，电荷量等值异号，分布在极板内侧 (2)<span class="math inline">\(C=\frac{q}{U}\)</span>，<span class="math inline">\(q\)</span>代表一侧的电荷量取正，<span class="math inline">\(U\)</span>代表极板间电压(电势差) (3)极板间电场强度：<span class="math inline">\(E=\frac{\sigma}{\varepsilon_{0}}=\frac{U}{d}\)</span> 电势差：<span class="math inline">\(U=\frac{q}{C}=E \cdot d\)</span> (4)极板间相互作用力：<span class="math inline">\(F=\frac{1}{2} E \cdot q\)</span> (5)含介质：<span class="math inline">\(C=\varepsilon_{r} C_{0}\quad E=\frac{E_{0}}{\varepsilon_{r}}\)</span>，<span class="math inline">\(\varepsilon_r\)</span>：相对介电常量，真空中<span class="math inline">\(\varepsilon_r=1\)</span> <span class="math display">\[
+\begin{array}{|c|c|c|c|c|}
+\hline \text { 常见电容器 } &amp; \text { 平行板电容器 } &amp; \text { 圆柱形电容器 } &amp; \text { 球形电容器 } &amp; \text { 孤立导体电容器 } \\
+\hline \text { 真空中 } &amp; C=\frac{\varepsilon_{0} S}{d} &amp; C=\frac{2 \pi \varepsilon_{0} l}{\ln R_{B} / R_{A}} &amp; C=4 \pi \varepsilon_{0} \frac{R_{A} R_{B}}{R_{B}-R_{A}} &amp; C=4 \pi \varepsilon_{0} R_{A} \\
+\hline \text { 含介质 } \varepsilon_{r} &amp; C=\frac{\varepsilon_{0} \varepsilon_{r} S}{d} &amp; C=\frac{2 \pi \varepsilon_{0} \varepsilon_{r} l}{\ln R_{B} / R_{A}} &amp; C=4 \pi \varepsilon_{0} \varepsilon_{r} \frac{R_{A} R_{B}}{R_{B}-R_{A}} &amp; C=4 \pi \varepsilon_{0} \varepsilon_{r} R_{A} \\
+\hline
+\end{array}
+\]</span></p>
+<h5 id="电介质电场能">电介质/电场能</h5>
 
-<p>解：(1)金属球表面：$+q$；球壳内表面：$-q$；球壳外表面：$+q$<br>        (2)由$\oint \vec{E} d \vec{S}=E \cdot 4 \pi r^{2}=\frac{1}{\varepsilon_{0}} \sum q_{\text {内 }} \Rightarrow E=\frac{\sum q_{\text {内 }}}{4 \pi \varepsilon_{0} r^{2}}$<br>$$<br>r&lt;R_{1} 时 \quad \sum q_{\text {内 }}=0 \quad E_{1}=0 \</p>
-<p>R_{1}&lt;r&lt;R_{2} 时 \quad \sum q_{\text {内 }}=q \quad E_{2}=\frac{q}{4 \pi \varepsilon_{0} r^{2}}\</p>
-<p>R_{2}&lt;r&lt;R_{3} 时 \quad \sum q_{\text {内 }}=q-q=0 \quad E_{3}=0\<br>R_{3}&lt;r 时 \quad \sum q_{\text {内 }}=q-q+q=q \quad E_{4}=\frac{q}{4 \pi \varepsilon_{0} r^{2}}\<br>$$<br>​        (3)根据球壳内外电势的叠加：<br>$$<br>\begin{array}{ll}<br>r&lt;R_{1} \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} R_{1}}-\frac{q}{4 \pi \varepsilon_{0} R_{2}}+\frac{q}{4 \pi \varepsilon_{0} R_{3}}=\frac{q}{4 \pi \varepsilon_{0}}\left(\frac{1}{R_{1}}-\frac{1}{R_{2}}+\frac{1}{R_{3}}\right) \<br>R_{1}&lt;r&lt;R_{2} \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} r}-\frac{q}{4 \pi \varepsilon_{0} R_{2}}+\frac{q}{4 \pi \varepsilon_{0} R_{3}}=\frac{q}{4 \pi \varepsilon_{0}}\left(\frac{1}{r}-\frac{1}{R_{2}}+\frac{1}{R_{3}}\right) \<br>R_{2}&lt;r&lt;R_{3} \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} r}-\frac{q}{4 \pi \varepsilon_{0} r}+\frac{q}{4 \pi \varepsilon_{0} R_{3}}=\frac{q}{4 \pi \varepsilon_{0} R_{3}} \<br>R_{3}&lt;r \text { 时 } \quad V=\frac{q}{4 \pi \varepsilon_{0} r}-\frac{q}{4 \pi \varepsilon_{0} r}+\frac{q}{4 \pi \varepsilon_{0} r}=\frac{q}{4 \pi \varepsilon_{0} r}<br>\end{array}<br>$$</p>
-<h4 id="电容"><a href="#电容" class="headerlink" title="电容"></a>电容</h4><p>$C=\frac{q}{U}$，单位：$F$(法拉)   常用换算：$1\mu F=10^{-6}F\quad 1pF=10^{-12} F$</p>
-<p>(1)电容器是由导体构成，电荷量等值异号，分布在极板内侧<br>(2)$C=\frac{q}{U}$，$q$代表一侧的电荷量取正，$U$代表极板间电压(电势差)<br>(3)极板间电场强度：$E=\frac{\sigma}{\varepsilon_{0}}=\frac{U}{d}$  电势差：$U=\frac{q}{C}=E \cdot d$<br>(4)极板间相互作用力：$F=\frac{1}{2} E \cdot q$<br>(5)含介质：$C=\varepsilon_{r} C_{0}\quad E=\frac{E_{0}}{\varepsilon_{r}}$，$\varepsilon_r$：相对介电常量，真空中$\varepsilon_r=1$<br>$$<br>\begin{array}{|c|c|c|c|c|}<br>\hline \text { 常见电容器 } &amp; \text { 平行板电容器 } &amp; \text { 圆柱形电容器 } &amp; \text { 球形电容器 } &amp; \text { 孤立导体电容器 } \<br>\hline \text { 真空中 } &amp; C=\frac{\varepsilon_{0} S}{d} &amp; C=\frac{2 \pi \varepsilon_{0} l}{\ln R_{B} / R_{A}} &amp; C=4 \pi \varepsilon_{0} \frac{R_{A} R_{B}}{R_{B}-R_{A}} &amp; C=4 \pi \varepsilon_{0} R_{A} \<br>\hline \text { 含介质 } \varepsilon_{r} &amp; C=\frac{\varepsilon_{0} \varepsilon_{r} S}{d} &amp; C=\frac{2 \pi \varepsilon_{0} \varepsilon_{r} l}{\ln R_{B} / R_{A}} &amp; C=4 \pi \varepsilon_{0} \varepsilon_{r} \frac{R_{A} R_{B}}{R_{B}-R_{A}} &amp; C=4 \pi \varepsilon_{0} \varepsilon_{r} R_{A} \<br>\hline<br>\end{array}<br>$$</p>
-<h5 id="电介质-电场能"><a href="#电介质-电场能" class="headerlink" title="电介质/电场能"></a>电介质/电场能</h5>
   
   
     
@@ -637,8 +685,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='next' href='/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/'>
           <p class='title'>有关多臂老虎机问题的一些算法<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>用数理统计方法解决多臂老虎机问题摘要多臂老虎机问题（Multi-Armed Banditproblem，简称MAB问题）是概率论与数理统计中一个经典问题，也属于机器学习中强化学习的范畴。
-在这个...</p>
+          <p class='content'>用数理统计方法解决多臂老虎机问题
+摘要
+多臂老虎机问题（Multi-Armed Bandit problem，简称MAB问题）是概率论与数理统计中一个经典问题，也属于机器学习中强化学习的范畴...</p>
         </a>
       
     </div>
@@ -681,7 +730,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%9C%BA%E5%BC%BA%E5%BA%A6"><span class="toc-text">电场强度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E9%80%9A%E9%87%8F%E3%80%81%E9%AB%98%E6%96%AF%E5%AE%9A%E7%90%86"><span class="toc-text">电通量、高斯定理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%94%B5%E9%80%9A%E9%87%8F"><span class="toc-text">1、电通量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E9%9D%99%E7%94%B5%E5%9C%BA%E4%B8%AD%E7%9A%84%E9%AB%98%E6%96%AF%E5%AE%9A%E7%90%86"><span class="toc-text">2、静电场中的高斯定理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%8A%BF%E3%80%81%E7%94%B5%E5%8A%BF%E8%83%BD"><span class="toc-text">电势、电势能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%94%B5%E5%8A%BF"><span class="toc-text">1、电势</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%B5%E5%8A%BF%E8%83%BD"><span class="toc-text">2、电势能</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E7%94%B5%E5%9C%BA%E5%92%8C%E7%94%B5%E5%8A%BF%E5%85%B3%E7%B3%BB"><span class="toc-text">3、电场和电势关系</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E4%BD%93"><span class="toc-text">导体</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E9%9D%99%E7%94%B5%E5%B9%B3%E8%A1%A1"><span class="toc-text">1、静电平衡</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%AF%BC%E4%BD%93%E4%B8%AD%E7%9A%84%E7%94%B5%E5%9C%BA%E5%92%8C%E7%94%B5%E5%8A%BF"><span class="toc-text">2、导体中的电场和电势</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%AE%B9"><span class="toc-text">电容</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E4%BB%8B%E8%B4%A8-%E7%94%B5%E5%9C%BA%E8%83%BD"><span class="toc-text">电介质&#x2F;电场能</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%9C%BA%E5%BC%BA%E5%BA%A6"><span class="toc-text">电场强度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E9%80%9A%E9%87%8F%E9%AB%98%E6%96%AF%E5%AE%9A%E7%90%86"><span class="toc-text">电通量、高斯定理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E9%80%9A%E9%87%8F"><span class="toc-text">1、电通量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%99%E7%94%B5%E5%9C%BA%E4%B8%AD%E7%9A%84%E9%AB%98%E6%96%AF%E5%AE%9A%E7%90%86"><span class="toc-text">2、静电场中的高斯定理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%8A%BF%E7%94%B5%E5%8A%BF%E8%83%BD"><span class="toc-text">电势、电势能</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E5%8A%BF"><span class="toc-text">1、电势</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E5%8A%BF%E8%83%BD"><span class="toc-text">2、电势能</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E5%9C%BA%E5%92%8C%E7%94%B5%E5%8A%BF%E5%85%B3%E7%B3%BB"><span class="toc-text">3、电场和电势关系</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E4%BD%93"><span class="toc-text">导体</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%99%E7%94%B5%E5%B9%B3%E8%A1%A1"><span class="toc-text">1、静电平衡</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%BC%E4%BD%93%E4%B8%AD%E7%9A%84%E7%94%B5%E5%9C%BA%E5%92%8C%E7%94%B5%E5%8A%BF"><span class="toc-text">2、导体中的电场和电势</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%AE%B9"><span class="toc-text">电容</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%B5%E4%BB%8B%E8%B4%A8%E7%94%B5%E5%9C%BA%E8%83%BD"><span class="toc-text">电介质&#x2F;电场能</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -752,7 +801,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
 </div>
         
       

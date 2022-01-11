@@ -504,9 +504,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>好久没更新了，小更一下<br>如下文所示<br>介绍一种不定长数组的输入方法（C语言实现）</p>
+  <p>好久没更新了，小更一下 如下文所示 介绍一种不定长数组的输入方法（C语言实现）</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> size_A;</span><br><span class="line">	<span class="keyword">int</span> A[<span class="number">1024</span>];</span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;;i++)</span><br><span class="line">	&#123;  </span><br><span class="line">    	<span class="built_in">scanf</span>(<span class="string">&quot;%d%c&quot;</span>,&amp;A[i],&amp;c); <span class="comment">//每次扫描输入以数字和char类型输入为准  </span></span><br><span class="line">    	<span class="keyword">if</span>(c==<span class="string">&#x27;\n&#x27;</span>) <span class="comment">//如果接受到回车，则break </span></span><br><span class="line">		&#123;</span><br><span class="line">			size_A = i + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;   </span><br><span class="line">    &#125;<span class="comment">//这样我们就得到了一个长度为i的数组a[]  </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
   
   
@@ -618,14 +617,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='prev' href='/2021/11/02/%E6%9C%89%E5%85%B3%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%80%92%E6%95%B0%E9%80%9F%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%8F%E6%84%9F%E6%83%B3/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关平方根倒数速算法的小感想</p>
-          <p class='content'>​        今天偶然看到了一个来自《Quake III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square Root），不得不感叹卡神的智慧。
-123456...</p>
+          <p class='content'>​ 今天偶然看到了一个来自《Quake III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square Root），不得不感叹卡神的智慧。
+123456789101...</p>
         </a>
       
       
         <a class='next' href='/2021/08/24/%E5%9F%BA%E4%BA%8E%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E8%BF%9B%E8%A1%8C%E8%81%9A%E7%B1%BB/'>
           <p class='title'>基于汉明距离进行聚类<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>vector版本12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849...</p>
+          <p class='content'>vector版本
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748...</p>
         </a>
       
     </div>
@@ -725,7 +725,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
 </div>
         
       
