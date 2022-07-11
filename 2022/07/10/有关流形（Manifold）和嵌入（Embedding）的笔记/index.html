@@ -505,7 +505,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   
   <p>流形，也就是 Manifold 。嵌入，也就是Embedding。</p>
-<p>有时候经常会在 paper 里看到“嵌入在高维空间中的低维流形”，不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在三维）中把它扭一扭，它就变成了一个流形（当然，不扭的时候，它也是一个流形，欧氏空间是流形的一种特殊情况）。</p>
+<p>有时候经常会在paper里看到“嵌入在高维空间中的低维流形”，以及机器学习里的Embedding层。不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在三维）中把它扭一扭，它就变成了一个流形（当然，不扭的时候，它也是一个流形，欧氏空间是流形的一种特殊情况）。</p>
 <p>所以，直观上来讲，一个流形好比是一个<span class="math inline">\(d\)</span>维的空间，在一个<span class="math inline">\(m\)</span>维的空间中 (<span class="math inline">\(m\)</span> &gt; <span class="math inline">\(d\)</span>) 被扭曲之后的结果。需要注意的是，流形并不是一个“形状”，而是一个“空间”。</p>
 <figure>
 <img src="https://blog.pluskid.org/uploads/2010/05/sphere.png" class="lazyload" data-srcset="https://blog.pluskid.org/uploads/2010/05/sphere.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="一个球面" /><figcaption aria-hidden="true">一个球面</figcaption>
@@ -549,7 +549,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T14:14:24+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T14:19:58+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年7月11日</p>
@@ -628,12 +628,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
+        <a class='prev' href='/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关交叉熵的笔记</p>
+          <p class='content'>熵这个概念还记得牛哥在一年前给我讲过，计算loss的时候要用到交叉熵，小整理一下。
+通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty of a sy...</p>
+        </a>
+      
       
         <a class='next' href='/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/'>
           <p class='title'>有关self-attention的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>好久没更了，小更一手
-这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
-如果谈到...</p>
+          <p class='content'>这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
+如果谈到Transformer那...</p>
         </a>
       
     </div>
@@ -654,6 +659,59 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 

@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>有关self-attention的笔记 - Leo Lee&#39;s blog</title>
+  <title>有关交叉熵的笔记 - Leo Lee&#39;s blog</title>
   
-    <meta name="keywords" content="机器学习">
+    <meta name="keywords" content="信息论,机器学习">
   
 
   
@@ -451,7 +451,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        有关self-attention的笔记
+        有关交叉熵的笔记
       </h1>
       <div class='new-meta-box'>
         
@@ -475,7 +475,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2022年7月10日</p>
+    <p>发布于：2022年7月11日</p>
   </a>
 </div>
 
@@ -486,7 +486,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="有关self-attention的笔记" data-path="/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/">
+      <div id="lc-pv" data-title="有关交叉熵的笔记" data-path="/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -504,25 +504,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。</p>
-<p>如果谈到Transformer那首先就会谈到self-attention。</p>
-<p>Transformer是一个Sequence to Sequence model，特别之处在于它大量用到了self-attention。</p>
-<p>要处理一个Sequence，最常想到的就是使用RNN，它的输入是一串vector sequence，输出是另一串vector sequence，如下图左所示是一个双向的RNN，同时考虑上下文。RNN非常擅长于处理input是一个sequence的状况，但它很不容易并行化 (hard to parallel)。</p>
-<p>假设在单向RNN的情况下，要算出<span class="math inline">\(b_4\)</span>，就必须要先看<span class="math inline">\(a_1\)</span>再看<span class="math inline">\(a_2\)</span>再看<span class="math inline">\(a_3\)</span>再看<span class="math inline">\(a_4\)</span>，所以这个过程很难平行处理。</p>
-<figure>
-<img src="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="处理Sequence数据的模型" /><figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
-</figure>
-<p>所以在并行化这个层面把CNN拿来取代RNN，如上图右所示。其中，橘色的三角形表示一个filter，每次扫过3个向量<span class="math inline">\(a\)</span>，扫过一轮以后，就输出了一排结果，使用橘色的小圆点表示。</p>
-<p>这是第一个橘色的filter的过程，还有其他的filter，比如下图中的黄色的filter，它经历着与橘色的filter相似的过程，又输出一排结果，使用黄色的小圆点表示。</p>
-<figure>
-<img src="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="处理Sequence数据的模型" /><figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
-</figure>
-<p>但是，表面上CNN和RNN可以做到相同的输入和输出，但是CNN只能考虑非常有限的内容。比如在我们右侧的图中CNN的filter只考虑了3个vector，不像RNN可以考虑之前的所有vector。但是CNN也不是没有办法考虑很长时间的dependency的，只需要堆叠filter，多堆叠几层，上层的filter就可以考虑比较多的资讯，比如，第二层的filter (蓝色的三角形)看了6个vector，所以，只要叠很多层，就能够看很长时间的资讯。</p>
-<p>而CNN的一个好处是：它是可以并行化的 (can parallel)，不需要等待红色的filter算完，再算黄色的filter。但是必须要叠很多层filter，才可以看到长时的资讯。</p>
-<p>所以现在提出一个新的想法：self-attention，如下图所示，目的是使用self-attention layer取代RNN所做的事情。</p>
-<figure>
-<img src="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="You can try to replace any thing that has been done by RNN with self-attention" /><figcaption aria-hidden="true">You can try to replace any thing that has been done by RNN with self-attention</figcaption>
-</figure>
+  <p>熵这个概念还记得牛哥在一年前给我讲过，计算loss的时候要用到交叉熵，小整理一下。</p>
+<p>通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty of a system)。在不同领域熵有不同的解释，比如热力学的定义和信息论也不大相同。</p>
+<p>要想明白交叉熵(Cross Entropy)的意义，可以从熵(Entropy) -&gt; KL散度(Kullback-Leibler Divergence) -&gt; 交叉熵这个顺序入手。当然，也有多种解释方法[1]。</p>
+<p>先给出一个“接地气但不严谨”的概念表述：</p>
+<ul>
+<li>熵：可以表示一个事件A的自信息量，也就是A包含多少信息。</li>
+<li>KL散度：可以用来表示从事件A的角度来看，事件B有多大不同。</li>
+<li>交叉熵：可以用来表示从事件A的角度来看，如何描述事件B。</li>
+</ul>
+<p>一句话总结的话：KL散度可以被用于计算代价，而在特定情况下最小化KL散度等价于最小化交叉熵。而交叉熵的运算更简单，所以用交叉熵来当做代价。</p>
 
   
   
@@ -553,7 +544,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T18:24:38+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T18:24:22+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年7月11日</p>
@@ -565,7 +556,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>信息论</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div>
 
 
         
@@ -578,7 +569,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关self-attention的笔记 - Leo Lee's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关交叉熵的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -590,7 +581,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关self-attention的笔记 - Leo Lee's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关交叉熵的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -602,7 +593,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关self-attention的笔记 - Leo Lee's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关交叉熵的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -632,18 +623,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关流形（Manifold）和嵌入（Embedding）的笔记</p>
-          <p class='content'>流形，也就是 Manifold 。嵌入，也就是Embedding。
-有时候经常会在paper里看到“嵌入在高维空间中的低维流形”，以及机器学习里的Embedding层。不过高维的数据对于我们这...</p>
+        <a class='prev' href='/2022/07/11/%E6%9C%89%E5%85%B3softmax%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关Softmax函数的笔记</p>
+          <p class='content'>上文提到了交叉熵这个损失函数，本来整理一下Softmax这个激活函数。
+Softmax从字面上来说，可以分成soft和max两个部分。max故名思议就是最大值的意思。Softmax的核心在于s...</p>
         </a>
       
       
-        <a class='next' href='/2022/03/28/%E5%8D%8E%E4%B8%BA%E8%BD%AF%E6%8C%912022%EF%BC%88%E5%A4%B1%E8%B4%A5%EF%BC%89/'>
-          <p class='title'>华为软挑2022（失败）<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>第一次参加这种比赛，到最后也没有分数，很难受，明年再战吧。
-感觉思路并不是妹有道理的QAQ
-1234567891011121314151617181920212223242526272829...</p>
+        <a class='next' href='/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'>有关流形（Manifold）和嵌入（Embedding）的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>流形，也就是 Manifold 。嵌入，也就是Embedding。
+有时候经常会在paper里看到“嵌入在高维空间中的低维流形”，以及机器学习里的Embedding层。不过高维的数据对于我们这...</p>
         </a>
       
     </div>
@@ -744,7 +734,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="有关self-attention的笔记";
+  pdata.postTitle="有关交叉熵的笔记";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

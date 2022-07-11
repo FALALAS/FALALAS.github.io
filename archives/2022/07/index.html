@@ -451,9 +451,103 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/07/11/%E6%9C%89%E5%85%B3softmax%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关Softmax函数的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        上文提到了交叉熵这个损失函数，本来整理一下Softmax这个激活函数。
+Softmax从字面上来说，可以分成soft和max两个部分。max故名思议就是最大值的意思。Softmax的核心在于soft，而soft有软的含义，与之相对的是hard硬。很多场景中需要我们找出数组所有元素中值最大的元素，实质上都是求的hardmax。
+hardmax最大的特点就是只选出其中一个最大的值，即非黑即白...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-07-11</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/07/11/%E6%9C%89%E5%85%B3softmax%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关交叉熵的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        熵这个概念还记得牛哥在一年前给我讲过，计算loss的时候要用到交叉熵，小整理一下。
+通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty of a system)。在不同领域熵有不同的解释，比如热力学的定义和信息论也不大相同。
+要想明白交叉熵(Cross Entropy)的意义，可以从熵(Entropy) -&gt; KL散度(Kullback-L...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-07-11</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -473,7 +567,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         流形，也就是 Manifold 。嵌入，也就是Embedding。
-有时候经常会在 paper 里看到“嵌入在高维空间中的低维流形”，不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在三维）中把它扭一扭，它就变成了一个...
+有时候经常会在paper里看到“嵌入在高维空间中的低维流形”，以及机器学习里的Embedding层。不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在...
       
     
   </div>
@@ -516,10 +610,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='md'>
     
       
-        好久没更了，小更一手
-这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
-如果谈到Transformer那首先就会谈到self-attention
-Transformer是一个Sequence to Sequence model，特别之处在于它大量用到了self-attentio...
+        这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
+如果谈到Transformer那首先就会谈到self-attention。
+Transformer是一个Sequence to Sequence model，特别之处在于它大量用到了self-attention。
+要处理一个Se...
       
     
   </div>
@@ -639,7 +733,7 @@ Transformer是一个Sequence to Sequence model，特别之处在于它大量用�
 
 
     <div class='content'>
-      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 17.33px; color: #828282">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 17.33px; color: #828282">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 17.33px; color: #828282">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 20.67px; color: #6c6c6c">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 17.33px; color: #828282">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a>
+      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 19px; color: #777">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 16.5px; color: #888">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16.5px; color: #888">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 21.5px; color: #666">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16.5px; color: #888">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a>
     </div>
   </section>
 
