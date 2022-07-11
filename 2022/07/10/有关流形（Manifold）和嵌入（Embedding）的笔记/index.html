@@ -22,9 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>有关self-attention的笔记 - Leo Lee&#39;s blog</title>
+  <title>有关流形（Manifold）和嵌入（Embedding）的笔记 - Leo Lee&#39;s blog</title>
   
-    <meta name="keywords" content="机器学习">
+    <meta name="keywords" content="机器学习,数学">
   
 
   
@@ -451,7 +451,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        有关self-attention的笔记
+        有关流形（Manifold）和嵌入（Embedding）的笔记
       </h1>
       <div class='new-meta-box'>
         
@@ -486,7 +486,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="有关self-attention的笔记" data-path="/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/">
+      <div id="lc-pv" data-title="有关流形（Manifold）和嵌入（Embedding）的笔记" data-path="/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -504,27 +504,21 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>好久没更了，小更一手</p>
-<p>这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。</p>
-<p>如果谈到Transformer那首先就会谈到self-attention</p>
-<p>Transformer是一个Sequence to Sequence model，特别之处在于它大量用到了self-attention。</p>
-<p>要处理一个Sequence，最常想到的就是使用RNN，它的输入是一串vector sequence，输出是另一串vector sequence，如下图左所示。</p>
-<p>下图左展示的是一个双向的RNN，同时考虑上下文。RNN非常擅长于处理input是一个sequence的状况，但它很不容易并行化 (hard to parallel)。</p>
-<p>假设在单向RNN的情况下，要算出<span class="math inline">\(b_4\)</span>，就必须要先看 <span class="math inline">\(a_1\)</span> 再看<span class="math inline">\(a_2\)</span>再看<span class="math inline">\(a_3\)</span>再看<span class="math inline">\(a_4\)</span>，所以这个过程很难平行处理。</p>
+  <p>流形，也就是 Manifold 。嵌入，也就是Embedding。</p>
+<p>有时候经常会在 paper 里看到“嵌入在高维空间中的低维流形”，不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在三维）中把它扭一扭，它就变成了一个流形（当然，不扭的时候，它也是一个流形，欧氏空间是流形的一种特殊情况）。</p>
+<p>所以，直观上来讲，一个流形好比是一个<span class="math inline">\(d\)</span>维的空间，在一个<span class="math inline">\(m\)</span>维的空间中 (<span class="math inline">\(m\)</span> &gt; <span class="math inline">\(d\)</span>) 被扭曲之后的结果。需要注意的是，流形并不是一个“形状”，而是一个“空间”。</p>
 <figure>
-<img src="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="处理Sequence数据的模型" /><figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
+<img src="https://blog.pluskid.org/uploads/2010/05/sphere.png" class="lazyload" data-srcset="https://blog.pluskid.org/uploads/2010/05/sphere.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="一个球面" /><figcaption aria-hidden="true">一个球面</figcaption>
 </figure>
-<p>所以在并行化这个层面把CNN拿来取代RNN，如上图右所示。其中，橘色的三角形表示一个filter，每次扫过3个向量<span class="math inline">\(a\)</span>，扫过一轮以后，就输出了一排结果，使用橘色的小圆点表示。</p>
-<p>这是第一个橘色的filter的过程，还有其他的filter，比如下图中的黄色的filter，它经历着与橘色的filter相似的过程，又输出一排结果，使用黄色的小圆点表示。</p>
-<figure>
-<img src="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="处理Sequence数据的模型" /><figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
-</figure>
-<p>但是，表面上CNN和RNN可以做到相同的输入和输出，但是CNN只能考虑非常有限的内容。比如在我们右侧的图中CNN的filter只考虑了3个vector，不像RNN可以考虑之前的所有vector。但是CNN也不是没有办法考虑很长时间的dependency的，只需要堆叠filter，多堆叠几层，上层的filter就可以考虑比较多的资讯，比如，第二层的filter (蓝色的三角形)看了6个vector，所以，只要叠很多层，就能够看很长时间的资讯。</p>
-<p>而CNN的一个好处是：它是可以并行化的 (can parallel)，不需要等待红色的filter算完，再算黄色的filter。但是必须要叠很多层filter，才可以看到长时的资讯。</p>
-<p>所以现在提出一个新的想法：self-attention，如下图所示，目的是使用self-attention layer取代RNN所做的事情。</p>
-<figure>
-<img src="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="You can try to replace any thing that has been done by RNN with self-attention" /><figcaption aria-hidden="true">You can try to replace any thing that has been done by RNN with self-attention</figcaption>
-</figure>
+<p>再从球面说起，如果我们事先不知道球面的存在，那么球面上的点，其实就是三维欧氏空间上的点，可以用一个三元组来表示其坐标。但是和空间中的普通点不一样的是，它们允许出现的位置受到了一定的限制，具体到球面，可以可以看一下它的参数方程： <span class="math display">\[
+\begin{aligned}
+&amp;x=x_{0}+r \sin \theta \cos \varphi \\
+&amp;y=y_{0}+r \sin \theta \sin \varphi \quad(0 \leq \varphi \leq 2 \pi \text { and } 0 \leq \theta \leq \pi) \\
+&amp;z=z_{0}+r \cos \theta
+\end{aligned}
+\]</span> 可以看到，这些三维的坐标实际上是由两个变量 <span class="math inline">\(\theta\)</span> 和 <span class="math inline">\(\varphi\)</span> 生成的，也可以说成是它的自由度是2，也正好对应了它是一个二维的流形，这里有点让我想到了矩阵的秩，好像也是这个道理。</p>
+<p>总结一下：</p>
+<p>这个概念在深度学习领域最原初的切入点是所谓的Manifold Hypothesis（流形假设）。流形假设是指“自然的原始数据是低维的流形（Manifold）嵌入于（embedded in）原始数据所在的高维空间”。那么，深度学习的任务就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。</p>
 
   
   
@@ -555,7 +549,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T13:55:26+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T14:14:24+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年7月11日</p>
@@ -567,7 +561,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%95%B0%E5%AD%A6/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>数学</p></a></div>
 
 
         
@@ -580,7 +574,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关self-attention的笔记 - Leo Lee's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关流形（Manifold）和嵌入（Embedding）的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -592,7 +586,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关self-attention的笔记 - Leo Lee's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关流形（Manifold）和嵌入（Embedding）的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -604,7 +598,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关self-attention的笔记 - Leo Lee's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关流形（Manifold）和嵌入（Embedding）的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -634,18 +628,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关流形（Manifold）和嵌入（Embedding）的笔记</p>
-          <p class='content'>流形，也就是 Manifold 。嵌入，也就是Embedding。
-有时候经常会在 paper 里看到“嵌入在高维空间中的低维流形”，不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像...</p>
-        </a>
       
-      
-        <a class='next' href='/2022/03/28/%E5%8D%8E%E4%B8%BA%E8%BD%AF%E6%8C%912022%EF%BC%88%E5%A4%B1%E8%B4%A5%EF%BC%89/'>
-          <p class='title'>华为软挑2022（失败）<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>第一次参加这种比赛，到最后也没有分数，很难受，明年再战吧。
-感觉思路并不是妹有道理的QAQ
-1234567891011121314151617181920212223242526272829...</p>
+        <a class='next' href='/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'>有关self-attention的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>好久没更了，小更一手
+这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
+如果谈到...</p>
         </a>
       
     </div>
@@ -666,59 +654,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
 
 
@@ -746,7 +681,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="有关self-attention的笔记";
+  pdata.postTitle="有关流形（Manifold）和嵌入（Embedding）的笔记";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
