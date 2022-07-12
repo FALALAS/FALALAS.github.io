@@ -517,8 +517,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 &amp;z=z_{0}+r \cos \theta
 \end{aligned}
 \]</span> 可以看到，这些三维的坐标实际上是由两个变量 <span class="math inline">\(\theta\)</span> 和 <span class="math inline">\(\varphi\)</span> 生成的，也可以说成是它的自由度是2，也正好对应了它是一个二维的流形，这里有点让我想到了矩阵的秩，好像也是这个道理。</p>
-<p>总结一下：</p>
 <p>这个概念在深度学习领域最原初的切入点是所谓的Manifold Hypothesis（流形假设）。流形假设是指“自然的原始数据是低维的流形（Manifold）嵌入于（embedded in）原始数据所在的高维空间”。那么，深度学习的任务就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。</p>
+<p>把流形引入到机器学习领域来主要有两种用途：一是将原来在欧氏空间中适用的算法加以改造，使得它工作在流形上，直接或间接地对流形的结构和性质加以利用；二是直接分析流形的结构，并试图将其映射到一个欧氏空间中，再在得到的结果上运用以前适用于欧氏空间的算法来进行学习。</p>
+<figure>
+<img src="https://blog.pluskid.org/uploads/2010/05/isomap-graph.png" class="lazyload" data-srcset="https://blog.pluskid.org/uploads/2010/05/isomap-graph.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Swiss Roll" /><figcaption aria-hidden="true">Swiss Roll</figcaption>
+</figure>
+<p>这个东西叫做 <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Swiss_roll">Swiss Roll</a> ，姑且把它看作一块卷起来的布好了。图中两个标黑圈的点，如果通过外围欧氏空间中的欧氏距离来计算的话，会是挨得很近的点，可是在流形上它们实际上是距离很远的点：红色的线是 Isomap 求出来的流形上的距离。可以想像，如果是原始的 MDS 的话，降维之后肯定会是很暴力地直接把它投影到二维空间中，完全无视流形结构，而 Isomap 则可以成功地将流形“展开”之后再做投影。</p>
+<p>最后码一个文章：https://blog.pluskid.org/archives/533</p>
 
   
   
@@ -549,10 +554,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-11T14:19:58+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-12T18:15:46+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年7月11日</p>
+    <p>更新于：2022年7月12日</p>
   </a>
 </div>
 
