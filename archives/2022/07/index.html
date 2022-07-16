@@ -457,9 +457,99 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/">
+        transformer代码解读
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        这个图21讲的是一个seq2seq的model，左侧为 Encoder block，右侧为 Decoder block。红色圈中的部分为Multi-Head Attention，是由多个Self-Attention组成的，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个 Multi-Head Attention...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-07-16</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关positional_encoding的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        以上是multi-head self-attention的原理，但是还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No position information in self attention)。所以你输入"A打了B"或者"B打了A"的效果其实是一样的，因为并没有考...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2022-07-16</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -478,8 +568,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='md'>
     
       
-        待补充
-
+        还有一种multi-head的self-attention，以2个head的情况为例: 由 \(a^{i}\) 生成的 \(q^{i}\) 进一步乘以2 个转移矩阵变为 \(q^{i, 1}\) 和 \(q^{i, 2}\) ，同理由 \(a^{i}\) 生成的 \(k^{i}\) 进一步乘以2个转移矩阵变为 \(k^{i, 1}\) 和 \(k^{i, 2}\) ，由 \(a^{i}\) ...
       
     
   </div>
@@ -779,7 +868,7 @@ Transformer是一个Sequence to Sequence model，特别之处在于它大量用�
 
 
     <div class='content'>
-      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 19px; color: #777">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 16.5px; color: #888">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16.5px; color: #888">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 21.5px; color: #666">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16.5px; color: #888">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a>
+      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 20.67px; color: #6c6c6c">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 17.33px; color: #828282">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 17.33px; color: #828282">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 17.33px; color: #828282">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 24px; color: #555">算法</a>
     </div>
   </section>
 
