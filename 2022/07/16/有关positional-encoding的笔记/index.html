@@ -504,7 +504,32 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>以上是multi-head self-attention的原理，但是还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No position information in self attention)。所以你输入"A打了B"或者"B打了A"的效果其实是一样的，因为并没有考虑位置的信息。所以在self-attention原来的paper中，作者为了解决这个问题所做的事情是如下图16所示：</p>
+  <p>还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No position information in self attention)。</p>
+<p>所以输入”A打了B“或者”B打了A“的效果其实是一样的，因为并没有考虑位置的信息。所以在self-attention原来的paper中，作者为了解决这个问题所做的事情是如下图所示：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-b8886621fc841085300f5bb21de26f0e_720w.jpg" class="lazyload" data-srcset="https://pic3.zhimg.com/80/v2-b8886621fc841085300f5bb21de26f0e_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<p>具体的做法是: 给每一个位置规定一个表示位置信息的向量<span class="math inline">\(e^{i}\)</span>，让它与<span class="math inline">\(a^{i}\)</span>加在一起之后作为 新的<span class="math inline">\(a^{i}\)</span>参与后面的运算过程，但是这个向量<span class="math inline">\(e^{i}\)</span>是由人工设定的，而不是神经网络学习出来的,每一个位置都有一个不同的 <span class="math inline">\(e^{i}\)</span> 。</p>
+<p>但是这里可能就会出现一个问题：为什么是相加而不是concatenate？加起来以后，原来表示位置的资讯不就混到里面去，很难被找到了吗？</p>
+<p>如上图所示，我们先给每一个位置的 <span class="math inline">\(x^{i} \in R(d, 1)\)</span> append一个one-hot编码的向量 <span class="math inline">\(p^{i} \in R(N, 1)\)</span> ，得到一个新的输入向量 <span class="math inline">\(x_{p}^{i} \in R(d+N, 1)\)</span> ，这个向量作为新的输入，乘 以一个transformation matrix <span class="math inline">\(W=\left[W^{I}, W^{P}\right] \in R(d, d+N)\)</span> 。那么： <span class="math display">\[
+W \cdot x_{p}^{i}=\left[W^{I}, W^{P}\right] \cdot\left[\begin{array}{c}
+x^{i} \\
+p^{i}
+\end{array}\right]=W^{I} \cdot x^{i}+W^{P} \cdot p^{i}=a^{i}+e^{i}
+\]</span> Transformer中除了单词的Embedding，还需要使用位置Embedding表示单词出现在句子中的位置。因为Transformer不采用双向RNN的结构，而是使用全局信息，不能利用单词的顺序信息，而这部分信息对于NLP来说非常重要。所以Transformer中使用位置Embedding保存单词在序列中的相对或绝对位置。</p>
+<p>位置Embedding用PE表示，PE的维度与单词Embedding是一样的。PE 可以通过训练得到，也可以使用某种公式计算得到。在 Transformer 中采用了后者，计算公式如下： <span class="math display">\[
+\begin{aligned}
+P E_{(p o s, 2 i)} &amp;=\sin \left(p o s / 10000^{2 i / d_{\text {model }}}\right) \\
+P E_{(\text {pos }, 2 i+1)} &amp;=\cos \left(p o s / 10000^{2 i / d_{\text {model }}}\right)
+\end{aligned}
+\]</span> 式中， pos 表示token在sequence中的位置。</p>
+<p><span class="math inline">\(i\)</span> ，或者准确意义上是 <span class="math inline">\(2 i\)</span> 和 <span class="math inline">\(2 i+1\)</span> 表示了Positional Encoding的维度， <span class="math inline">\(i\)</span> 的取值范围是: <span class="math inline">\(\left[0, \ldots, d_{\text {model }} / 2\right)\)</span> 。所以当 pos 为 1 时，对应的Positional Encoding可以写成： <span class="math display">\[
+P E(1)=\left[\sin \left(1 / 10000^{0 / 512}\right), \cos \left(1 / 10000^{0 / 512}\right), \sin \left(1 / 10000^{2 / 512}\right), \cos \left(1 / 10000^{2 / 512}\right), \ldots\right]
+\]</span> 式中， <span class="math inline">\(d_{\text {model }}=512\)</span> 。底数是 10000 。</p>
+<p>这个式子的好处是：</p>
+<ul>
+<li>每个位置有一个唯一的positional encoding。</li>
+<li>使PE能够适应比训练集里面所有句子更长的句子，假设训练集里面最长的句子是有 20 个单词，突然来了一个长度为 21 的句子，则使用公式计算的方法可以计算出第 21 位的 Embedding。</li>
+<li>可以让模型容易地计算出相对位置，对于固定长度的间距<span class="math inline">\(k\)</span>，任意位置的<span class="math inline">\(PE_{pos+k}\)</span>都可以被<span class="math inline">\(PE_{pos}\)</span>的线性函数表示。</li>
+</ul>
 
   
   
@@ -535,7 +560,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-17T02:05:05+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-17T16:14:35+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年7月17日</p>
@@ -615,7 +640,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class="prev-next">
       
         <a class='prev' href='/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>transformer代码解读</p>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>transformer原理分析和代码解读</p>
           <p class='content'>这个图21讲的是一个seq2seq的model，左侧为 Encoder block，右侧为 Decoder block。红色圈中的部分为Multi-Head Attention，是由多个Self...</p>
         </a>
       

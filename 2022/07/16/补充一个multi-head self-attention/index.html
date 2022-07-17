@@ -509,9 +509,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>同理得到 <span class="math inline">\(b^{i, 2}(i=1,2, \ldots, N)\)</span> 。</p>
 <p>现在我们有了 <span class="math inline">\(b^{i, 1}(i=1,2, \ldots, N) \in R(d, 1)\)</span> 和 <span class="math inline">\(b^{i, 2}(i=1,2, \ldots, N) \in R(d, 1)\)</span> ，可以把它们 concat起来，再通过一个transformation matrix调整维度，使之与刚才的 <span class="math inline">\(b^{i}(i=1,2, \ldots, N) \in R(d, 1)\)</span> 维度一致。</p>
 <p><img src="https://pic1.zhimg.com/80/v2-df5d332304c2fd217705f210edd18bf4_720w.jpg" class="lazyload" data-srcset="https://pic1.zhimg.com/80/v2-df5d332304c2fd217705f210edd18bf4_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
-<p>从下图可以看到 Multi-Head Attention 包含多个 Self-Attention 层，首先将输入 <span class="math inline">\(X\)</span> 分别传 递到 2个不同的 Self-Attention 中，计算得到 2 个输出结果。</p>
-<p>得到2个输出矩阵之后，Multi-Head Attention 将它们拼接在一起 (Concat)，然后传入一个Linear层，得到 Multi-Head Attention 最终的输出 <span class="math inline">\(Z\)</span> 。</p>
-<p>可以看到 Multi-Head Attention 输出的矩阵 <span class="math inline">\(Z\)</span> 与其输入的矩阵 <span class="math inline">\(X\)</span> 的维度是一样的。</p>
+<p>从下图可以看到 Multi-Head Attention 包含多个 Self-Attention 层，首先将输入<span class="math inline">\(X\)</span>分别传 递到 2个不同的 Self-Attention 中，计算得到 2 个输出结果。</p>
+<p>得到2个输出矩阵之后，Multi-Head Attention 将它们拼接在一起 (Concat)，然后传入一个Linear层，得到 Multi-Head Attention 最终的输出<span class="math inline">\(Z\)</span>。</p>
+<p>可以看到Multi-Head Attention输出的矩阵<span class="math inline">\(Z\)</span>与其输入的矩阵<span class="math inline">\(X\)</span>的维度是一样的。</p>
 <p><img src="https://pic2.zhimg.com/80/v2-f784c73ae6eb34a00108b64e3db394fd_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-f784c73ae6eb34a00108b64e3db394fd_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
 <p>不同组别的query和key可以关注输入中不同的信息，比如global和local。</p>
 
@@ -544,7 +544,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-17T02:03:37+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-17T10:35:35+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年7月17日</p>
@@ -625,7 +625,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='prev' href='/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关positional_encoding的笔记</p>
-          <p class='content'>以上是multi-head self-attention的原理，但是还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置...</p>
+          <p class='content'>还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No position ...</p>
         </a>
       
       
