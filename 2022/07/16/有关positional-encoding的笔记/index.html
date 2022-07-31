@@ -515,12 +515,12 @@ x^{i} \\
 p^{i}
 \end{array}\right]=W^{I} \cdot x^{i}+W^{P} \cdot p^{i}=a^{i}+e^{i}
 \]</span> Transformer中除了单词的Embedding，还需要使用位置Embedding表示单词出现在句子中的位置。因为Transformer不采用双向RNN的结构，而是使用全局信息，不能利用单词的顺序信息，而这部分信息对于NLP来说非常重要。所以Transformer中使用位置Embedding保存单词在序列中的相对或绝对位置。</p>
-<p>位置Embedding用PE表示，PE的维度与单词Embedding是一样的。PE 可以通过训练得到，也可以使用某种公式计算得到。在 Transformer 中采用了后者，计算公式如下： <span class="math display">\[
+<p>位置Embedding用PE表示，PE的维度与单词Embedding是一样的。PE可以通过训练得到，也可以使用某种公式计算得到。在 Transformer 中采用了后者，计算公式如下： <span class="math display">\[
 \begin{aligned}
 P E_{(p o s, 2 i)} &amp;=\sin \left(p o s / 10000^{2 i / d_{\text {model }}}\right) \\
 P E_{(\text {pos }, 2 i+1)} &amp;=\cos \left(p o s / 10000^{2 i / d_{\text {model }}}\right)
 \end{aligned}
-\]</span> 式中， pos 表示token在sequence中的位置。</p>
+\]</span> 式中，pos表示token在sequence中的位置。</p>
 <p><span class="math inline">\(i\)</span>，或者准确意义上是<span class="math inline">\(2 i\)</span>和<span class="math inline">\(2 i+1\)</span>表示了Positional Encoding的维度，<span class="math inline">\(i\)</span>的取值范围是:<span class="math inline">\(\left[0, \ldots, d_{\text {model }} / 2\right)\)</span>。所以当 pos 为 1 时，对应的Positional Encoding可以写成： <span class="math display">\[
 P E(1)=\left[\sin \left(1 / 10000^{0 / 512}\right), \cos \left(1 / 10000^{0 / 512}\right), \sin \left(1 / 10000^{2 / 512}\right), \cos \left(1 / 10000^{2 / 512}\right), \ldots\right]
 \]</span> 式中，<span class="math inline">\(d_{\text {model }}=512\)</span>。底数是 10000 。</p>
@@ -560,7 +560,7 @@ P E(1)=\left[\sin \left(1 / 10000^{0 / 512}\right), \cos \left(1 / 10000^{0 / 51
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-31T18:11:27+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-07-31T22:12:26+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年7月31日</p>
@@ -644,8 +644,8 @@ P E(1)=\left[\sin \left(1 / 10000^{0 / 512}\right), \cos \left(1 / 10000^{0 / 51
           <p class='content'>
 transformer最经典的图
 
-这个图讲的是一个seq2seq的model，左侧为 Encoder block，右侧为 Decoder block。
-黄色圈中的部分为Multi-H...</p>
+这个图为transformer的整体结构，左侧为 Encoder block，右侧为 Decoder block。
+黄色圈中的部分为Multi-He...</p>
         </a>
       
       
