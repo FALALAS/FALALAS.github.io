@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：收藏 - Leo Lee&#39;s blog</title>
+  <title>归档：2022/8 - Leo Lee&#39;s blog</title>
   
 
   
@@ -104,7 +104,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <body>
     
 
-<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+<header id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -355,7 +355,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="half" class='cover-wrapper  search' style="display: ;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://z3.ax1x.com/2021/08/06/fn4CB8.png"></div>
           
@@ -440,11 +440,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
-  
-    
-      
+	
+		
   <section class="post-list">
     
       
@@ -466,22 +464,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2022/01/22/%E6%9C%89%E5%85%B3python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关python数据分析的笔记
+      <a href="/2022/08/22/%E6%9C%89%E5%85%B3BatchNormalization%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关BatchNormalization的笔记
       </a>
     </h2>
   
   <div class='md'>
     
       
-        1、Numpy
-numpy中文教程
-官方文档
+        
 
-Numpy是一个用于进行数组运算的库
-Numpy中最重要的对象是称为ndarray的N维数组类型
-一般使用如下语句导入:import numpy as np
-创建数组:numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin ...
       
     
   </div>
@@ -489,12 +481,12 @@ Numpy中最重要的对象是称为ndarray的N维数组类型
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2022-01-22</time>
+        <time>2022-08-22</time>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2022/01/22/%E6%9C%89%E5%85%B3python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <a class='readmore' href='/2022/08/22/%E6%9C%89%E5%85%B3BatchNormalization%E7%9A%84%E7%AC%94%E8%AE%B0/'>
             阅读全文
           </a>
         </div>
@@ -516,20 +508,15 @@ Numpy中最重要的对象是称为ndarray的N维数组类型
   
     
     <h2 class="article-title" >
-      <a href="/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/">
-        有关FASTQ和SRA
+      <a href="/2022/08/22/%E6%9C%89%E5%85%B3%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关反向传播的笔记
       </a>
     </h2>
   
   <div class='md'>
     
       
-        下载网站：
-https://www.ebi.ac.uk/ena/browser/home
-https://www.ncbi.nlm.nih.gov/https://www.ncbi.nlm.nih.gov/
-记得挂梯子
-FASTQ与SRA之间的转换：
-学会使用sratoolkit，但是还没学会
+        
 
       
     
@@ -538,12 +525,12 @@ FASTQ与SRA之间的转换：
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2021-08-15</time>
+        <time>2022-08-22</time>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/'>
+          <a class='readmore' href='/2022/08/22/%E6%9C%89%E5%85%B3%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%9A%84%E7%AC%94%E8%AE%B0/'>
             阅读全文
           </a>
         </div>
@@ -563,8 +550,7 @@ FASTQ与SRA之间的转换：
   
 
 
-    
-  
+	
 </div>
 <aside class='l_side'>
   
@@ -677,14 +663,14 @@ FASTQ与SRA之间的转换：
   // header 这里无论是否开启pjax都需要
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.add("show");
+  l_header.classList.remove("show");
   
   
     // cover
     var cover_wrapper=document.querySelector('.cover-wrapper');
     
-    cover_wrapper.id="none";
-    cover_wrapper.style.display="none";
+    cover_wrapper.id="half";
+    cover_wrapper.style.display="";
     
   
 </script>

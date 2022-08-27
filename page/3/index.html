@@ -5,7 +5,9 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
+      
+        <meta name="robots" content="noindex,follow">
+      
     
   
   <!-- 渲染优化 -->
@@ -24,7 +26,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：收藏 - Leo Lee&#39;s blog</title>
+  <title>Leo Lee&#39;s blog</title>
   
 
   
@@ -440,20 +442,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
   
-    
-      
   <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-      
     
     
       
@@ -466,22 +457,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2022/01/22/%E6%9C%89%E5%85%B3python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关python数据分析的笔记
+      <a href="/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/">
+        有关于FASTQ文件中的碱基序列压缩问题的笔记
       </a>
     </h2>
   
   <div class='md'>
     
       
-        1、Numpy
-numpy中文教程
-官方文档
-
-Numpy是一个用于进行数组运算的库
-Numpy中最重要的对象是称为ndarray的N维数组类型
-一般使用如下语句导入:import numpy as np
-创建数组:numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin ...
+        目前 FASTQ 文件的无损压缩算法主要分为四类。第一类即使用普适的压缩软件 对文件进行压缩存储，例如 Gzip 以及 Bzip2，该类方法将 FASTQ 文件看做普通的字 符输入，不对其做任何处理，因此无法充分利用文件潜在的数据特征，使得压缩效果 不够理想。
+第二类算法的主要思想是重新对文件中序列进行排序，使得相似的序列尽可能聚 集从而提高压缩率，例如 SCALCE，Orcom，Minc...
       
     
   </div>
@@ -489,12 +474,12 @@ Numpy中最重要的对象是称为ndarray的N维数组类型
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2022-01-22</time>
+        <time>2021-08-09</time>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2022/01/22/%E6%9C%89%E5%85%B3python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <a class='readmore' href='/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/'>
             阅读全文
           </a>
         </div>
@@ -516,21 +501,16 @@ Numpy中最重要的对象是称为ndarray的N维数组类型
   
     
     <h2 class="article-title" >
-      <a href="/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/">
-        有关FASTQ和SRA
+      <a href="/2021/08/06/%E6%88%90%E5%8A%9F%E5%BB%BA%E7%AB%99%EF%BC%81/">
+        成功建站！
       </a>
     </h2>
   
   <div class='md'>
     
       
-        下载网站：
-https://www.ebi.ac.uk/ena/browser/home
-https://www.ncbi.nlm.nih.gov/https://www.ncbi.nlm.nih.gov/
-记得挂梯子
-FASTQ与SRA之间的转换：
-学会使用sratoolkit，但是还没学会
-
+        纪念一下
+今天终于成功可以让这个小站见人了，想要建一个个人博客的想法来自于不想写数模作业，想摸鱼🤣 主要的参考资料： 知乎：https://zhuanlan.zhihu.com/p/26625249 Easy Hexo：https://easyhexo.com/ Volantis：https://volantis.js.org/ Valine：https://valine.js.org/...
       
     
   </div>
@@ -538,12 +518,12 @@ FASTQ与SRA之间的转换：
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2021-08-15</time>
+        <time>2021-08-06</time>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/'>
+          <a class='readmore' href='/2021/08/06/%E6%88%90%E5%8A%9F%E5%BB%BA%E7%AB%99%EF%BC%81/'>
             阅读全文
           </a>
         </div>
@@ -560,11 +540,24 @@ FASTQ与SRA之间的转换：
   </section>
   
     
-  
-
-
+      <br>
+      <div class="prev-next">
+        
+          <a class="prev" rel="prev" href="/page/2/">
+            <section class="post prev white-box shadow" >
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+            </section>
+          </a>
+        
+        <p class="current">
+          3 / 3
+        </p>
+        
+      </div>
     
   
+
+
 </div>
 <aside class='l_side'>
   
@@ -662,6 +655,7 @@ FASTQ与SRA之间的转换：
 
 
 </aside>
+
 
 
 		  
