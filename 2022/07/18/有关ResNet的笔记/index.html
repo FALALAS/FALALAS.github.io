@@ -558,6 +558,19 @@ q=x+y
 <p>顺带一提，这里一个Block中必须至少含有两个层，否则就会出现很滑稽的情况： <span class="math display">\[
 \mathbf{y}=\mathcal{F}\left(x,\left\{W_{i}\right\}\right)+x=\left(W_{1} x\right)+x=\left(W_{1}+1\right) x
 \]</span> 显然这样加了和没加差不多</p>
+<figure>
+<img src="https://picx.zhimg.com/80/v2-03f393009c383ce8ec8b956399a105a8_720w.jpg?source=1940ef5c" class="lazyload" data-srcset="https://picx.zhimg.com/80/v2-03f393009c383ce8ec8b956399a105a8_720w.jpg?source=1940ef5c" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="ResNet结构示意图（左到右分别是VGG，没有残差的PlainNet，有残差的ResNet）" /><figcaption aria-hidden="true">ResNet结构示意图（左到右分别是VGG，没有残差的PlainNet，有残差的ResNet）</figcaption>
+</figure>
+<p>可以看到即使是当年号称“Very Deep”的VGG，和最基础的Resnet在深度上都相形见绌。</p>
+<p>跳接的曲线中大部分是实线，但也有少部分虚线。这些虚线的代表这些Block前后的维度不一致，因为去掉残差结构的Plain网络还是参照了VGG经典的设计思路：每隔x层，空间上/2（下采样）但深度翻倍。</p>
+<p>也就是说，维度不一致体现在两个层面：空间上不一致、深度上不一致</p>
+<p>空间上不一致很简单，只需要在跳接的部分给输入x加上一个线性映射<span class="math inline">\(Ws\)</span>,即：<br />
+<span class="math display">\[
+\mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)+\mathbf{x} \quad \rightarrow \quad \mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_{i}\right\}\right)+W_{s} \mathbf{x}
+\]</span> 而对于深度上的不一致，则有两种解决办法，一种是在跳接过程中加一个1*1的卷积层进行升维，另一种则是直接简单粗暴地补零。事实证明两种方法都行得通。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1702.08591.pdf">论文</a>认为即使BN过后梯度的模稳定在了正常范围内，但梯度的相关性实际上是随着层数增加持续衰减的。而经过证明，ResNet可以有效减少这种相关性的衰减。</p>
+<p>对于<span class="math inline">\(L\)</span>层的网络来说，没有残差表示的Plain Net梯度相关性的衰减在<span class="math inline">\(\frac{1}{2^{L}}\)</span> ，而ResNet的衰减却只有<span class="math inline">\(\frac{1}{\sqrt{L}}\)</span>。这也验证了ResNet论文本身的观点，网络训练难度随着层数增长的速度不是线性，而至少是多项式等级的增长,也可能是指数级增长的。</p>
+<p>而对于“梯度弥散”观点来说，在输出引入一个输入x的恒等映射，则梯度也会对应地引入一个常数1，这样的网络的确不容易出现梯度值异常，在某种意义上，起到了稳定梯度的作用。除此之外，shortcut类似的方法也并不是第一次提出，之前就有“Highway Networks”。可以只管理解为，以往参数要得到梯度，需要快递员将梯度一层一层中转到参数手中，而跳接实际上给梯度开了一条“高速公路”，效率自然大幅提高，不过这只是个比较想当然的理由。</p>
 
   
   
@@ -588,10 +601,10 @@ q=x+y
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-08-28T01:40:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-08-29T01:44:34+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年8月28日</p>
+    <p>更新于：2022年8月29日</p>
   </a>
 </div>
 
@@ -666,12 +679,6 @@ q=x+y
 
   
     <div class="prev-next">
-      
-        <a class='prev' href='/2022/08/22/%E6%9C%89%E5%85%B3%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关反向传播的笔记</p>
-          <p class='content'>
-</p>
-        </a>
       
       
         <a class='next' href='/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
