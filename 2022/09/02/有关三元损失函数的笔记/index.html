@@ -5,10 +5,6 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="noindex,follow">
-      
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -26,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Leo Lee&#39;s blog</title>
+  <title>有关三元损失函数的笔记 - Leo Lee&#39;s blog</title>
+  
+    <meta name="keywords" content="机器学习">
   
 
   
@@ -357,7 +355,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://z3.ax1x.com/2021/08/06/fn4CB8.png"></div>
           
@@ -443,531 +441,225 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-  <section class="post-list">
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/01/22/%E6%9C%89%E5%85%B3python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关python数据分析的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        1、Numpy
-numpy中文教程
-官方文档
 
-Numpy是一个用于进行数组运算的库
-Numpy中最重要的对象是称为ndarray的N维数组类型
-一般使用如下语句导入:import numpy as np
-创建数组:numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin ...
-      
-    
-  </div>
+
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        有关三元损失函数的笔记
+      </h1>
+      <div class='new-meta-box'>
         
-        <time>2022-01-22</time>
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://www.hualigs.cn/image/610d277ae201d.jpg">
+    <p>李傲</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年9月2日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="有关三元损失函数的笔记" data-path="/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <p>triplet loss 是深度学习的一种损失函数，主要是用于训练差异性小的样本，比如人脸等；其次在训练目标是得到样本的embedding任务中，triplet loss 也经常使用，比如文本、图片的embedding。</p>
+<p>损失函数公式：<span class="math inline">\(L=max(d(a,p)−d(a,n)+margin,0)\)</span></p>
+<p>输入是一个三元组，包括锚（Anchor）示例、正（Positive）示例、负（Negative）示例，通过优化锚示例与正示例的距离小于锚示例与负示例的距离，实现样本之间的相似性计算。</p>
+<p>a：anchor，锚示例；p：positive，与a是同一类别的样本；n：negative，与a是不同类别的样本；margin是一个大于0的常数。最终的优化目标是拉近a和p的距离，拉远a和n的距离。</p>
+<p>其中样本可以分为三类：</p>
+<p>easy triplets：<span class="math inline">\(L=0\)</span>，即<span class="math inline">\(d(a,p)+margin&gt;d(a,n)\)</span>，这种情况不需要优化，天然a和p的距离很近，a和n的距离很远，如下图</p>
+<p><img src="https://pic1.zhimg.com/80/v2-79483ddef7efaf272b1448fe78553648_720w.jpg" class="lazyload" data-srcset="https://pic1.zhimg.com/80/v2-79483ddef7efaf272b1448fe78553648_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<p>hard triplets：<span class="math inline">\(L&gt;margin\)</span>，即<span class="math inline">\(d(a,p)&gt;d(a,n)\)</span>，a和n的距离近，a和p的距离远，这种情况损失最大，需要优化，如下图</p>
+<p><img src="https://pic2.zhimg.com/80/v2-22dddc8d121df5c840cb8878d46662d1_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-22dddc8d121df5c840cb8878d46662d1_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<p>semi-hard triplets：<span class="math inline">\(L&lt;margin\)</span>，即<span class="math inline">\(d(a,p)&lt;d(a,n)&lt;d(a,p)+margin\)</span>，即a和p的距离比a和n的距离近，但是近的不够多，不满足margin，这种情况存在损失，但损失比hard triplets要小，也需要优化，如下图</p>
+<p><img src="https://pic3.zhimg.com/80/v2-d94bdabb8c369d36a614c441f0397efe_720w.jpg" class="lazyload" data-srcset="https://pic3.zhimg.com/80/v2-d94bdabb8c369d36a614c441f0397efe_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<ul>
+<li>避免模型走捷径，将negative和positive的embedding训练成很相近，因为如果没margin，triplets loss公式就变成了 L=max(d(a,p)−d(a,n),0) ，那么只要 d(a,p)=d(a,n) 就可以满足上式，也就是锚点a和正例p与锚点a和负例n的距离一样即可，这样模型很难正确区分正例和负例。</li>
+<li>设定一个margin常量，可以迫使模型努力学习，能让锚点a和负例n的distance值更大，同时让锚点a和正例p的distance值更小。</li>
+<li>由于margin的存在，使得triplets loss多了一个参数，margin的大小需要调参。如果margin太大，则模型的损失会很大，而且学习到最后，loss也很难趋近于0，甚至导致网络不收敛，但是可以较有把握的区分较为相似的样本，即a和p更好区分；如果margin太小，loss很容易趋近于0，模型很好训练，但是较难区分a和p。</li>
+</ul>
+<p>首先能看到，对于triplet loss的损失公式，要有3个输入，即锚点a，正例p和负例n。对于样本来讲，有3种，即easy triplets、hard triplets和semi-hard triplets。</p>
+<p>理论上讲，使用hard triplets训练模型最好，因为这样模型能够有很好的学习能力，但由于margin的存在，这类样本可能模型没法很好的拟合，训练比较困难；其次是使用semi-hard triplet，这类样本是实际使用中最优选择，因为这类样本损失不为0，而且损失不大，模型既可以学习到样本之间的差异，又较容易收敛；至于easy triplet，损失为0，不用拿来训练。</p>
+<p>针对不同的业务，其实构造的原则也不一样，比如人脸识别场景，样本的选择应该满足<span class="math inline">\(d(a,p)\)</span>和<span class="math inline">\(d(a,n)\)</span>尽可能接近，其实就是选择semi-hard triplets样本，这样一来，损失函数的公式不容易满足，也就意味着损失值不够低，模型必须认真训练和更新自己的参数，从而努力让<span class="math inline">\(d(a,n)\)</span>的值尽可能变大，同时让<span class="math inline">\(d(a,p)\)</span>的值尽可能变小。</p>
+<p>针对搜索引擎场景，比如dssm，正样本是用户query搜索点击的doc做正例，负例是采用随机采样的策略，一般随机采样的策略是不可控的，既可能采样到easy triplet，又可能采样到hard triple，要看采样的池子怎么确定。</p>
+<p>Facebook最近提出的EBR也指出，在随机采样的策略上，要增加semi-hard triplets，选取搜索曝光页面第101~500，也就是让模型看到这些模糊的样本，有些相似但没那么相似，这样模型才能更好的学习到样本之间的差异。</p>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2022/01/22/%E6%9C%89%E5%85%B3python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-09-03T01:31:29+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年9月3日</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
+          
   
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/01/11/%E6%9C%89%E5%85%B3%E7%94%B5%E7%A3%81%E5%AD%A6%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关电磁学的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
       
-        电场强度
-库仑定律： \[
-F=\frac{1}{4 \pi \varepsilon_{0}} \frac{q \cdot q_{0}}{r^{2}}
-\] 真空介电常量： \[
-\varepsilon_{0}=8.85 \times 10^{-12} C^{2} /\left(N \cdot m^{2}\right)
-\] 电场强度： \[
-E=\frac{1}{4 \pi \...
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关三元损失函数的笔记 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关三元损失函数的笔记 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关三元损失函数的笔记 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
       
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-01-11</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/01/11/%E6%9C%89%E5%85%B3%E7%94%B5%E7%A3%81%E5%AD%A6%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
 </div>
 
-          </div>
+
+
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/">
-        有关多臂老虎机问题的一些算法
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        用数理统计方法解决多臂老虎机问题
-摘要
-多臂老虎机问题（Multi-Armed Bandit problem，简称MAB问题）是概率论与数理统计中一个经典问题，也属于机器学习中强化学习的范畴。
-在这个问题中，赌徒必须决定在一系列试验中使用不同的老虎机中的哪一个，以最大化他的回报。这一经典问题之所以受到广泛关注，是因为它提供了一个简单的模型，在探索（尝试每个机器以找到回报最好的一台）、利...
-      
-    
+    </div>
   </div>
+
+
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-12-02</time>
-        
-      </div>
+  
+
+  
+    <div class="prev-next">
       
-        <div>
-          <a class='readmore' href='/2021/12/02/%E6%9C%89%E5%85%B3%E5%A4%9A%E8%87%82%E8%80%81%E8%99%8E%E6%9C%BA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AE%97%E6%B3%95/'>
-            阅读全文
-          </a>
-        </div>
+      
+        <a class='next' href='/2022/07/18/%E6%9C%89%E5%85%B3ResNet%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'>有关ResNet的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>今天来填一个巨大的坑，主要是学车真的快把人热傻了外加晒成了黑炭，考不过真是be了。
+神经网络叠的越深，则学习出的效果就一定会越好吗？答案无疑是否定的，人们发现当模型层数增加到某种程度，模型的效...</p>
+        </a>
       
     </div>
   
+</article>
 
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
 </div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/11/02/%E6%9C%89%E5%85%B3%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%80%92%E6%95%B0%E9%80%9F%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%8F%E6%84%9F%E6%83%B3/">
-        有关平方根倒数速算法的小感想
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        ​ 今天偶然看到了一个来自《Quake III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square Root），不得不感叹卡神的智慧。
-12345678910111213141516float Q_rsqrt( float number )&#123;    long i;    float x2,y;    const float threehalfs =...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-11-02</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/11/02/%E6%9C%89%E5%85%B3%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%80%92%E6%95%B0%E9%80%9F%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%8F%E6%84%9F%E6%83%B3/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/09/20/%E6%9C%89%E5%85%B3%E8%BE%93%E5%85%A5%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关输入不定长数组的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        好久没更新了，小更一下 如下文所示 介绍一种不定长数组的输入方法（C语言实现）
-12345678910111213141516int main()  &#123;	int size_A;	int A[1024];	char c;	for (int i = 0;;i++)	&#123;      	scanf(&quot;%d%c&quot;,&amp;A[i],&amp;c); //每次扫...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-09-20</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/09/20/%E6%9C%89%E5%85%B3%E8%BE%93%E5%85%A5%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/08/24/%E5%9F%BA%E4%BA%8E%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E8%BF%9B%E8%A1%8C%E8%81%9A%E7%B1%BB/">
-        基于汉明距离进行聚类
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        vector版本
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-08-24</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/08/24/%E5%9F%BA%E4%BA%8E%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E8%BF%9B%E8%A1%8C%E8%81%9A%E7%B1%BB/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/08/24/%E6%9C%89%E5%85%B3%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关汉明距离的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        介绍
-汉明距离是以理查德·卫斯里·汉明的名字命名的。在信息论中，两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。例如：
-1011101 与 1001001 之间的汉明距离是 2。
-2143896 与 2233796 之间的汉明距离是 3。
-"toned" 与 "roses" 之间的汉明距离是 3。...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-08-24</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/08/24/%E6%9C%89%E5%85%B3%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/">
-        有关FASTQ和SRA
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        下载网站：
-https://www.ebi.ac.uk/ena/browser/home
-https://www.ncbi.nlm.nih.gov/https://www.ncbi.nlm.nih.gov/
-记得挂梯子
-FASTQ与SRA之间的转换：
-学会使用sratoolkit，但是还没学会
-
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-08-15</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关现代优化算法的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        题目
-已知100个目标的经度、纬度
-
-
-
-纬度
-经度
-纬度
-经度
-纬度
-经度
-纬度
+  </article>
 
 
 
 
-53.7121
-46.3253
-28.2753
-46.3253
-28.2753
-30.3313
-6.9348
-
-
-56.5432
-22.7891
-23.1045
-22.7891
-23.1045
-10.1584
-12.4819
-
-
-20...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-08-14</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/">
-        有关于FASTQ文件中的碱基序列压缩问题的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        目前 FASTQ 文件的无损压缩算法主要分为四类。第一类即使用普适的压缩软件 对文件进行压缩存储，例如 Gzip 以及 Bzip2，该类方法将 FASTQ 文件看做普通的字 符输入，不对其做任何处理，因此无法充分利用文件潜在的数据特征，使得压缩效果 不够理想。
-第二类算法的主要思想是重新对文件中序列进行排序，使得相似的序列尽可能聚 集从而提高压缩率，例如 SCALCE，Orcom，Minc...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2021-08-09</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-          <a class="prev" rel="prev" href="/">
-            <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
-            </section>
-          </a>
-        
-        <p class="current">
-          2 / 3
-        </p>
-        
-          <a class="next" rel="next" href="/page/3/">
-            <section class="post next white-box shadow">
-              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
 
 
 </div>
@@ -977,91 +669,8 @@ FASTQ与SRA之间的转换：
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://z3.ax1x.com/2021/08/06/fmjyff.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Leo Lee</h2>
-        
-        
-          <p>may become an AI scientist</p>
-
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:liaoxdu@foxmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/FALALAS/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=130671631"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
 
 
-    <div class='content'>
-      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 19px; color: #777">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 16.5px; color: #888">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16.5px; color: #888">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16.5px; color: #888">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 21.5px; color: #666">算法</a>
-    </div>
-  </section>
-
-
-  
 
   
 
@@ -1076,8 +685,8 @@ FASTQ与SRA之间的转换：
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="有关三元损失函数的笔记";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
