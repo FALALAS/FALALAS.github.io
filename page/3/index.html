@@ -457,6 +457,223 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2021/08/24/%E6%9C%89%E5%85%B3%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关汉明距离的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        介绍
+汉明距离是以理查德·卫斯里·汉明的名字命名的。在信息论中，两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。例如：
+1011101 与 1001001 之间的汉明距离是 2。
+2143896 与 2233796 之间的汉明距离是 3。
+"toned" 与 "roses" 之间的汉明距离是 3。...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-08-24</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/08/24/%E6%9C%89%E5%85%B3%E6%B1%89%E6%98%8E%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/">
+        有关FASTQ和SRA
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        下载网站：
+https://www.ebi.ac.uk/ena/browser/home
+https://www.ncbi.nlm.nih.gov/https://www.ncbi.nlm.nih.gov/
+记得挂梯子
+FASTQ与SRA之间的转换：
+学会使用sratoolkit，但是还没学会
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-08-15</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/08/15/%E6%9C%89%E5%85%B3FASTQ%E5%92%8CSRA/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关现代优化算法的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        题目
+已知100个目标的经度、纬度
+
+
+
+纬度
+经度
+纬度
+经度
+纬度
+经度
+纬度
+
+
+
+
+53.7121
+46.3253
+28.2753
+46.3253
+28.2753
+30.3313
+6.9348
+
+
+56.5432
+22.7891
+23.1045
+22.7891
+23.1045
+10.1584
+12.4819
+
+
+20...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-08-14</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/08/14/%E6%9C%89%E5%85%B3%E7%8E%B0%E4%BB%A3%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/">
+        有关于FASTQ文件中的碱基序列压缩问题的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        目前 FASTQ 文件的无损压缩算法主要分为四类。第一类即使用普适的压缩软件 对文件进行压缩存储，例如 Gzip 以及 Bzip2，该类方法将 FASTQ 文件看做普通的字 符输入，不对其做任何处理，因此无法充分利用文件潜在的数据特征，使得压缩效果 不够理想。
+第二类算法的主要思想是重新对文件中序列进行排序，使得相似的序列尽可能聚 集从而提高压缩率，例如 SCALCE，Orcom，Minc...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-08-09</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/08/09/%E7%BB%BC%E8%BF%B0%EF%BC%9AFASTQ%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E7%A2%B1%E5%9F%BA%E5%8E%8B%E7%BC%A9%E9%97%AE%E9%A2%98/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2021/08/06/%E6%88%90%E5%8A%9F%E5%BB%BA%E7%AB%99%EF%BC%81/">
         成功建站！
       </a>
@@ -600,7 +817,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 19px; color: #777">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 16.5px; color: #888">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16.5px; color: #888">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16.5px; color: #888">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 21.5px; color: #666">算法</a>
+      <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 18px; color: #7e7e7e">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 20px; color: #707070">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 22px; color: #636363">算法</a>
     </div>
   </section>
 
