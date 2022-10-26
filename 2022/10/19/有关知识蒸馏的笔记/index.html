@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Leo Lee&#39;s blog</title>
+  <title>有关知识蒸馏的笔记 - Leo Lee&#39;s blog</title>
+  
+    <meta name="keywords" content="机器学习">
   
 
   
@@ -448,28 +450,61 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
     
+      <h1 class="title">
+        有关知识蒸馏的笔记
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://www.hualigs.cn/image/610d277ae201d.jpg">
+    <p>李傲</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年10月19日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="有关知识蒸馏的笔记" data-path="/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
   </div>
 
 
   
   
-  <table>
-<tbody>
-<tr class="odd">
-<td>title： 有关知识蒸馏的笔记</td>
-</tr>
-<tr class="even">
-<td>date： 2022-10-19 22：24：43</td>
-</tr>
-<tr class="odd">
-<td>tags： 机器学习</td>
-</tr>
-<tr class="even">
-<td>mathjax： true</td>
-</tr>
-</tbody>
-</table>
-<p>知识蒸馏是一种模型压缩方法，是一种基于“教师-学生网络思想”的训练方法，由于其简单，有效，在工业界被广泛应用。这一技术的理论来自于2015年Hinton发表的一篇神作： Distilling the Knowledge in a Neural Network(https：//arxiv.org/pdf/1503.02531.pdf)</p>
+  <p>知识蒸馏是一种模型压缩方法，是一种基于“教师-学生网络思想”的训练方法，由于其简单，有效，在工业界被广泛应用。这一技术的理论来自于2015年Hinton发表的一篇神作： Distilling the Knowledge in a Neural Network(https：//arxiv.org/pdf/1503.02531.pdf)</p>
 <p>Knowledge Distillation，简称KD，顾名思义，就是将已经训练好的模型包含的知识(”Knowledge”)，蒸馏(“Distill“)提取到另一个模型里面去。今天，我们就来简单读一下这篇论文，力求用简单的语言描述论文作者的主要思想。在本文中，我们将从背景和动机讲起，然后着重介绍“知识蒸馏”的方法，最后我会讨论“温度“这个名词。</p>
 <p>1 介绍</p>
 <p>1.1 论文提出的背景 虽然在一般情况下，我们不会去区分训练和部署使用的模型，但是训练和部署之间存在着一定的不一致性：</p>
@@ -606,7 +641,7 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-10-26T23:04:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-10-26T23:18:40+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年10月26日</p>
@@ -617,6 +652,9 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>机器学习</p></a></div>
+
 
         
       
@@ -628,7 +666,7 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/&title= - Leo Lee's blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关知识蒸馏的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -640,7 +678,7 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/&title= - Leo Lee's blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关知识蒸馏的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -652,7 +690,7 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/&title= - Leo Lee's blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2022/10/19/%E6%9C%89%E5%85%B3%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F%E7%9A%84%E7%AC%94%E8%AE%B0/&title=有关知识蒸馏的笔记 - Leo Lee's blog&summary="
           
           >
           
@@ -709,6 +747,59 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
 
 
 
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
 
 </div>
 <aside class='l_side'>
@@ -733,8 +824,8 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="有关知识蒸馏的笔记";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
