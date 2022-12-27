@@ -517,7 +517,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>上面容器和水的比喻非常经典和贴切，但是会引起一个误解： 人们在直觉上会觉得，要保留相近的知识量，必须保留相近规模的模型。也就是说，一个模型的参数量基本决定了其所能捕获到的数据内蕴含的“知识”的量。</p>
 <p>这样的想法是基本正确的，但是需要注意的是：</p>
 <p>模型的参数量和其所能捕获的“知识“量之间并非稳定的线性关系(下图中的1)，而是接近边际收益逐渐减少的一种增长曲线(下图中的2和3)。 完全相同的模型架构和模型参数量，使用完全相同的训练数据，能捕获的“知识”量并不一定完全相同，另一个关键因素是训练的方法。合适的训练方法可以使得在模型参数总量比较小时，尽可能地获取到更多的“知识”(下图中的3与2曲线的对比)。</p>
-<p><img src="https：//imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQYVFQTjZEaWNkMGp3SFdHWUJ0S1gzTDY3R0dmZEt6UlJ4MjJ3bExXa241U2ZiNHlsTWljSExZdkEvNjQw?x-oss-process=image/format，png" class="lazyload" data-srcset="https：//imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQYVFQTjZEaWNkMGp3SFdHWUJ0S1gzTDY3R0dmZEt6UlJ4MjJ3bExXa241U2ZiNHlsTWljSExZdkEvNjQw?x-oss-process=image/format，png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQYVFQTjZEaWNkMGp3SFdHWUJ0S1gzTDY3R0dmZEt6UlJ4MjJ3bExXa241U2ZiNHlsTWljSExZdkEvNjQw?x-oss-process=image/format.png" class="lazyload" data-srcset="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQYVFQTjZEaWNkMGp3SFdHWUJ0S1gzTDY3R0dmZEt6UlJ4MjJ3bExXa241U2ZiNHlsTWljSExZdkEvNjQw?x-oss-process=image/format.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
 <p>2 知识蒸馏的理论依据</p>
 <p>2.1 Teacher Model和Student Model</p>
 <p>知识蒸馏使用的是Teacher—Student模型，其中teacher是“知识”的输出者，student是“知识”的接受者。知识蒸馏的过程分为2个阶段：</p>
@@ -533,14 +533,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>KD的训练过程和传统的训练过程的对比</p>
 <p>传统training过程(hard targets)： 对ground truth求极大似然 KD的training过程(soft targets)： 用large model的class probabilities作为soft targets</p>
 <figure>
-<img src="https：//imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQOElqZTlMMFdGRVh6VnpZZGRPTm1tMEhEaWNGRGliOExIRE1jSTdpYXBONDJqb1pRYndubFA2aWEwUS82NDA?x-oss-process=image/format，png" class="lazyload" data-srcset="https：//imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQOElqZTlMMFdGRVh6VnpZZGRPTm1tMEhEaWNGRGliOExIRE1jSTdpYXBONDJqb1pRYndubFA2aWEwUS82NDA?x-oss-process=image/format，png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="上图： Hard Target 下图： Soft Target" /><figcaption aria-hidden="true">上图： Hard Target 下图： Soft Target</figcaption>
+<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQOElqZTlMMFdGRVh6VnpZZGRPTm1tMEhEaWNGRGliOExIRE1jSTdpYXBONDJqb1pRYndubFA2aWEwUS82NDA?x-oss-process=image/format.png" class="lazyload" data-srcset="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQOElqZTlMMFdGRVh6VnpZZGRPTm1tMEhEaWNGRGliOExIRE1jSTdpYXBONDJqb1pRYndubFA2aWEwUS82NDA?x-oss-process=image/format.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="上图： Hard Target 下图： Soft Target" /><figcaption aria-hidden="true">上图： Hard Target 下图： Soft Target</figcaption>
 </figure>
 <p>KD的训练过程为什么更有效?</p>
 <p>softmax层的输出，除了正例之外，负标签也带有大量的信息，比如某些负标签对应的概率远远大于其他负标签。而在传统的训练过程(hard target)中，所有负标签都被统一对待。也就是说，KD的训练方式使得每个样本给Net-S带来的信息量大于传统的训练方式。</p>
 <p>【举个例子】</p>
 <p>在手写体数字识别任务MNIST中，输出类别有10个。</p>
 <p>假设某个输入的“2”更加形似“3“，softmax的输出值中“3“对应的概率为0.1，而其他负标签对应的值都很小，而另一个“2“更加形似“7“，“7“对应的概率为0.1。这两个“2“对应的hard target的值是相同的，但是它们的soft target却是不同的，由此我们可见soft target蕴含着比hard target多的信息。并且soft target分布的熵相对高时，其soft target蕴含的知识就更丰富。</p>
-<p><img src="https：//imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQMjZkVGlhQ3JyemNtcGREa1JneDNDaWJudEZmTGtMVVA2bmFvbTRMQnZwTk1VdGxJdXVOR05xTWcvNjQw?x-oss-process=image/format，png" class="lazyload" data-srcset="https：//imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQMjZkVGlhQ3JyemNtcGREa1JneDNDaWJudEZmTGtMVVA2bmFvbTRMQnZwTk1VdGxJdXVOR05xTWcvNjQw?x-oss-process=image/format，png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQMjZkVGlhQ3JyemNtcGREa1JneDNDaWJudEZmTGtMVVA2bmFvbTRMQnZwTk1VdGxJdXVOR05xTWcvNjQw?x-oss-process=image/format.png" class="lazyload" data-srcset="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQMjZkVGlhQ3JyemNtcGREa1JneDNDaWJudEZmTGtMVVA2bmFvbTRMQnZwTk1VdGxJdXVOR05xTWcvNjQw?x-oss-process=image/format.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
 <p>两个”2“的hard target相同而soft target不同。这就解释了为什么通过蒸馏的方法训练出的Net-S相比使用完全相同的模型结构和训练数据只使用hard target的训练方法得到的模型，拥有更好的泛化能力。</p>
 <p>2.3. softmax函数</p>
 <p>先回顾一下原始的softmax函数： <span class="math display">\[
@@ -555,7 +555,7 @@ q_i=\frac{\exp \left(z_i / T\right)}{\sum_j \exp \left(z_j / T\right)}
 <p>3.1 通用的知识蒸馏方法</p>
 <p>第一步是训练Net-T；第二步是在高温T下，蒸馏Net-T的知识到Net-S</p>
 <figure>
-<img src="https：//intellabs.github.io/distiller/imgs/knowledge_distillation.png" class="lazyload" data-srcset="https：//intellabs.github.io/distiller/imgs/knowledge_distillation.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="知识蒸馏示意图" /><figcaption aria-hidden="true">知识蒸馏示意图</figcaption>
+<img src="https://intellabs.github.io/distiller/imgs/knowledge_distillation.png" class="lazyload" data-srcset="https://intellabs.github.io/distiller/imgs/knowledge_distillation.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="知识蒸馏示意图" /><figcaption aria-hidden="true">知识蒸馏示意图</figcaption>
 </figure>
 <p>训练Net-T的过程很简单，下面详细讲讲第二步：高温蒸馏的过程。高温蒸馏过程的目标函数由distill loss(对应soft target)和student loss(对应hard target)加权得到。示意图如上。 <span class="math display">\[
 L=\alpha L_{\text {soft }}+\beta L_{\text {hard }}
@@ -598,7 +598,7 @@ L_{h a r d}=-\sum_j^N c_j \log \left(q_j^1\right)=-\left(\frac{\sum_j^N c_j z_j}
 L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
 \]</span> 4 关于“温度“的讨论</p>
 <p>【问题】 我们都知道“蒸馏”需要在高温下进行，那么这个“蒸馏”的温度代表了什么，又是如何选取合适的温度？</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQRlEzOW1xaWJOZnV6OHQxNHFFZHVhVXVvbWVjOEM0T2tTaWFqT3NNdzBPRjhEeXIyZ0hPMUFvQ1EvNjQw?x-oss-process=image/format,png" class="lazyload" data-srcset="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQRlEzOW1xaWJOZnV6OHQxNHFFZHVhVXVvbWVjOEM0T2tTaWFqT3NNdzBPRjhEeXIyZ0hPMUFvQ1EvNjQw?x-oss-process=image/format,png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQRlEzOW1xaWJOZnV6OHQxNHFFZHVhVXVvbWVjOEM0T2tTaWFqT3NNdzBPRjhEeXIyZ0hPMUFvQ1EvNjQw?x-oss-process=image/format.png" class="lazyload" data-srcset="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9ESGlidVVmcFp2UWNxbWV3dlZ2ZmljSkcyVkR2dkJVOElQRlEzOW1xaWJOZnV6OHQxNHFFZHVhVXVvbWVjOEM0T2tTaWFqT3NNdzBPRjhEeXIyZ0hPMUFvQ1EvNjQw?x-oss-process=image/format.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" /></p>
 <p>随着温度T的增大，概率分布的熵逐渐增大</p>
 <p>4.1 温度的特点</p>
 <p>在回答这个问题之前，先讨论一下温度T的特点</p>
@@ -641,10 +641,10 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-10-26T23:18:40+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2022-10-27T09:51:44+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2022年10月26日</p>
+    <p>更新于：2022年10月27日</p>
   </a>
 </div>
 
@@ -719,6 +719,12 @@ L_{\text {soft }}^{\prime}=1 / 2\left(z_i-v_i\right)^2
 
   
     <div class="prev-next">
+      
+        <a class='prev' href='/2022/10/27/%E6%9C%89%E5%85%B3GaitSet%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关GaitSet的笔记</p>
+          <p class='content'>
+</p>
+        </a>
       
       
         <a class='next' href='/2022/09/23/%E6%9C%89%E5%85%B3%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/'>
