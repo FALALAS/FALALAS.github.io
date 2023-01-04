@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>归档：2022/9 - Leo Lee&#39;s blog</title>
+  <title>标签：PyTorch - Leo Lee&#39;s blog</title>
   
 
   
@@ -104,7 +104,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <body>
     
 
-<header id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -355,7 +355,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="half" class='cover-wrapper  search' style="display: ;">
+        <div id="full" class='cover-wrapper  search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://z3.ax1x.com/2021/08/06/fn4CB8.png"></div>
           
@@ -440,19 +440,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
+
 <div class='l_main'>
-	
-		
+  
+    
+      
   <section class="post-list">
     
       
         
           
         
-          
-        
-          
-        
       
     
     
@@ -466,16 +464,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2022/09/23/%E6%9C%89%E5%85%B3%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关距离的笔记
+      <a href="/2022/12/22/%E6%9C%89%E5%85%B3timm%E5%BA%93%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/">
+        有关timm库的笔记
       </a>
     </h2>
   
   <div class='md'>
     
       
-        
-
+        1 什么是 timm 库？
+PyTorchImageModels，简称 timm，是一个巨大的 PyTorch 代码集合，包括了一系列：
+image models layers utilities optimizers schedulers data-loaders / augmentations training / validation scripts
+旨在将各种 SOTA 模型整...
       
     
   </div>
@@ -483,105 +483,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='meta-v3' line_style='solid'>
       <div>
         
-        <time>2022-09-23</time>
+        <time>2022-12-22</time>
         
       </div>
       
         <div>
-          <a class='readmore' href='/2022/09/23/%E6%9C%89%E5%85%B3%E8%B7%9D%E7%A6%BB%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/09/23/%E5%87%A0%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83/">
-        几种排序算法的比较
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Θ，既是上界也是下界(tight)，等于的意思。
-Ο，表示上界(tightness unknown)，小于等于的意思。
-ο，表示上界(not tight)，小于的意思。
-Ω，表示下界(tightness unknown)，大于等于的意思。
-ω，表示下界(not tight)，大于的意思。
-O符号是用于描述函数渐近行为的数学符号。更确切地说，它是用另一个（通常更简单的）函数来描述一个...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-09-23</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/09/23/%E5%87%A0%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关三元损失函数的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        triplet loss 是深度学习的一种损失函数，主要是用于训练差异性小的样本，比如人脸等；其次在训练目标是得到样本的embedding任务中，triplet loss 也经常使用，比如文本、图片的embedding。
-损失函数公式：\(L=max(d(a,p)−d(a,n)+margin,0)\)
-输入是一个三元组，包括锚（Anchor）示例、正（Positive）示例、负（Nega...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-09-02</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <a class='readmore' href='/2022/12/22/%E6%9C%89%E5%85%B3timm%E5%BA%93%E7%9A%84%E4%B8%80%E4%BA%9B%E7%AC%94%E8%AE%B0/'>
             阅读全文
           </a>
         </div>
@@ -601,7 +508,8 @@ O符号是用于描述函数渐近行为的数学符号。更确切地说，它�
   
 
 
-	
+    
+  
 </div>
 <aside class='l_side'>
   
@@ -714,14 +622,14 @@ O符号是用于描述函数渐近行为的数学符号。更确切地说，它�
   // header 这里无论是否开启pjax都需要
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.remove("show");
+  l_header.classList.add("show");
   
   
     // cover
     var cover_wrapper=document.querySelector('.cover-wrapper');
     
-    cover_wrapper.id="half";
-    cover_wrapper.style.display="";
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
     
   
 </script>
