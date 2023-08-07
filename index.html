@@ -511,9 +511,153 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2023/07/16/intro%EF%BC%9A%E6%B7%B7%E5%90%88%E5%83%8F%E5%85%83%E7%9A%84%E5%88%86%E8%A7%A3/">
+        intro：混合像元的分解
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        合像元的分解好好好
+
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2023-07-16</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2023/07/16/intro%EF%BC%9A%E6%B7%B7%E5%90%88%E5%83%8F%E5%85%83%E7%9A%84%E5%88%86%E8%A7%A3/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2023/04/03/%E6%9C%89%E5%85%B3%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关目标检测损失函数的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        目标检测分类损失函数——Cross entropy、Focal loss
+一、Cross Entropy Loss 交叉熵是用来判定实际的输出与期望的输出的接近程度，刻画的是实际输出与期望输出的距离，也就是交叉熵的值越小，两个概率分布就越接近。
+
+CE Loss的定义
+
+假设概率分布p为期望输出，概率分布q为实际输出，H(p,q)为交叉熵，则：
+当 时，交叉熵取得最小值，因此可以...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2023-04-03</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2023/04/03/%E6%9C%89%E5%85%B3%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2023/01/09/%E6%9C%89%E5%85%B3shell%E3%80%81bash%E3%80%81cmd%E7%9A%84%E7%AC%94%E8%AE%B0/">
+        有关shell、bash、cmd的笔记
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        问题一：DOS与windows中cmd区别
+在windows系统中，“开始-运行-cmd”可以打开“cmd.exe”，进行命令行操作。
+操作系统可以分成核心（kernel）和Shell（外壳）两部分，其中，Shell是操作系统与外部的主要接口，位于操作系统的外层，为用户提供与操作系统核心沟通的途径。在windows系统中见到的桌面即explorer.exe（资源管理器）是图形shell，...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2023-01-09</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2023/01/09/%E6%9C%89%E5%85%B3shell%E3%80%81bash%E3%80%81cmd%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -672,7 +816,7 @@ Knowledge Distillation，简称KD，...
   <div class='md'>
     
       
-        
+        考完了不想写了
 
       
     
@@ -840,140 +984,6 @@ O符号是用于描述函数渐近行为的数学符号。更确切地说，它�
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/">
-        transformer原理分析和代码解读
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        
-transformer最经典的图
-
-这个图为transformer的整体结构，左侧为 Encoder block，右侧为 Decoder block。
-黄色圈中的部分为Multi-Head Attention，是由多个Self-Attention组成的，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-16</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关positional_encoding的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No position information in self attention)。
-所以输入”A打了B“或者”B打了A“的效果其实是一样的，因为并没有考虑位置的信息。所以在self-attention原来的paper中...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-16</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/16/%E8%A1%A5%E5%85%85%E4%B8%80%E4%B8%AAmulti-head%20self-attention/">
-        补充一个multi-head self-attention
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        还有一种multi-head的self-attention，以2个head的情况为例: 由\(a^{i}\)生成的\(q^{i}\)进一步乘以2 个转移矩阵变为\(q^{i, 1}\)和\(q^{i, 2}\)，同理由\(a^{i}\)生成的\(k^{i}\)进一步乘以2个转移矩阵变为\(k^{i, 1}\)和\(k^{i, 2}\)，由\(a^{i}\)生成的\(v^{i}\)进一步乘以2...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-16</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/16/%E8%A1%A5%E5%85%85%E4%B8%80%E4%B8%AAmulti-head%20self-attention/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1082,7 +1092,7 @@ transformer最经典的图
 
 
     <div class='content'>
-      <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 18px; color: #7e7e7e">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 20px; color: #707070">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 22px; color: #636363">算法</a>
+      <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/cv%E7%9B%B8%E5%85%B3/" style="font-size: 14px; color: #999">cv相关</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 18px; color: #7e7e7e">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 20px; color: #707070">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E6%AD%A5%E6%80%81%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #999">步态识别</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 22px; color: #636363">算法</a>
     </div>
   </section>
 
