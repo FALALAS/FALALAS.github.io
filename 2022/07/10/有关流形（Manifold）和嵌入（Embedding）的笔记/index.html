@@ -506,23 +506,44 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   <p>流形，也就是 Manifold 。嵌入，也就是Embedding。</p>
 <p>有时候经常会在paper里看到“嵌入在高维空间中的低维流形”，以及机器学习里的Embedding层。不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在三维）中把它扭一扭，它就变成了一个流形（当然，不扭的时候，它也是一个流形，欧氏空间是流形的一种特殊情况）。</p>
-<p>所以，直观上来讲，一个流形好比是一个<span class="math inline">\(d\)</span>维的空间，在一个<span class="math inline">\(m\)</span>维的空间中 (<span class="math inline">\(m\)</span> &gt; <span class="math inline">\(d\)</span>) 被扭曲之后的结果。需要注意的是，流形并不是一个“形状”，而是一个“空间”。</p>
+<p>所以，直观上来讲，一个流形好比是一个<span
+class="math inline">\(d\)</span>维的空间，在一个<span
+class="math inline">\(m\)</span>维的空间中 (<span
+class="math inline">\(m\)</span> &gt; <span
+class="math inline">\(d\)</span>)
+被扭曲之后的结果。需要注意的是，流形并不是一个“形状”，而是一个“空间”。</p>
 <figure>
-<img src="https://blog.pluskid.org/uploads/2010/05/sphere.png" class="lazyload" data-srcset="https://blog.pluskid.org/uploads/2010/05/sphere.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="一个球面" /><figcaption aria-hidden="true">一个球面</figcaption>
+<img src="https://blog.pluskid.org/uploads/2010/05/sphere.png"
+alt="一个球面" />
+<figcaption aria-hidden="true">一个球面</figcaption>
 </figure>
-<p>再从球面说起，如果我们事先不知道球面的存在，那么球面上的点，其实就是三维欧氏空间上的点，可以用一个三元组来表示其坐标。但是和空间中的普通点不一样的是，它们允许出现的位置受到了一定的限制，具体到球面，可以可以看一下它的参数方程： <span class="math display">\[
+<p>再从球面说起，如果我们事先不知道球面的存在，那么球面上的点，其实就是三维欧氏空间上的点，可以用一个三元组来表示其坐标。但是和空间中的普通点不一样的是，它们允许出现的位置受到了一定的限制，具体到球面，可以可以看一下它的参数方程：
+<span class="math display">\[
 \begin{aligned}
 &amp;x=x_{0}+r \sin \theta \cos \varphi \\
-&amp;y=y_{0}+r \sin \theta \sin \varphi \quad(0 \leq \varphi \leq 2 \pi \text { and } 0 \leq \theta \leq \pi) \\
+&amp;y=y_{0}+r \sin \theta \sin \varphi \quad(0 \leq \varphi \leq 2 \pi
+\text { and } 0 \leq \theta \leq \pi) \\
 &amp;z=z_{0}+r \cos \theta
 \end{aligned}
-\]</span> 可以看到，这些三维的坐标实际上是由两个变量 <span class="math inline">\(\theta\)</span> 和 <span class="math inline">\(\varphi\)</span> 生成的，也可以说成是它的自由度是2，也正好对应了它是一个二维的流形，这里有点让我想到了矩阵的秩，好像也是这个道理。</p>
-<p>这个概念在深度学习领域最原初的切入点是所谓的Manifold Hypothesis（流形假设）。流形假设是指“自然的原始数据是低维的流形（Manifold）嵌入于（embedded in）原始数据所在的高维空间”。那么，深度学习的任务就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。</p>
+\]</span> 可以看到，这些三维的坐标实际上是由两个变量 <span
+class="math inline">\(\theta\)</span> 和 <span
+class="math inline">\(\varphi\)</span>
+生成的，也可以说成是它的自由度是2，也正好对应了它是一个二维的流形，这里有点让我想到了矩阵的秩，好像也是这个道理。</p>
+<p>这个概念在深度学习领域最原初的切入点是所谓的Manifold
+Hypothesis（流形假设）。流形假设是指“自然的原始数据是低维的流形（Manifold）嵌入于（embedded
+in）原始数据所在的高维空间”。那么，深度学习的任务就是把高维原始数据（图像，句子）映射到低维流形，使得高维的原始数据被映射到低维流形之后变得可分，而这个映射就叫嵌入（Embedding）。</p>
 <p>把流形引入到机器学习领域来主要有两种用途：一是将原来在欧氏空间中适用的算法加以改造，使得它工作在流形上，直接或间接地对流形的结构和性质加以利用；二是直接分析流形的结构，并试图将其映射到一个欧氏空间中，再在得到的结果上运用以前适用于欧氏空间的算法来进行学习。</p>
 <figure>
-<img src="https://blog.pluskid.org/uploads/2010/05/isomap-graph.png" class="lazyload" data-srcset="https://blog.pluskid.org/uploads/2010/05/isomap-graph.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Swiss Roll" /><figcaption aria-hidden="true">Swiss Roll</figcaption>
+<img src="https://blog.pluskid.org/uploads/2010/05/isomap-graph.png"
+alt="Swiss Roll" />
+<figcaption aria-hidden="true">Swiss Roll</figcaption>
 </figure>
-<p>这个东西叫做 <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Swiss_roll">Swiss Roll</a> ，姑且把它看作一块卷起来的布好了。图中两个标黑圈的点，如果通过外围欧氏空间中的欧氏距离来计算的话，会是挨得很近的点，可是在流形上它们实际上是距离很远的点：红色的线是 Isomap 求出来的流形上的距离。可以想像，如果是原始的 MDS 的话，降维之后肯定会是很暴力地直接把它投影到二维空间中，完全无视流形结构，而 Isomap 则可以成功地将流形“展开”之后再做投影。</p>
+<p>这个东西叫做 <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Swiss_roll">Swiss
+Roll</a>
+，姑且把它看作一块卷起来的布好了。图中两个标黑圈的点，如果通过外围欧氏空间中的欧氏距离来计算的话，会是挨得很近的点，可是在流形上它们实际上是距离很远的点：红色的线是
+Isomap 求出来的流形上的距离。可以想像，如果是原始的 MDS
+的话，降维之后肯定会是很暴力地直接把它投影到二维空间中，完全无视流形结构，而
+Isomap 则可以成功地将流形“展开”之后再做投影。</p>
 <p>最后码一个文章：https://blog.pluskid.org/archives/533</p>
 
   
@@ -536,7 +557,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <blockquote>
             
               
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
 
               
             
@@ -636,14 +658,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <a class='prev' href='/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关交叉熵的笔记</p>
           <p class='content'>熵这个概念还记得牛哥在一年前给我讲过，计算loss的时候要用到交叉熵，小整理一下。
-通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty of a sy...</p>
+通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty
+of a
+...</p>
         </a>
       
       
         <a class='next' href='/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/'>
           <p class='title'>有关self-attention的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
-如果谈到Transformer那...</p>
+          <p class='content'>这学期一直都在看ViT（Vision
+Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
+如果谈到Transformer...</p>
         </a>
       
     </div>
@@ -790,13 +815,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       

@@ -504,7 +504,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>好久没更新了，小更一下 如下文所示 介绍一种不定长数组及字符串的输入方法（C语言实现）</p>
+  <p>好久没更新了，小更一下 如下文所示
+介绍一种不定长数组及字符串的输入方法（C语言实现）</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> size_A;</span><br><span class="line">	<span class="keyword">int</span> A[<span class="number">1024</span>];</span><br><span class="line">	<span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;;i++)</span><br><span class="line">	&#123;  </span><br><span class="line">    	<span class="built_in">scanf</span>(<span class="string">&quot;%d%c&quot;</span>,&amp;A[i],&amp;c); <span class="comment">//每次扫描输入以数字和char类型输入为准  </span></span><br><span class="line">    	<span class="keyword">if</span>(c==<span class="string">&#x27;\n&#x27;</span>) <span class="comment">//如果接受到回车，则break </span></span><br><span class="line">		&#123;</span><br><span class="line">			size_A = i + <span class="number">1</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;   </span><br><span class="line">    &#125;<span class="comment">//这样我们就得到了一个长度为i的数组a[]  </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、输入不含空格的字符串</span></span><br><span class="line">string str;</span><br><span class="line">cin &gt;&gt; str;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 2、输入包含空格的字符串</span></span><br><span class="line">string str;</span><br><span class="line"><span class="comment">// 如果前面有了cin输入，则还需添加如下一句</span></span><br><span class="line"><span class="comment">// getchar();</span></span><br><span class="line"><span class="built_in">getline</span>(cin, str);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 3、不停输入字符串，直到遇到回车</span></span><br><span class="line">string str;</span><br><span class="line"><span class="comment">// 如果前面有了cin输入回车，则还需添加如下两句句</span></span><br><span class="line"><span class="comment">// cin.clear();</span></span><br><span class="line"><span class="comment">// cin.ignore();</span></span><br><span class="line"><span class="keyword">while</span>(cin.<span class="built_in">peek</span>()!=<span class="string">&#x27;\n&#x27;</span>)&#123;</span><br><span class="line">    cin &gt;&gt; str;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 4、不停输入字符串，字符串间以空格分隔，直到遇到回车</span></span><br><span class="line">string str;</span><br><span class="line"><span class="keyword">while</span>(cin &gt;&gt; str)&#123;</span><br><span class="line">    cout &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// getchar是用来吸收空格和回车的</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">getchar</span>() == <span class="string">&#x27;\n&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -519,7 +520,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <blockquote>
             
               
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
 
               
             
@@ -618,8 +620,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='prev' href='/2021/11/02/%E6%9C%89%E5%85%B3%E5%B9%B3%E6%96%B9%E6%A0%B9%E5%80%92%E6%95%B0%E9%80%9F%E7%AE%97%E6%B3%95%E7%9A%84%E5%B0%8F%E6%84%9F%E6%83%B3/'>
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关平方根倒数速算法的小感想</p>
-          <p class='content'>​ 今天偶然看到了一个来自《Quake III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square Root），不得不感叹卡神的智慧。
-123456789101...</p>
+          <p class='content'>​ 今天偶然看到了一个来自《Quake
+III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square
+Root），不得不感叹卡神的智慧。
+1234567891...</p>
         </a>
       
       
@@ -720,13 +724,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       

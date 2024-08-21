@@ -491,12 +491,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       
         目标检测分类损失函数——Cross entropy、Focal loss
-一、Cross Entropy Loss 交叉熵是用来判定实际的输出与期望的输出的接近程度，刻画的是实际输出与期望输出的距离，也就是交叉熵的值越小，两个概率分布就越接近。
+一、Cross Entropy Loss
+交叉熵是用来判定实际的输出与期望的输出的接近程度，刻画的是实际输出与期望输出的距离，也就是交叉熵的值越小，两个概率分布就越接近。
 
 CE Loss的定义
 
 假设概率分布p为期望输出，概率分布q为实际输出，H(p,q)为交叉熵，则：
-当 时，交叉熵取得最小值，因此可以...
+当
+时，交叉熵取得最小值，因此...
       
     
   </div>
@@ -540,7 +542,8 @@ CE Loss的定义
     
       
         1 什么是 timm 库？
-PyTorchImageModels，简称 timm，是一个巨大的 PyTorch 代码集合，包括了一系列：
+PyTorchImageModels，简称 timm，是一个巨大的 PyTorch
+代码集合，包括了一系列：
 image models
 layers
 utilities
@@ -548,7 +551,7 @@ optimizers
 schedulers
 data-loaders / augmentations
 training / validation scripts
-旨在将各种 SO...
+旨在将各种 S...
       
     
   </div>
@@ -591,8 +594,11 @@ training / validation scripts
   <div class='md'>
     
       
-        知识蒸馏是一种模型压缩方法，是一种基于“教师-学生网络思想”的训练方法，由于其简单，有效，在工业界被广泛应用。这一技术的理论来自于2015年Hinton发表的一篇神作： Distilling the Knowledge in a Neural Network(https：//arxiv.org/pdf/1503.02531.pdf)
-Knowledge Distillation，简称KD，...
+        知识蒸馏是一种模型压缩方法，是一种基于“教师-学生网络思想”的训练方法，由于其简单，有效，在工业界被广泛应用。这一技术的理论来自于2015年Hinton发表的一篇神作：
+Distilling the Knowledge in a Neural
+Network(https：//arxiv.org/pdf/1503.02531.pdf)
+Knowledge
+Distillation，简称...
       
     
   </div>
@@ -635,9 +641,11 @@ Knowledge Distillation，简称KD，...
   <div class='md'>
     
       
-        triplet loss 是深度学习的一种损失函数，主要是用于训练差异性小的样本，比如人脸等；其次在训练目标是得到样本的embedding任务中，triplet loss 也经常使用，比如文本、图片的embedding。
+        triplet loss
+是深度学习的一种损失函数，主要是用于训练差异性小的样本，比如人脸等；其次在训练目标是得到样本的embedding任务中，triplet
+loss 也经常使用，比如文本、图片的embedding。
 损失函数公式：\(L=max(d(a,p)−d(a,n)+margin,0)\)
-输入是一个三元组，包括锚（Anchor）示例、正（Positive）示例、负（Nega...
+输入是一个三元组，包括锚（Anchor）示例、正（Positive）示例、负（Ne...
       
     
   </div>
@@ -729,10 +737,14 @@ Knowledge Distillation，简称KD，...
     
       
         
+
 transformer最经典的图
 
-这个图为transformer的整体结构，左侧为 Encoder block，右侧为 Decoder block。
-黄色圈中的部分为Multi-Head Attention，是由多个Self-Attention组成的，可以看到 Encoder block 包含一个 Multi-Head Attention，而 Decoder block 包含两个...
+这个图为transformer的整体结构，左侧为 Encoder block，右侧为 Decoder
+block。
+黄色圈中的部分为Multi-Head
+Attention，是由多个Self-Attention组成的，可以看到 Encoder block 包含一个
+Multi-Head Attention，而 Decoder block...
       
     
   </div>
@@ -775,8 +787,9 @@ transformer最经典的图
   <div class='md'>
     
       
-        还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No position information in self attention)。
-所以输入”A打了B“或者”B打了A“的效果其实是一样的，因为并没有考虑位置的信息。所以在self-attention原来的paper中...
+        还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No
+position information in self attention)。
+所以输入”A打了B“或者”B打了A“的效果其实是一样的，因为并没有考虑位置的信息。所以在self-attention原来的paper...
       
     
   </div>
@@ -908,8 +921,11 @@ hardmax最大的特点就是只选出其中一个最大的值，即非黑即白.
     
       
         熵这个概念还记得牛哥在一年前给我讲过，计算loss的时候要用到交叉熵，小整理一下。
-通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty of a system)。在不同领域熵有不同的解释，比如热力学的定义和信息论也不大相同。
-要想明白交叉熵(Cross Entropy)的意义，可以从熵(Entropy) -&gt; KL散度(Kullback-L...
+通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty
+of a
+system)。在不同领域熵有不同的解释，比如热力学的定义和信息论也不大相同。
+要想明白交叉熵(Cross Entropy)的意义，可以从熵(Entropy) -&gt;
+KL散度(Kullbac...
       
     
   </div>
@@ -1045,7 +1061,7 @@ hardmax最大的特点就是只选出其中一个最大的值，即非黑即白.
 
 
     <div class='content'>
-      <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 18px; color: #7e7e7e">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 20px; color: #707070">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E6%AD%A5%E6%80%81%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #999">步态识别</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 22px; color: #636363">算法</a>
+      <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 18px; color: #7e7e7e">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 20px; color: #707070">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E6%AD%A5%E6%80%81%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #999">步态识别</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 22px; color: #636363">算法</a> <a href="/tags/%E8%BD%BB%E9%87%8F%E5%8C%96/" style="font-size: 14px; color: #999">轻量化</a>
     </div>
   </section>
 
@@ -1111,13 +1127,19 @@ hardmax最大的特点就是只选出其中一个最大的值，即非黑即白.
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       

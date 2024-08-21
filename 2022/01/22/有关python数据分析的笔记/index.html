@@ -506,12 +506,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
   <h3 id="numpy">1、Numpy</h3>
 <p><a target="_blank" rel="noopener" href="https://www.yiibai.com/numpy/">numpy中文教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html">官方文档</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html">官方文档</a></p>
 <ul>
 <li>Numpy是一个用于进行数组运算的库</li>
 <li>Numpy中最重要的对象是称为ndarray的N维数组类型</li>
 <li>一般使用如下语句导入:import numpy as np</li>
-<li>创建数组:numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmin = 0)</li>
+<li>创建数组:numpy.array(object, dtype = None, copy = True, order =
+None, subok = False, ndmin = 0)</li>
 <li>可以用np.dtype()定义结构体</li>
 <li>数组维度:ndarray.shape</li>
 <li>数组维数:ndarray.ndim</li>
@@ -520,20 +522,24 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>创建零数组:numpy.zeros(shape, dtype = float, order = 'C')</li>
 <li>创建一数组:numpy.ones(shape, dtype = float, order = 'C')</li>
 <li>用现有数据创建数组:numpy.asarray(a, dtype = None, order = None)</li>
-<li>按数值范围创建数组:numpy.arange(start = 0, stop, step = 1, dtype),类似的有linspace()和logspace()</li>
+<li>按数值范围创建数组:numpy.arange(start = 0, stop, step = 1,
+dtype),类似的有linspace()和logspace()</li>
 <li>切片:b=a[start:stop:step],可以用...代表剩余维度</li>
 <li>整数索引:每个整数数组表示该维度的下标值,b=a[[r1, r2], [c1, c2]]</li>
 <li>布尔索引:返回是布尔运算的结果的对象,可以用&amp;或|连接()分隔的条件</li>
-<li>在 NumPy 中可以对形状不相似的数组进行操作,因为它拥有广播功能,我的理解是,广播是一种维度的单方向拉伸</li>
+<li>在 NumPy
+中可以对形状不相似的数组进行操作,因为它拥有广播功能,我的理解是,广播是一种维度的单方向拉伸</li>
 <li>数组迭代:numpy.nditer(ndarray)或ndarray.flat</li>
 <li>数组长度:len(arr)</li>
 <li>访问第i个元素:一维数组用a[i],多维数组用a.flat[i]</li>
 <li>数组转置:ndarray.T</li>
-<li>数组分割:numpy.split(ary, indices_or_sections, axis),第二项的值为整数则表明要创建的等大小的子数组的数量,是一维数组则表明要创建新子数组的点。</li>
+<li>数组分割:numpy.split(ary, indices_or_sections,
+axis),第二项的值为整数则表明要创建的等大小的子数组的数量,是一维数组则表明要创建新子数组的点。</li>
 <li>追加值:numpy.append(arr, values, axis)</li>
 <li>插入值:numpy.insert(arr, idx, values, axis)</li>
 <li>删除值:numpy.delete(arr, values, axis)</li>
-<li>去重数组:numpy.unique(arr, return_index, return_inverse, return_counts)</li>
+<li>去重数组:numpy.unique(arr, return_index, return_inverse,
+return_counts)</li>
 <li>字符串函数:numpy.char类</li>
 <li>三角函数:numpy.sin(arr),numpy.cos(arr),numpy.tan(arr)</li>
 <li>四舍五入:numpy.around(arr,decimals)</li>
@@ -552,15 +558,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>线性代数:numpy.linalg模块</li>
 </ul>
 <h3 id="matplotlib">2、Matplotlib</h3>
-<p><a target="_blank" rel="noopener" href="https://matplotlib.org/users/pyplot_tutorial.html">官方教程</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c495e663f0ed">官方教程中文翻译</a></p>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/wizardforcel/article/details/54407212">matplotlib入门教程</a></p>
-<p><a target="_blank" rel="noopener" href="http://nbviewer.jupyter.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb">Jupyter Notebook Viewer的matplotlib lecture</a><a target="_blank" rel="noopener" href="http://nbviewer.jupyter.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb"></a></p>
+<p><a
+target="_blank" rel="noopener" href="https://matplotlib.org/users/pyplot_tutorial.html">官方教程</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.jianshu.com/p/c495e663f0ed">官方教程中文翻译</a></p>
+<p><a
+target="_blank" rel="noopener" href="http://blog.csdn.net/wizardforcel/article/details/54407212">matplotlib入门教程</a></p>
+<p><a
+target="_blank" rel="noopener" href="http://nbviewer.jupyter.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb">Jupyter
+Notebook Viewer的matplotlib lecture</a><a
+target="_blank" rel="noopener" href="http://nbviewer.jupyter.org/github/jrjohansson/scientific-python-lectures/blob/master/Lecture-4-Matplotlib.ipynb"></a></p>
 <p>建议先看官方教程,通过折线图熟悉基本操作,然后看入门教程第三章到第六章掌握各种图的画法</p>
 <ul>
 <li>一般使用如下语句导入:import matplotlib.pyplot as plt</li>
-<li>绘图:<a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot">plt.plot(x,y)</a>,可选color,marker,label等参数,默认的x坐标为从0开始且与y长度相同的数组,x坐标与y坐标一般使用numpy数组,也可以用列表</li>
-<li>设置线条:<a target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.setp.html#matplotlib.pyplot.setp">plt.setp()</a></li>
+<li>绘图:<a
+target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot">plt.plot(x,y)</a>,可选color,marker,label等参数,默认的x坐标为从0开始且与y长度相同的数组,x坐标与y坐标一般使用numpy数组,也可以用列表</li>
+<li>设置线条:<a
+target="_blank" rel="noopener" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.setp.html#matplotlib.pyplot.setp">plt.setp()</a></li>
 <li>轴名称:plt.xlable('str'),plt.ylable('str)</li>
 <li>添加文本:plt.txt(xpos,ypos,'str')</li>
 <li>添加格子:plt.grid(True)</li>
@@ -569,7 +583,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>图示:plt.legend(),结合plot()中的label参数使用</li>
 <li>获取子图:plt.sublot(nrows,ncols,index)或plt.subplot2grid((nrows,ncols),(rows,cols)),可选colspan和rowspan属性</li>
 <li>创建画布:plt.figure()</li>
-<li>数学表达式:<a target="_blank" rel="noopener" href="https://matplotlib.org/users/mathtext.html#mathtext-tutorial">TeX表达式</a></li>
+<li>数学表达式:<a
+target="_blank" rel="noopener" href="https://matplotlib.org/users/mathtext.html#mathtext-tutorial">TeX表达式</a></li>
 <li>非线性轴:plt.xscale('scale'),plt.yscale('scale'),可选参数log,symlog,logit等</li>
 <li>填充颜色:plt.fill(x,y)和plt.fill_between(x,y,where=...)</li>
 <li>条形图:plt.bar(x,y),注意多个条形图的默认颜色相同,应选择不同的颜色方便区分</li>
@@ -579,13 +594,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>饼图:plt.pie(slice),饼图用于显示部分对整体的关系,可选labels,colors,explode,autupct等属性</li>
 </ul>
 <h3 id="pandas">3、Pandas</h3>
-<p><a target="_blank" rel="noopener" href="http://pandas.pydata.org/pandas-docs/stable/10min.html">10 Minutes to Pandas</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/chaosimple/p/4153083.html">十分钟搞定pandas(上文翻译版)</a></p>
-<p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/25779298/">利用python进行数据分析</a></p>
+<p><a target="_blank" rel="noopener" href="http://pandas.pydata.org/pandas-docs/stable/10min.html">10
+Minutes to Pandas</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/chaosimple/p/4153083.html">十分钟搞定pandas(上文翻译版)</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://book.douban.com/subject/25779298/">利用python进行数据分析</a></p>
 <p>上面两个教程用于速成,下面这本书是pandas的作者写的,用于仔细了解</p>
 <ul>
 <li>一般使用如下语句导入:import pandas as pd</li>
-<li>Pandas是基于NumPy 的一种工具,提供了一套名为DataFrame的数据结构,比较契合统计分析中的表结构,可用Numpy或其它方式进行计算</li>
+<li>Pandas是基于NumPy
+的一种工具,提供了一套名为DataFrame的数据结构,比较契合统计分析中的表结构,可用Numpy或其它方式进行计算</li>
 <li>创建Series:pd.Series=(data,index),Series是一维数组</li>
 <li>创建DataFrame:pd.DataFrame(data,index,colums),也可以传递一个字典结构来填充data和colums,DataFrame类似于二维表格,简称df</li>
 <li>查看df头尾行:df.head(i),df.tail(i),如不填参数则分别返回除了前五行/倒数前五行的内容</li>
@@ -625,7 +644,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <blockquote>
             
               
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
 
               
             
@@ -844,13 +864,19 @@ F=\frac{1}{4 \pi \varepsilon_{0}} \frac{q \cdot q_{0}}{r^{2}}
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       

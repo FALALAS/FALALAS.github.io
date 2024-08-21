@@ -504,10 +504,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>​ 今天偶然看到了一个来自《Quake III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square Root），不得不感叹卡神的智慧。</p>
+  <p>​ 今天偶然看到了一个来自《Quake
+III》（雷神之锤III）的算法，平方根倒数速算法（Fast Inverse Square
+Root），不得不感叹卡神的智慧。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">Q_rsqrt</span><span class="params">( <span class="keyword">float</span> number )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> i;</span><br><span class="line">    <span class="keyword">float</span> x2,y;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">float</span> threehalfs = <span class="number">1.5F</span>;</span><br><span class="line">    x2 = number * <span class="number">0.5F</span>;</span><br><span class="line">    y= number;</span><br><span class="line">    i=* ( <span class="keyword">long</span> *  ) &amp;y;                     <span class="comment">// evil floating point bit hack</span></span><br><span class="line">    i = <span class="number">0x5f3759df</span> - ( i &gt;&gt;<span class="number">1</span> );             <span class="comment">// what the fuck?</span></span><br><span class="line">    y=* ( <span class="keyword">float</span> * ) &amp;i;</span><br><span class="line">    y =y * ( threehalfs - ( x2* y * y ) );  <span class="comment">// 1st iteration</span></span><br><span class="line"><span class="comment">// y =y * ( threehalfs - ( x2* y * y ) );   // 2nd iteration, can be removed</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>（这段代码的精髓在WTF？</p>
-<p>​ 虽然算法很精妙，还是有点过时，今天我还是应该直接写1/sqrt(x)，然后交给编译器优化就行了，我应该是不如现代编译器会优化的。</p>
+<p>​
+虽然算法很精妙，还是有点过时，今天我还是应该直接写1/sqrt(x)，然后交给编译器优化就行了，我应该是不如现代编译器会优化的。</p>
 
   
   
@@ -520,7 +523,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <blockquote>
             
               
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
 
               
             
@@ -621,14 +625,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>有关多臂老虎机问题的一些算法</p>
           <p class='content'>用数理统计方法解决多臂老虎机问题
 摘要
-多臂老虎机问题（Multi-Armed Bandit problem，简称MAB问题）是概率论与数理统计中一个经典问题，也属于机器学习中强化学习的范畴...</p>
+多臂老虎机问题（Multi-Armed Bandit
+problem，简称MAB问题）是概率论与数理统计中一个经典问题，也属于机器学习中强化学习的范...</p>
         </a>
       
       
         <a class='next' href='/2021/09/20/%E6%9C%89%E5%85%B3%E8%BE%93%E5%85%A5%E4%B8%8D%E5%AE%9A%E9%95%BF%E6%95%B0%E7%BB%84%E7%9A%84%E7%AC%94%E8%AE%B0/'>
           <p class='title'>有关输入不定长数组与字符串的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>好久没更新了，小更一下 如下文所示 介绍一种不定长数组及字符串的输入方法（C语言实现）
-12345678910111213141516int main()  &#123;	int size_A...</p>
+          <p class='content'>好久没更新了，小更一下 如下文所示
+介绍一种不定长数组及字符串的输入方法（C语言实现）
+12345678910111213141516int main()  &#123;	int size_...</p>
         </a>
       
     </div>
@@ -722,13 +728,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       

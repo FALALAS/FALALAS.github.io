@@ -504,67 +504,156 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>这学期一直都在看ViT（Vision Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。</p>
+  <p>这学期一直都在看ViT（Vision
+Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。</p>
 <p>如果谈到Transformer那首先就会谈到self-attention。</p>
-<p>Transformer是一个Sequence to Sequence model，特别之处在于它大量用到了self-attention。</p>
-<p>要处理一个Sequence，最常想到的就是使用RNN，它的输入是一串vector sequence，输出是另一串vector sequence，如下图左所示是一个双向的RNN，同时考虑上下文。RNN非常擅长于处理input是一个sequence的状况，但它很不容易并行化 (hard to parallel)。</p>
-<p>假设在单向RNN的情况下，要算出<span class="math inline">\(b_4\)</span>，就必须要先看<span class="math inline">\(a_1\)</span>再看<span class="math inline">\(a_2\)</span>再看<span class="math inline">\(a_3\)</span>再看<span class="math inline">\(a_4\)</span>，所以这个过程很难平行处理。</p>
+<p>Transformer是一个Sequence to Sequence
+model，特别之处在于它大量用到了self-attention。</p>
+<p>要处理一个Sequence，最常想到的就是使用RNN，它的输入是一串vector
+sequence，输出是另一串vector
+sequence，如下图左所示是一个双向的RNN，同时考虑上下文。RNN非常擅长于处理input是一个sequence的状况，但它很不容易并行化
+(hard to parallel)。</p>
+<p>假设在单向RNN的情况下，要算出<span
+class="math inline">\(b_4\)</span>，就必须要先看<span
+class="math inline">\(a_1\)</span>再看<span
+class="math inline">\(a_2\)</span>再看<span
+class="math inline">\(a_3\)</span>再看<span
+class="math inline">\(a_4\)</span>，所以这个过程很难平行处理。</p>
 <figure>
-<img src="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="处理Sequence数据的模型" /><figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
+<img
+src="https://pic2.zhimg.com/80/v2-7a6a6f0977b06b3372b129a09a3ccb31_720w.jpg"
+alt="处理Sequence数据的模型" />
+<figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
 </figure>
-<p>所以在并行化这个层面把CNN拿来取代RNN，如上图右所示。其中，橘色的三角形表示一个filter，每次扫过3个向量<span class="math inline">\(a\)</span>，扫过一轮以后，就输出了一排结果，使用橘色的小圆点表示。</p>
+<p>所以在并行化这个层面把CNN拿来取代RNN，如上图右所示。其中，橘色的三角形表示一个filter，每次扫过3个向量<span
+class="math inline">\(a\)</span>，扫过一轮以后，就输出了一排结果，使用橘色的小圆点表示。</p>
 <p>这是第一个橘色的filter的过程，还有其他的filter，比如下图中的黄色的filter，它经历着与橘色的filter相似的过程，又输出一排结果，使用黄色的小圆点表示。</p>
 <figure>
-<img src="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="处理Sequence数据的模型" /><figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
+<img
+src="https://pic2.zhimg.com/80/v2-cabda788832922a8f141542a334ccb61_720w.jpg"
+alt="处理Sequence数据的模型" />
+<figcaption aria-hidden="true">处理Sequence数据的模型</figcaption>
 </figure>
-<p>但是，表面上CNN和RNN可以做到相同的输入和输出，但是CNN只能考虑非常有限的内容。比如在我们右侧的图中CNN的filter只考虑了3个vector，不像RNN可以考虑之前的所有vector。但是CNN也不是没有办法考虑很长时间的dependency的，只需要堆叠filter，多堆叠几层，上层的filter就可以考虑比较多的资讯，比如，第二层的filter (蓝色的三角形)看了6个vector，所以，只要叠很多层，就能够看很长时间的资讯。</p>
-<p>而CNN的一个好处是：它是可以并行化的 (can parallel)，不需要等待红色的filter算完，再算黄色的filter。但是必须要叠很多层filter，才可以看到长时的资讯。</p>
-<p>所以现在提出一个新的想法：self-attention，如下图所示，目的是使用self-attention layer取代RNN所做的事情。</p>
+<p>但是，表面上CNN和RNN可以做到相同的输入和输出，但是CNN只能考虑非常有限的内容。比如在我们右侧的图中CNN的filter只考虑了3个vector，不像RNN可以考虑之前的所有vector。但是CNN也不是没有办法考虑很长时间的dependency的，只需要堆叠filter，多堆叠几层，上层的filter就可以考虑比较多的资讯，比如，第二层的filter
+(蓝色的三角形)看了6个vector，所以，只要叠很多层，就能够看很长时间的资讯。</p>
+<p>而CNN的一个好处是：它是可以并行化的 (can
+parallel)，不需要等待红色的filter算完，再算黄色的filter。但是必须要叠很多层filter，才可以看到长时的资讯。</p>
+<p>所以现在提出一个新的想法：self-attention，如下图所示，目的是使用self-attention
+layer取代RNN所做的事情。</p>
 <figure>
-<img src="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="You can try to replace any thing that has been done by RNN with self-attention" /><figcaption aria-hidden="true">You can try to replace any thing that has been done by RNN with self-attention</figcaption>
+<img
+src="https://pic2.zhimg.com/80/v2-e3ef96ccae817226577ee7a3c28fa16d_720w.jpg"
+alt="You can try to replace any thing that has been done by RNN with self-attention" />
+<figcaption aria-hidden="true">You can try to replace any thing that has
+been done by RNN with self-attention</figcaption>
 </figure>
 <p>那么self-attention具体是怎么做的呢？</p>
-<p><span class="math inline">\(q:\)</span>query (to match others) <span class="math display">\[
+<p><span class="math inline">\(q:\)</span>query (to match others) <span
+class="math display">\[
 q^{i}=W^{q} a^{i}
-\]</span> <span class="math inline">\(k:\)</span>key (to be matched) <span class="math display">\[
+\]</span> <span class="math inline">\(k:\)</span>key (to be matched)
+<span class="math display">\[
 k^{i}=W^{k} a^{i}
-\]</span> <span class="math inline">\(v:\)</span>value (information to be extracted) <span class="math display">\[
+\]</span> <span class="math inline">\(v:\)</span>value (information to
+be extracted) <span class="math display">\[
 v^{i}=W^{v} a^{i}
-\]</span> 首先假设我们的input是下图的<span class="math inline">\(x_{1}-x_{4}\)</span>，是一个sequence，每一个input (vector)先乘上一个 矩阵<span class="math inline">\(W\)</span>得到lembedding，即向量<span class="math inline">\(a_{1}-a_{4}\)</span>。接着这个embedding进入 self-attention层，每 一个向量<span class="math inline">\(a_{1}-a_{4}\)</span>分别乘上3个不同的transformation matrix<span class="math inline">\(W_{q}, W_{k}, W_{v}\)</span>，以向量<span class="math inline">\(a_{1}\)</span>为 例，分别得到3个不同的向量<span class="math inline">\(q_{1}, k_{1}, v_{1}\)</span>。</p>
+\]</span> 首先假设我们的input是下图的<span
+class="math inline">\(x_{1}-x_{4}\)</span>，是一个sequence，每一个input
+(vector)先乘上一个 矩阵<span
+class="math inline">\(W\)</span>得到lembedding，即向量<span
+class="math inline">\(a_{1}-a_{4}\)</span>。接着这个embedding进入
+self-attention层，每 一个向量<span
+class="math inline">\(a_{1}-a_{4}\)</span>分别乘上3个不同的transformation
+matrix<span class="math inline">\(W_{q}, W_{k},
+W_{v}\)</span>，以向量<span class="math inline">\(a_{1}\)</span>为
+例，分别得到3个不同的向量<span class="math inline">\(q_{1}, k_{1},
+v_{1}\)</span>。</p>
 <figure>
-<img src="https://s3.bmp.ovh/imgs/2022/07/11/1f0a0c06db7813db.jpg" class="lazyload" data-srcset="https://s3.bmp.ovh/imgs/2022/07/11/1f0a0c06db7813db.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="self-attention的QKV" /><figcaption aria-hidden="true">self-attention的QKV</figcaption>
+<img src="https://s3.bmp.ovh/imgs/2022/07/11/1f0a0c06db7813db.jpg"
+alt="self-attention的QKV" />
+<figcaption aria-hidden="true">self-attention的QKV</figcaption>
 </figure>
-<p>接下来使用每个query<span class="math inline">\(q\)</span>去对每个key<span class="math inline">\(k\)</span>做attention， attention就是匹配这2个向量有多接近， 比如我现在要对<span class="math inline">\(q^{i}\)</span>和<span class="math inline">\(k^{j}\)</span>做attention，我就可以把这2个向量做scaled inner product(按比例内积)，得到<span class="math inline">\(\alpha_{i,j}\)</span>： <span class="math display">\[
+<p>接下来使用每个query<span
+class="math inline">\(q\)</span>去对每个key<span
+class="math inline">\(k\)</span>做attention，
+attention就是匹配这2个向量有多接近， 比如我现在要对<span
+class="math inline">\(q^{i}\)</span>和<span
+class="math inline">\(k^{j}\)</span>做attention，我就可以把这2个向量做scaled
+inner product(按比例内积)，得到<span
+class="math inline">\(\alpha_{i,j}\)</span>： <span
+class="math display">\[
 \alpha_{i,j}=q^{i} \cdot k^{j} / \sqrt{d}
-\]</span> 式中，<span class="math inline">\(d\)</span>是<span class="math inline">\(q\)</span>跟<span class="math inline">\(k\)</span>的维度。因为<span class="math inline">\(q \cdot k\)</span>的数值会随着dimension的增大而增大，所以要除以<span class="math inline">\(\sqrt{\text { dimension }}\)</span>的值，相当于归一化的效果。</p>
+\]</span> 式中，<span class="math inline">\(d\)</span>是<span
+class="math inline">\(q\)</span>跟<span
+class="math inline">\(k\)</span>的维度。因为<span
+class="math inline">\(q \cdot
+k\)</span>的数值会随着dimension的增大而增大，所以要除以<span
+class="math inline">\(\sqrt{\text { dimension
+}}\)</span>的值，相当于归一化的效果。</p>
 <figure>
-<img src="https://s3.bmp.ovh/imgs/2022/07/11/11d8f2bc6d93b93c.jpg" class="lazyload" data-srcset="https://s3.bmp.ovh/imgs/2022/07/11/11d8f2bc6d93b93c.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="q与k之间做attention" /><figcaption aria-hidden="true">q与k之间做attention</figcaption>
+<img src="https://s3.bmp.ovh/imgs/2022/07/11/11d8f2bc6d93b93c.jpg"
+alt="q与k之间做attention" />
+<figcaption aria-hidden="true">q与k之间做attention</figcaption>
 </figure>
-<p>接下来要做的事如图6所示，把计算得到的所有<span class="math inline">\(\alpha_{1, i}\)</span>值取 softmax 操作。</p>
+<p>接下来要做的事如图6所示，把计算得到的所有<span
+class="math inline">\(\alpha_{1, i}\)</span>值取 softmax 操作。</p>
 <figure>
-<img src="https://s3.bmp.ovh/imgs/2022/07/12/229c7d5a1e2e3436.jpg" class="lazyload" data-srcset="https://s3.bmp.ovh/imgs/2022/07/12/229c7d5a1e2e3436.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="放入激活层" /><figcaption aria-hidden="true">放入激活层</figcaption>
+<img src="https://s3.bmp.ovh/imgs/2022/07/12/229c7d5a1e2e3436.jpg"
+alt="放入激活层" />
+<figcaption aria-hidden="true">放入激活层</figcaption>
 </figure>
 <p>其中有： <span class="math display">\[
-\hat{\alpha}_{1, i}=\exp \left(\alpha_{1, i}\right) / \sum_{j} \exp \left(\alpha_{1, j}\right)
-\]</span> 取完 softmax 操作以后，我们得到了<span class="math inline">\(\hat{\alpha}_{1, i}\)</span>，我们用它和所有的<span class="math inline">\(v^{i}\)</span>值进行相乘。具体来讲， 把<span class="math inline">\(\hat{\alpha}_{1,1}\)</span>乘上<span class="math inline">\(v^{1}\)</span>，把<span class="math inline">\(\hat{\alpha}_{1,2}\)</span>乘上<span class="math inline">\(v^{2}\)</span>，把<span class="math inline">\(\hat{\alpha}_{1,3}\)</span>乘上<span class="math inline">\(v^{3}\)</span>，把<span class="math inline">\(\hat{\alpha}_{1,4}\)</span>乘上<span class="math inline">\(v^{4}\)</span>，把结果通通 加起来得到<span class="math inline">\(b^{1}\)</span>，所以，今天在产生<span class="math inline">\(b^{1}\)</span>的过程中用了整个sequence的资讯 (Considering the whole sequence)。如果要考虑local的information，则只需要学习出相应的<span class="math inline">\(\hat{\alpha}_{1, i}=0\)</span>，<span class="math inline">\(b^{1}\)</span>就不再带有那个对应分支的信息了；如果要考虑global的information，则只需要学习出相应的<span class="math inline">\(\hat{\alpha}_{1, i} \neq 0\)</span>，<span class="math inline">\(b^{1}\)</span>就带有全部的对应分支的信息了。</p>
+\hat{\alpha}_{1, i}=\exp \left(\alpha_{1, i}\right) / \sum_{j} \exp
+\left(\alpha_{1, j}\right)
+\]</span> 取完 softmax 操作以后，我们得到了<span
+class="math inline">\(\hat{\alpha}_{1,
+i}\)</span>，我们用它和所有的<span
+class="math inline">\(v^{i}\)</span>值进行相乘。具体来讲， 把<span
+class="math inline">\(\hat{\alpha}_{1,1}\)</span>乘上<span
+class="math inline">\(v^{1}\)</span>，把<span
+class="math inline">\(\hat{\alpha}_{1,2}\)</span>乘上<span
+class="math inline">\(v^{2}\)</span>，把<span
+class="math inline">\(\hat{\alpha}_{1,3}\)</span>乘上<span
+class="math inline">\(v^{3}\)</span>，把<span
+class="math inline">\(\hat{\alpha}_{1,4}\)</span>乘上<span
+class="math inline">\(v^{4}\)</span>，把结果通通 加起来得到<span
+class="math inline">\(b^{1}\)</span>，所以，今天在产生<span
+class="math inline">\(b^{1}\)</span>的过程中用了整个sequence的资讯
+(Considering the whole
+sequence)。如果要考虑local的information，则只需要学习出相应的<span
+class="math inline">\(\hat{\alpha}_{1, i}=0\)</span>，<span
+class="math inline">\(b^{1}\)</span>就不再带有那个对应分支的信息了；如果要考虑global的information，则只需要学习出相应的<span
+class="math inline">\(\hat{\alpha}_{1, i} \neq 0\)</span>，<span
+class="math inline">\(b^{1}\)</span>就带有全部的对应分支的信息了。</p>
 <figure>
-<img src="https://s3.bmp.ovh/imgs/2022/07/12/6fb8027c97383aa3.jpg" class="lazyload" data-srcset="https://s3.bmp.ovh/imgs/2022/07/12/6fb8027c97383aa3.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="得到第一个输出" /><figcaption aria-hidden="true">得到第一个输出</figcaption>
+<img src="https://s3.bmp.ovh/imgs/2022/07/12/6fb8027c97383aa3.jpg"
+alt="得到第一个输出" />
+<figcaption aria-hidden="true">得到第一个输出</figcaption>
 </figure>
-<p>同样的方法，也可以计算出<span class="math inline">\(b^{2}, b^{3}, b^{4}\)</span>。</p>
-<p>经过了以上一连串计算，self-attention layer做的事情跟RNN是一样的，只是它可以并行的得到layer输出的结果，如下图所示。现在我们要用矩阵表示上述的计算过程。</p>
+<p>同样的方法，也可以计算出<span class="math inline">\(b^{2}, b^{3},
+b^{4}\)</span>。</p>
+<p>经过了以上一连串计算，self-attention
+layer做的事情跟RNN是一样的，只是它可以并行的得到layer输出的结果，如下图所示。现在我们要用矩阵表示上述的计算过程。</p>
 <figure>
-<img src="https://pic2.zhimg.com/80/v2-67bc90b683b40488e922dcd5abcaa089_720w.jpg" class="lazyload" data-srcset="https://pic2.zhimg.com/80/v2-67bc90b683b40488e922dcd5abcaa089_720w.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="self-attention的效果" /><figcaption aria-hidden="true">self-attention的效果</figcaption>
+<img
+src="https://pic2.zhimg.com/80/v2-67bc90b683b40488e922dcd5abcaa089_720w.jpg"
+alt="self-attention的效果" />
+<figcaption aria-hidden="true">self-attention的效果</figcaption>
 </figure>
 <p>本例中我们选择三个输入值，已经通过embedding处理，得到了三个词向量。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input <span class="number">1</span>: [<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>] </span><br><span class="line">Input <span class="number">2</span>: [<span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">2</span>]</span><br><span class="line">Input <span class="number">3</span>: [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-<p>权重包括三个，分别是query的<span class="math inline">\(W_{q} ，\)</span>key的<span class="math inline">\(W_{k}\)</span>以及value的<span class="math inline">\(W_{v}\)</span>，这三个权重分别初始化为</p>
+<p>权重包括三个，分别是query的<span class="math inline">\(W_{q}
+，\)</span>key的<span
+class="math inline">\(W_{k}\)</span>以及value的<span
+class="math inline">\(W_{v}\)</span>，这三个权重分别初始化为</p>
 <p><span class="math inline">\(W_{q}\)</span>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line"> [<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line"> [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line"> [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
 <p><span class="math inline">\(W_{k}\)</span>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line"> [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
 <p><span class="math inline">\(W_{v}\)</span>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line"> [<span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>],</span><br><span class="line"> [<span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>],</span><br><span class="line"> [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
-<p>有了输入和权重，接下来可以计算每个输入对应的key，query 和value了。</p>
+<p>有了输入和权重，接下来可以计算每个输入对应的key，query
+和value了。</p>
 <p>第一个输入的Key为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">               [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>] x [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">               [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br><span class="line">               [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
 <p>第二个输入的Key为：</p>
@@ -583,9 +672,13 @@ v^{i}=W^{v} a^{i}
 <p>上一步骤中输出结果求和就得到第一个输出值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  [<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>]</span><br><span class="line">+ [<span class="number">1.0</span>, <span class="number">4.0</span>, <span class="number">0.0</span>]</span><br><span class="line">+ [<span class="number">1.0</span>, <span class="number">3.0</span>, <span class="number">1.5</span>]</span><br><span class="line">-----------------</span><br><span class="line">= [<span class="number">2.0</span>, <span class="number">7.0</span>, <span class="number">1.5</span>]</span><br></pre></td></tr></table></figure>
 <p>重复计算，分别得到第二个和第三个输出值</p>
-<p>于是三个输入经过self-attention模块，得到了三个输出值。这就是attention模块做的事情《Attention Is All You Need》论文中的attention计算公式： <span class="math display">\[
-\operatorname{Attention}(Q, K, V)=\operatorname{softmax}\left(\frac{Q K^{T}}{\sqrt{d}_{k}}\right) V
-\]</span> attention最厉害的地方在于能够捕捉到全局信息，经过这个模块的输出结果，是通过输入结果两两运算得出了权重，再对输入进行加权求和得到了。除了捕捉全局信息，还能并行计算，这就比之前的RNN和CNN厉害多。</p>
+<p>于是三个输入经过self-attention模块，得到了三个输出值。这就是attention模块做的事情《Attention
+Is All You Need》论文中的attention计算公式： <span
+class="math display">\[
+\operatorname{Attention}(Q, K, V)=\operatorname{softmax}\left(\frac{Q
+K^{T}}{\sqrt{d}_{k}}\right) V
+\]</span>
+attention最厉害的地方在于能够捕捉到全局信息，经过这个模块的输出结果，是通过输入结果两两运算得出了权重，再对输入进行加权求和得到了。除了捕捉全局信息，还能并行计算，这就比之前的RNN和CNN厉害多。</p>
 
   
   
@@ -598,7 +691,8 @@ v^{i}=W^{v} a^{i}
           <blockquote>
             
               
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
 
               
             
@@ -853,13 +947,19 @@ v^{i}=W^{v} a^{i}
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       

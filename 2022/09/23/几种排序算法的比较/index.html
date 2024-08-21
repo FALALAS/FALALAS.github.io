@@ -512,15 +512,34 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>O符号是用于描述函数渐近行为的数学符号。更确切地说，它是用另一个（通常更简单的）函数来描述一个函数数量级的渐近上界。</p>
 <p>Ω符号的定义与O符号的定义类似，但主要区别是，O符号表示函数在增长到一定程度时总小于一个特定函数的常数倍，大Ω符号则表示总大于，来描述一个函数数量级的渐近下界。</p>
 <p>Θ符号是O符号和Ω符号的结合。下面给出具体的数学定义:</p>
-<p>函数<span class="math inline">\(f ( n )\)</span>代表某一算法在输入大小为n的情况下的工作量（效率），则在n趋向很大的时候，我们将f (n)与另一行为已知的函数g(n)进行比较：</p>
-<p>1）如果<span class="math inline">\(lim f(n)/g(n)=0\)</span>，则称f(n)在数量级上严格小于g(n)，记为<span class="math inline">\(f (n)=o( g(n))\)</span>。</p>
-<p>2）如果<span class="math inline">\(lim f(n)/g(n)=\infty\)</span>，则称f(n)在数量级上严格大于g(n)，记为<span class="math inline">\(f (n)=ω( g(n))\)</span>。</p>
-<p>3）如果<span class="math inline">\(lim f(n)/g(n)=c\)</span>，这里c为非0常数，则称f(n)在数量级上等于g(n)，即f(n)和g(n)是同一个数量级的函数，记为：<span class="math inline">\(f(n)=Θ(g(n))\)</span>。</p>
-<p>4）如果f(n)在数量级上小于或等于g(n)，则记为<span class="math inline">\(f(n)=O(g(n))\)</span>。</p>
-<p>5）如果f(n)在数量级上大于或等于g(n)，则记为<span class="math inline">\(f(n)=Ω(g(n))\)</span>。</p>
-<table>
+<p>函数<span class="math inline">\(f ( n
+)\)</span>代表某一算法在输入大小为n的情况下的工作量（效率），则在n趋向很大的时候，我们将f
+(n)与另一行为已知的函数g(n)进行比较：</p>
+<p>1）如果<span class="math inline">\(lim
+f(n)/g(n)=0\)</span>，则称f(n)在数量级上严格小于g(n)，记为<span
+class="math inline">\(f (n)=o( g(n))\)</span>。</p>
+<p>2）如果<span class="math inline">\(lim
+f(n)/g(n)=\infty\)</span>，则称f(n)在数量级上严格大于g(n)，记为<span
+class="math inline">\(f (n)=ω( g(n))\)</span>。</p>
+<p>3）如果<span class="math inline">\(lim
+f(n)/g(n)=c\)</span>，这里c为非0常数，则称f(n)在数量级上等于g(n)，即f(n)和g(n)是同一个数量级的函数，记为：<span
+class="math inline">\(f(n)=Θ(g(n))\)</span>。</p>
+<p>4）如果f(n)在数量级上小于或等于g(n)，则记为<span
+class="math inline">\(f(n)=O(g(n))\)</span>。</p>
+<p>5）如果f(n)在数量级上大于或等于g(n)，则记为<span
+class="math inline">\(f(n)=Ω(g(n))\)</span>。</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 10%" />
+<col style="width: 6%" />
+<col style="width: 32%" />
+</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th style="text-align: center;">排序方式</th>
 <th style="text-align: center;">平均时间复杂度</th>
 <th style="text-align: center;">最坏时间复杂度</th>
@@ -531,16 +550,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">快速</td>
 <td style="text-align: center;">O(nlogn)</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
 <td style="text-align: center;">O(nlogn)</td>
 <td style="text-align: center;">O(logn)</td>
 <td style="text-align: center;">不稳定</td>
 <td style="text-align: center;">最坏比较次数 $ 2 $</td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;">归并</td>
 <td style="text-align: center;">O(nlogn)</td>
 <td style="text-align: center;">O(nlogn)</td>
@@ -549,7 +569,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <td style="text-align: center;">稳定</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">堆</td>
 <td style="text-align: center;">O(nlogn)</td>
 <td style="text-align: center;">O(nlogn)</td>
@@ -558,43 +578,51 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <td style="text-align: center;">不稳定</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;">冒泡</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
 <td style="text-align: center;">O(n)</td>
 <td style="text-align: center;">O(1)</td>
 <td style="text-align: center;">稳定</td>
 <td style="text-align: center;">最坏比较次数 $ 2 $</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">选择</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
 <td style="text-align: center;">O(1)</td>
 <td style="text-align: center;">不稳定</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;">插入</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
 <td style="text-align: center;">O(n)</td>
 <td style="text-align: center;">O(1)</td>
 <td style="text-align: center;">稳定</td>
 <td style="text-align: center;">最坏比较次数 $ 2 $</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">希尔</td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">O(<span class="math inline">\(n^2\)</span>)</td>
+<td style="text-align: center;">O(<span
+class="math inline">\(n^2\)</span>)</td>
 <td style="text-align: center;">O(n)</td>
 <td style="text-align: center;">O(1)</td>
 <td style="text-align: center;">不稳定</td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
+<tr>
 <td style="text-align: center;">基数</td>
 <td style="text-align: center;">O(d(n+r))</td>
 <td style="text-align: center;">O(d(n+r))</td>
@@ -603,7 +631,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <td style="text-align: center;">稳定</td>
 <td style="text-align: center;">d为位数，r为基数</td>
 </tr>
-<tr class="odd">
+<tr>
 <td style="text-align: center;">计数</td>
 <td style="text-align: center;">O(n+k)</td>
 <td style="text-align: center;">O(n+k)</td>
@@ -626,7 +654,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <blockquote>
             
               
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
 
               
             
@@ -732,7 +761,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class='next' href='/2022/09/02/%E6%9C%89%E5%85%B3%E4%B8%89%E5%85%83%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/'>
           <p class='title'>有关三元损失函数的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>triplet loss 是深度学习的一种损失函数，主要是用于训练差异性小的样本，比如人脸等；其次在训练目标是得到样本的embedding任务中，triplet loss 也经常使用，比如文本、...</p>
+          <p class='content'>triplet loss
+是深度学习的一种损失函数，主要是用于训练差异性小的样本，比如人脸等；其次在训练目标是得到样本的embedding任务中，triplet
+loss 也经常使用，比如文...</p>
         </a>
       
     </div>
@@ -879,13 +910,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>博客内容遵循 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享
+4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         
-          <div><p><span id="lc-sv">本站总访问量为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+          <div><p><span id="lc-sv">本站总访问量为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+次</span> <span id="lc-uv">访客数为 <span
+id="number"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+人</span></p>
 </div>
         
       
