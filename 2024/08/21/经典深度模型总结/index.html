@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>归档：2022/7 - Leo Lee&#39;s blog</title>
+  <title>经典深度模型总结 - Leo Lee&#39;s blog</title>
+  
+    <meta name="keywords" content="深度学习">
   
 
   
@@ -104,7 +104,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <body>
     
 
-<header id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -355,7 +355,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="half" class='cover-wrapper  search' style="display: ;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://z3.ax1x.com/2021/08/06/fn4CB8.png"></div>
           
@@ -441,412 +441,219 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 
 <div class='l_main'>
-	
-		
-  <section class="post-list">
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
     
-      
+    
+    
+      <h1 class="title">
+        经典深度模型总结
+      </h1>
+      <div class='new-meta-box'>
         
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://www.hualigs.cn/image/610d277ae201d.jpg">
+    <p>李傲</p>
+  </a>
+</div>
+
           
         
           
-        
+            
+
           
         
           
-        
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2024年8月21日</p>
+  </a>
+</div>
+
           
         
           
-        
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="经典深度模型总结" data-path="/2024/08/21/%E7%BB%8F%E5%85%B8%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
           
         
+      </div>
+    
+  </div>
+
+
+  
+  
+  <p>LeNet ：最早用于手写数字识别的CNN网络 AlexNet
+：2012年ILSVRC比赛冠军，比LeNet层数更深，这是一个历史性突破。 ZFNet
+：2013年ILSVRC比赛效果较好，和AlexNet类似。 VGGNet
+：2014年ILSVRC比赛分类亚军、定位冠军 GoogleNet
+：2014年ILSVRC分类比赛冠军 ResNet
+：2015年ILSVRC比赛冠军，碾压之前的各种网络 ————————————————</p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA
+4.0) 协议</p>
+
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-21T23:22:07+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2024年8月21日</p>
+  </a>
+</div>
+
+        
+      
+        
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
   
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/18/%E6%9C%89%E5%85%B3ResNet%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关ResNet的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        今天来填一个巨大的坑，主要是学车真的快把人热傻了外加晒成了黑炭，考不过真是be了。
-神经网络叠的越深，则学习出的效果就一定会越好吗？答案无疑是否定的，人们发现当模型层数增加到某种程度，模型的效果将会不升反降。也就是说，深度模型发生了退化（degradation）情况。
-那么，为什么会出现这种情况？
-首先印入脑海的就是的过拟合问题
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>深度学习</p></a></div>
 
-在这个多项式回归问题中，左边的模型是欠拟合（und...
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2024/08/21/%E7%BB%8F%E5%85%B8%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/&title=经典深度模型总结 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2024/08/21/%E7%BB%8F%E5%85%B8%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/&title=经典深度模型总结 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2024/08/21/%E7%BB%8F%E5%85%B8%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/&title=经典深度模型总结 - Leo Lee's blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
       
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-18</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/18/%E6%9C%89%E5%85%B3ResNet%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
 </div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/">
-        transformer原理分析和代码解读
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        
 
-transformer最经典的图
 
-这个图为transformer的整体结构，左侧为 Encoder block，右侧为 Decoder
-block。
-黄色圈中的部分为Multi-Head
-Attention，是由多个Self-Attention组成的，可以看到 Encoder block 包含一个
-Multi-Head Attention，而 Decoder block...
+        
       
-    
+    </div>
   </div>
+
+
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-16</time>
-        
-      </div>
+  
+
+  
+    <div class="prev-next">
       
-        <div>
-          <a class='readmore' href='/2022/07/16/transformer%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB/'>
-            阅读全文
-          </a>
-        </div>
+      
+        <a class='next' href='/2024/08/21/%E6%9C%89%E5%85%B3MobleNet%E7%9A%84%E7%AC%94%E8%AE%B0/'>
+          <p class='title'>有关MobleNet的笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>标准卷积
+标准卷积，利用若干个多通道卷积核对输入的多通道图像进行处理，输出的feature
+map既提取了通道特征，又提取了空间特征。
+
+
+在这里插入图片描述
+
+用数学公式表达标准...</p>
+        </a>
       
     </div>
   
+</article>
 
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
 </div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关positional_encoding的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        还有一个问题是：现在的self-attention中没有位置的信息，一个单词向量的“近在咫尺”位置的单词向量和“远在天涯”位置的单词向量效果是一样的，没有表示位置的信息(No
-position information in self attention)。
-所以输入”A打了B“或者”B打了A“的效果其实是一样的，因为并没有考虑位置的信息。所以在self-attention原来的paper...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-16</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/16/%E6%9C%89%E5%85%B3positional-encoding%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/16/%E8%A1%A5%E5%85%85%E4%B8%80%E4%B8%AAmulti-head%20self-attention/">
-        补充一个multi-head self-attention
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        还有一种multi-head的self-attention，以2个head的情况为例: 由\(a^{i}\)生成的\(q^{i}\)进一步乘以2 个转移矩阵变为\(q^{i, 1}\)和\(q^{i, 2}\)，同理由\(a^{i}\)生成的\(k^{i}\)进一步乘以2个转移矩阵变为\(k^{i, 1}\)和\(k^{i, 2}\)，由\(a^{i}\)生成的\(v^{i}\)进一步乘以2...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-16</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/16/%E8%A1%A5%E5%85%85%E4%B8%80%E4%B8%AAmulti-head%20self-attention/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/11/%E6%9C%89%E5%85%B3softmax%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关Softmax函数的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        上文提到了交叉熵这个损失函数，本来整理一下Softmax这个激活函数。
-Softmax从字面上来说，可以分成soft和max两个部分。max故名思议就是最大值的意思。Softmax的核心在于soft，而soft有软的含义，与之相对的是hard硬。很多场景中需要我们找出数组所有元素中值最大的元素，实质上都是求的hardmax。
-hardmax最大的特点就是只选出其中一个最大的值，即非黑即白...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-11</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/11/%E6%9C%89%E5%85%B3softmax%E5%87%BD%E6%95%B0%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关交叉熵的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        熵这个概念还记得牛哥在一年前给我讲过，计算loss的时候要用到交叉熵，小整理一下。
-通用的说，熵(Entropy)被用于描述一个系统中的不确定性(the uncertainty
-of a
-system)。在不同领域熵有不同的解释，比如热力学的定义和信息论也不大相同。
-要想明白交叉熵(Cross Entropy)的意义，可以从熵(Entropy) -&gt;
-KL散度(Kullbac...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-11</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/11/%E6%9C%89%E5%85%B3%E4%BA%A4%E5%8F%89%E7%86%B5%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关流形（Manifold）和嵌入（Embedding）的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        流形，也就是 Manifold 。嵌入，也就是Embedding。
-有时候经常会在paper里看到“嵌入在高维空间中的低维流形”，以及机器学习里的Embedding层。不过高维的数据对于我们这些可怜的低维生物来说总是很难以想像（论为什么要学习高等代数），所以最直观的例子通常都会是嵌入在三维空间中的二维或者一维流形。比如说一块布，可以把它看成一个二维平面，这是一个二维的欧氏空间，现在我们（在...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-10</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/10/%E6%9C%89%E5%85%B3%E6%B5%81%E5%BD%A2%EF%BC%88Manifold%EF%BC%89%E5%92%8C%E5%B5%8C%E5%85%A5%EF%BC%88Embedding%EF%BC%89%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/">
-        有关self-attention的笔记
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        这学期一直都在看ViT（Vision
-Transformer），现在的transformer近似于一种“大道至简”，在各个领域都可以作为一个baseline。
-如果谈到Transformer那首先就会谈到self-attention。
-Transformer是一个Sequence to Sequence
-model，特别之处在于它大量用到了self-attention。
-要处理一个...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2022-07-10</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2022/07/10/%E6%9C%89%E5%85%B3self-attention%E7%9A%84%E7%AC%94%E8%AE%B0/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-  
+  </article>
 
 
-	
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -854,96 +661,14 @@ model，特别之处在于它大量用到了self-attention。
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://z3.ax1x.com/2021/08/06/fmjyff.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Leo Lee</h2>
-        
-        
-          <p>may become an AI scientist</p>
-
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:liaoxdu@foxmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/FALALAS/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=130671631"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
 
 
-    <div class='content'>
-      <a href="/tags/PyTorch/" style="font-size: 14px; color: #999">PyTorch</a> <a href="/tags/Python/" style="font-size: 14px; color: #999">Python</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E8%AE%BA/" style="font-size: 18px; color: #7e7e7e">信息论</a> <a href="/tags/%E6%94%B6%E8%97%8F/" style="font-size: 20px; color: #707070">收藏</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">数学</a> <a href="/tags/%E6%97%A5%E5%BF%97/" style="font-size: 14px; color: #999">日志</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 24px; color: #555">机器学习</a> <a href="/tags/%E6%AD%A5%E6%80%81%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #999">步态识别</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 14px; color: #999">深度学习</a> <a href="/tags/%E7%89%A9%E7%90%86/" style="font-size: 14px; color: #999">物理</a> <a href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/" style="font-size: 16px; color: #8b8b8b">生物信息学</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 22px; color: #636363">算法</a> <a href="/tags/%E8%BD%BB%E9%87%8F%E5%8C%96/" style="font-size: 14px; color: #999">轻量化</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
 		  
@@ -952,21 +677,21 @@ model，特别之处在于它大量用到了self-attention。
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="经典深度模型总结";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
   var l_header=document.getElementById("l_header");
   
-  l_header.classList.remove("show");
+  l_header.classList.add("show");
   
   
     // cover
     var cover_wrapper=document.querySelector('.cover-wrapper');
     
-    cover_wrapper.id="half";
-    cover_wrapper.style.display="";
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
     
   
 </script>
