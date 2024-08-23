@@ -648,14 +648,14 @@ alt="img" />
 <figcaption aria-hidden="true">img</figcaption>
 </figure>
 <h4 id="inverted-residuals">Inverted residuals</h4>
-<p>回顾V1的网络结构，我们发现V1很像是一个直筒型的VGG网络。我们想像Resnet一样复用我们的特征，所以我们引入了<strong>shortcut结构</strong>，这样V2的block就是如下图形式：</p>
+<p>回顾V1的网络结构，我们发现V1很像是一个直筒型的VGG网络。我们想像Resnet一样复用我们的特征，所以我们引入了shortcut结构，这样V2的block就是如下图形式：</p>
 <figure>
 <img
 src="https://pic3.zhimg.com/80/v2-27e7b6dd3d9a934d8f6af1a6bf23fa8a_720w.webp"
 alt="img" />
 <figcaption aria-hidden="true">img</figcaption>
 </figure>
-<p>对比一下V1和V2：</p>
+<p>对比一下ResNet和MobileNet V2：</p>
 <figure>
 <img
 src="https://pic2.zhimg.com/80/v2-7b4422a0efcc89c46029052d29d538b5_720w.webp"
@@ -668,9 +668,17 @@ alt="img" />
 <li>ResNet 先降维 (0.25倍)、卷积、再升维。</li>
 <li>MobileNetV2 则是 先升维 (6倍)、卷积、再降维。</li>
 </ul>
-<p>刚好V2的block刚好与Resnet的block相反，作者将其命名为<strong>Inverted
-residuals</strong>。就是论文名中的<strong>Inverted
-residuals</strong>。</p>
+<p>刚好V2的block刚好与Resnet的block相反，作者将其命名为Inverted
+residuals。就是论文名中的Inverted residuals。</p>
+<p>我们将V1和V2的block进行一下对比：</p>
+<figure>
+<img
+src="https://pic1.zhimg.com/80/v2-e1563835663535ee5f885fa56c19751c_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>左边是v1的block，没有Shortcut并且带最后的ReLU6。</p>
+<p>右边是v2的加入了1×1升维，引入Shortcut并且去掉了最后的ReLU，改为Linear。步长为1时，先进行1×1卷积升维，再进行深度卷积提取特征，再通过Linear的逐点卷积降维。将input与output相加，形成残差结构。步长为2时，因为input与output的尺寸不符，因此不添加shortcut结构，其余均一致。</p>
 
   
   
@@ -702,7 +710,7 @@ residuals</strong>。</p>
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T22:35:39+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T22:42:38+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年8月23日</p>
