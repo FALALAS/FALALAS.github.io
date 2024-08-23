@@ -551,7 +551,7 @@ Separable Convolution）</h3>
 DSC）由逐深度卷积和逐点卷积组成，深度卷积用于提取空间特征，逐点卷积用于提取通道特征。深度可分离卷积在特征维度上分组卷积，对每个channel进行独立的逐深度卷积（depthwise
 convolution），并在输出前使用一个1x1卷积（pointwise
 convolution）将所有通道进行聚合。 <img
-src="https://i-blog.csdnimg.cn/blog_migrate/8ebad0bbe7105ab83bc7b519347a5495.png#pic_center" /></p>
+src="https://pic1.zhimg.com/80/v2-30b6ec010424b349e16529607e1d0c2c_720w.webp" /></p>
 <p>深度可分离卷积，先对每个channel进行DWConv，然后再通过
 PWConv合并所有channels为输出特征图，从而达到减小计算量、提升计算效率的目的。</p>
 <h4 id="参数量">参数量</h4>
@@ -639,7 +639,7 @@ groups 整除。当groups
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:31:49+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:42:04+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年8月23日</p>
