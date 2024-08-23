@@ -508,7 +508,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>标准卷积，利用若干个多通道卷积核对输入的多通道图像进行处理，输出的feature
 map既提取了通道特征，又提取了空间特征。</p>
 <p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/2bb318f37c8635dd139df383f46cdbd3.png#pic_center" /></p>
+src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/820f1729de0d444aacfe3562d219a5bb~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" /></p>
 <p>用数学公式表达标准卷积，假设卷积核大小为<span
 class="math inline">\(D_K*D_K\)</span>，输入通道为M，输出通道为N，输出的特征图尺寸为<span
 class="math inline">\(D_F*D_F\)</span>，则通过标准卷积之后，可以计算：</p>
@@ -591,10 +591,22 @@ class="math inline">\(，\)</span>=$
 <h5 id="深度可分离卷积的优势">深度可分离卷积的优势</h5>
 <p>相比于传统的卷积神经网络，深度可分离卷积的显著优势在于：</p>
 <ul>
-<li><p>更少的参数：可减少输入通道数量，从而有效地减少卷积层所需的参数。</p></li>
-<li><p>更快的速度：运行速度比传统卷积快。</p></li>
-<li><p>更加易于移植：计算量更小，更易于实现和部署在不同的平台上。</p></li>
-<li><p>更加精简：能够精简计算模型，从而在较小的设备上实现高精度的运算。</p></li>
+<li>更少的参数：可减少输入通道数量，从而有效地减少卷积层所需的参数。</li>
+<li>更快的速度：运行速度比传统卷积快。</li>
+<li>更加易于移植：计算量更小，更易于实现和部署在不同的平台上。</li>
+<li>更加精简：能够精简计算模型，从而在较小的设备上实现高精度的运算。</li>
+</ul>
+<h3 id="pytorch代码实现">(PyTorch)代码实现</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.Conv2d(in_channels, </span><br><span class="line">                out_channels, </span><br><span class="line">                kernel_size, </span><br><span class="line">                stride=<span class="number">1</span>, </span><br><span class="line">                padding=<span class="number">0</span>, </span><br><span class="line">                dilation=<span class="number">1</span>, </span><br><span class="line">                groups=<span class="number">1</span>, </span><br><span class="line">                bias=<span class="literal">True</span>, </span><br><span class="line">                padding_mode=<span class="string">&#x27;zeros&#x27;</span>, </span><br><span class="line">                device=<span class="literal">None</span>, </span><br><span class="line">                dtype=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p>参数 groups 用来表示卷积的分组，in_channels 和 out_channels 都要被
+groups 整除。当groups
+设置不同时，可以区分出分组卷积或深度可分离卷积：</p>
+<ul>
+<li><p>当 groups=1 时，表示标准卷积；</p></li>
+<li><p>当 groups&lt;in_channels 时，表示普通的分组卷积。例如，当 group=2
+时，该分组卷积有两组并列的卷积，每组看到一半的输入通道，并产生一半的输出通道，最后将两组的结果连接起来。</p></li>
+<li><p>当 groups=in_channels
+时，表示深度可分离卷积，每个通道都有一组自己的滤波器。</p></li>
 </ul>
 
   
@@ -627,7 +639,7 @@ class="math inline">\(，\)</span>=$
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:19:18+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:27:47+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年8月23日</p>
@@ -818,7 +830,7 @@ ZFNet ：2013年ILSVRC比赛效果较...</p>
         <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF"><span class="toc-text">标准卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AFdepthwise-convolution"><span class="toc-text">逐深度卷积（Depthwise
 Convolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E7%82%B9%E5%8D%B7%E7%A7%AFpointwise-convolution"><span class="toc-text">逐点卷积（Pointwise
 Convolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AFdepthwise-separable-convolution"><span class="toc-text">深度可分离卷积（Depthwise
-Separable Convolution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">参数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F"><span class="toc-text">计算量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF%E5%AF%B9%E6%AF%94"><span class="toc-text">与标准卷积对比</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94"><span class="toc-text">结构对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">计算量和参数量对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">深度可分离卷积的优势</span></a></li></ol></li></ol></li></ol>
+Separable Convolution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">参数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F"><span class="toc-text">计算量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF%E5%AF%B9%E6%AF%94"><span class="toc-text">与标准卷积对比</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94"><span class="toc-text">结构对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">计算量和参数量对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">深度可分离卷积的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pytorch%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">(PyTorch)代码实现</span></a></li></ol>
     </div>
   </section>
 
