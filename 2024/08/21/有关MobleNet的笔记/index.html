@@ -507,8 +507,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <h3 id="标准卷积">标准卷积</h3>
 <p>标准卷积，利用若干个多通道卷积核对输入的多通道图像进行处理，输出的feature
 map既提取了通道特征，又提取了空间特征。</p>
-<p><img
-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/820f1729de0d444aacfe3562d219a5bb~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" /></p>
 <p>用数学公式表达标准卷积，假设卷积核大小为<span
 class="math inline">\(D_K*D_K\)</span>，输入通道为M，输出通道为N，输出的特征图尺寸为<span
 class="math inline">\(D_F*D_F\)</span>，则通过标准卷积之后，可以计算：</p>
@@ -520,15 +518,11 @@ Convolution）</h3>
 <p>逐深度卷积（Depthwise
 convolution，DWConv）与标准卷积的区别在于，深度卷积的卷积核为单通道模式，需要对输入的每一个通道进行卷积，这样就会得到和输入特征图通道数一致的输出特征图。即有输入特征图通道数=卷积核个数=输出特征图个数。</p>
 <p>假设，一个大小为64×64像素、3通道彩色图片，3个单通道卷积核分别进行卷积计算，输出3个单通道的特征图。所以，一个3通道的图像经过运算后生成了3个Feature
-map，如下图所示。其中一个Filter只包含一个大小为3×3的Kernel，卷积部分的参数量为：$
+map。其中一个Filter只包含一个大小为3×3的Kernel，卷积部分的参数量为：$
 N_{depthwise} = 3 × 3 × 3 = 27$</p>
-<p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/4c42c64b4862a7c4667b0aee2a21a73b.png#pic_center" /></p>
 <p>再比如，输入12x12x3
 的特征图，3个5x5x1的卷积核，经过逐深度卷积输出8x8x3的特征图。因此，卷积层的参数量为：$
 N_{pointwise} = 5 × 5 × 3 = 45$</p>
-<p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/c7ec592e4a828ec3d0b75d33af874e0f.png#pic_center" /></p>
 <h3 id="逐点卷积pointwise-convolution">逐点卷积（Pointwise
 Convolution）</h3>
 <p>简单理解，逐点卷积就是H/W维度不变，改变channel。</p>
@@ -537,29 +531,25 @@ Convolution）</h3>
 Convolution，PWConv）实质上是用1x1的卷积核进行升维。在GoogleNet中大量使用1x1的卷积核，那里主要是用来降维。1x1的卷积核主要作用是对特征图进行升维和降维。</p>
 <p>如下图所示，从深度卷积得到的3个单通道特征图，经过4个大小为1x1x3卷积核的卷积计算，输出4个特征图，而输出特征图的个数取决于Filter的个数。因此，卷积层的参数量为：<span
 class="math inline">\(N_{pointwise} = 1 × 1 × 3 × 4 = 12\)</span></p>
-<p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/946468807b8d0b061efa4057c17ed7c0.png#pic_center" /></p>
 <p>再比如，经过逐深度卷积得到 8x8x3
 的特征图，256个1x1x3的卷积核，经过逐点卷积输出8x8x256的特征图。因此，卷积层的参数量为：<span
 class="math inline">\(N_{pointwise} = 1 × 1 × 3 × 256 = 768\)</span></p>
-<p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/365808ffce963766d6ad550e181cb247.png#pic_center" /></p>
 <h3
 id="深度可分离卷积depthwise-separable-convolution">深度可分离卷积（Depthwise
 Separable Convolution）</h3>
 <p>深度可分离卷积（Depthwise separable convolution,
 DSC）由逐深度卷积和逐点卷积组成，深度卷积用于提取空间特征，逐点卷积用于提取通道特征。深度可分离卷积在特征维度上分组卷积，对每个channel进行独立的逐深度卷积（depthwise
 convolution），并在输出前使用一个1x1卷积（pointwise
-convolution）将所有通道进行聚合。 <img
-src="https://pic1.zhimg.com/80/v2-30b6ec010424b349e16529607e1d0c2c_720w.webp" /></p>
+convolution）将所有通道进行聚合。</p>
 <p>深度可分离卷积，先对每个channel进行DWConv，然后再通过
 PWConv合并所有channels为输出特征图，从而达到减小计算量、提升计算效率的目的。</p>
 <h4 id="参数量">参数量</h4>
 <p>逐深度卷积：深度卷积的卷积核尺寸<span class="math inline">\(D_K * D_K
 * 1\)</span>，卷积核个数为M，所以参数量为：<span
 class="math inline">\(D_K * D_K * M\)</span></p>
-<p>逐点卷积：逐点卷积的卷积核尺寸为$1 ∗ 1 ∗ M <span
-class="math inline">\(，卷积核个数为N，所以参数量为：\)</span>M * N$</p>
+<p>逐点卷积：逐点卷积的卷积核尺寸为<span
+class="math inline">\(1*1*M\)</span>，卷积核个数为N，所以参数量为：<span
+class="math inline">\(M *N\)</span></p>
 <p>因此，深度可分离卷积的参数量为：<span class="math inline">\(D_K * D_K
 * M+M * N\)</span></p>
 <h4 id="计算量">计算量</h4>
@@ -576,13 +566,9 @@ D_F * D_F\)</span></p>
 <h4 id="与标准卷积对比">与标准卷积对比</h4>
 <h5 id="结构对比">结构对比</h5>
 <p>深度可分离卷积的每个块构成：首先是一个3x3的深度卷积，其次是BN、Relu层，接下来是1x1的逐点卷积，最后又是BN和Relu层。</p>
-<p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/6778c4fd041b88bf5fca07059c5b1f86.png#pic_center" /></p>
 <h5 id="计算量和参数量对比">计算量和参数量对比</h5>
-<p><img
-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef697ccc23fe41a895e6454fc728a30d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" /></p>
-<p><img
-src="https://i-blog.csdnimg.cn/blog_migrate/e834e5bb250dac65829df99e78c7b70a.png#pic_center" /></p>
+<p>参数量比值=计算量比值=<span
+class="math inline">\(\frac{1}{N}+\frac{1}{D_k^2}\)</span></p>
 <p>一般的，N较大，$ <span
 class="math inline">\(可忽略不计，\)</span>D_K<span
 class="math inline">\(表示卷积核的大小，若\)</span>D_K =3<span
@@ -639,7 +625,7 @@ groups 整除。当groups
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:42:04+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:49:38+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年8月23日</p>
