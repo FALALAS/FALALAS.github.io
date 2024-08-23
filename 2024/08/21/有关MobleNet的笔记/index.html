@@ -504,36 +504,46 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h3 id="标准卷积">标准卷积</h3>
+  <p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/70703846">轻量级神经网络“巡礼”（二）——
+MobileNet，从V1到V3 - 知乎 (zhihu.com)</a></p>
+<h3 id="标准卷积">标准卷积</h3>
 <p>标准卷积，利用若干个多通道卷积核对输入的多通道图像进行处理，输出的feature
 map既提取了通道特征，又提取了空间特征。</p>
+<p><img
+src="https://pic4.zhimg.com/80/v2-f471bdb9191d0c8b65688ececbe935fb_720w.webp" /></p>
+<p>输入一个12×12×3的一个输入特征图，经过5×5×3的卷积核卷积得到一个8×8×1的输出特征图。如果此时我们有256个特征图，我们将会得到一个8×8×256的输出特征图。</p>
 <p>用数学公式表达标准卷积，假设卷积核大小为<span
 class="math inline">\(D_K*D_K\)</span>，输入通道为M，输出通道为N，输出的特征图尺寸为<span
-class="math inline">\(D_F*D_F\)</span>，则通过标准卷积之后，可以计算：</p>
+class="math inline">\(D_W *
+D_H\)</span>，则通过标准卷积之后，可以计算：</p>
 <p>参数量为：<span class="math inline">\(D_K*D_K*M*N\)</span>
-计算量为：<span class="math inline">\(D_K*D_K*M*N*D_F*D_F\)</span></p>
+计算量为：<span class="math inline">\(D_K*D_K*M*N*D_W * D_H\)</span></p>
+<figure>
+<img
+src="https://pic2.zhimg.com/80/v2-eb2f07d6b8bc4c8a90c5daafbba683dd_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <h3 id="逐深度卷积depthwise-convolution">逐深度卷积（Depthwise
 Convolution）</h3>
 <p>简单理解，逐深度卷积就是深度(channel)维度不变，改变H/W。</p>
+<p><img
+src="https://pic2.zhimg.com/80/v2-b74a5e8241eb500949d8dcc47558d035_720w.webp" /></p>
 <p>逐深度卷积（Depthwise
 convolution，DWConv）与标准卷积的区别在于，深度卷积的卷积核为单通道模式，需要对输入的每一个通道进行卷积，这样就会得到和输入特征图通道数一致的输出特征图。即有输入特征图通道数=卷积核个数=输出特征图个数。</p>
-<p>假设，一个大小为64×64像素、3通道彩色图片，3个单通道卷积核分别进行卷积计算，输出3个单通道的特征图。所以，一个3通道的图像经过运算后生成了3个Feature
-map。其中一个Filter只包含一个大小为3×3的Kernel，卷积部分的参数量为：$
-N_{depthwise} = 3 × 3 × 3 = 27$</p>
-<p>再比如，输入12x12x3
-的特征图，3个5x5x1的卷积核，经过逐深度卷积输出8x8x3的特征图。因此，卷积层的参数量为：$
-N_{pointwise} = 5 × 5 × 3 = 45$</p>
 <h3 id="逐点卷积pointwise-convolution">逐点卷积（Pointwise
 Convolution）</h3>
 <p>简单理解，逐点卷积就是H/W维度不变，改变channel。</p>
+<figure>
+<img
+src="https://pic1.zhimg.com/80/v2-f480c4453e9b7915c88d34ca79288e20_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>根据深度卷积可知，输入特征图通道数=卷积核个数=输出特征图个数，这样会导致输出的特征图个数过少（或者说输出特征图的通道数过少，可看成是输出特征图个数为1，通道数为3），从而可能影响信息的有效性。此时，就需要进行逐点卷积。</p>
 <p>逐点卷积（Pointwise
-Convolution，PWConv）实质上是用1x1的卷积核进行升维。在GoogleNet中大量使用1x1的卷积核，那里主要是用来降维。1x1的卷积核主要作用是对特征图进行升维和降维。</p>
-<p>如下图所示，从深度卷积得到的3个单通道特征图，经过4个大小为1x1x3卷积核的卷积计算，输出4个特征图，而输出特征图的个数取决于Filter的个数。因此，卷积层的参数量为：<span
-class="math inline">\(N_{pointwise} = 1 × 1 × 3 × 4 = 12\)</span></p>
-<p>再比如，经过逐深度卷积得到 8x8x3
-的特征图，256个1x1x3的卷积核，经过逐点卷积输出8x8x256的特征图。因此，卷积层的参数量为：<span
-class="math inline">\(N_{pointwise} = 1 × 1 × 3 × 256 = 768\)</span></p>
+Convolution，PWConv）实质上是用1x1的卷积核进行升维。</p>
 <h3
 id="深度可分离卷积depthwise-separable-convolution">深度可分离卷积（Depthwise
 Separable Convolution）</h3>
@@ -541,6 +551,14 @@ Separable Convolution）</h3>
 DSC）由逐深度卷积和逐点卷积组成，深度卷积用于提取空间特征，逐点卷积用于提取通道特征。深度可分离卷积在特征维度上分组卷积，对每个channel进行独立的逐深度卷积（depthwise
 convolution），并在输出前使用一个1x1卷积（pointwise
 convolution）将所有通道进行聚合。</p>
+<p><img
+src="https://pic1.zhimg.com/80/v2-30b6ec010424b349e16529607e1d0c2c_720w.webp" /></p>
+<figure>
+<img
+src="https://pic3.zhimg.com/80/v2-e123df730cbb163fff15987638bfb03e_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>深度可分离卷积，先对每个channel进行DWConv，然后再通过
 PWConv合并所有channels为输出特征图，从而达到减小计算量、提升计算效率的目的。</p>
 <h4 id="参数量">参数量</h4>
@@ -554,19 +572,37 @@ class="math inline">\(M *N\)</span></p>
 * M+M * N\)</span></p>
 <h4 id="计算量">计算量</h4>
 <p>逐深度卷积：深度卷积的卷积核尺寸$ D_K * D_K * 1<span
-class="math inline">\(，卷积核个数为M，每个都要做\)</span>D_F * D_F<span
-class="math inline">\(次乘加运算，所以计算量为：\)</span>D_K * D_K * M *
-D_F * D_F$</p>
+class="math inline">\(，卷积核个数为M，每个都要做\)</span>D_W * D_H<span
+class="math inline">\(次乘加运算，所以计算量为：\)</span>D_K * D_K * M
+<em>D_W </em> D_H$</p>
 <p>逐点卷积：逐点卷积的卷积核尺寸为<span class="math inline">\(1 * 1 *
-M\)</span>，卷积核个数为N，每个都要做<span class="math inline">\(D_F *
-D_F\)</span>次乘加运算，所以计算量为：<span class="math inline">\(M*N *
-D_F * D_F\)</span></p>
+M\)</span>，卷积核个数为N，每个都要做<span class="math inline">\(D_W *
+D_H\)</span>次乘加运算，所以计算量为：<span class="math inline">\(M*N *
+D_W * D_H\)</span></p>
 <p>因此，深度可分离卷积的计算量为：<span class="math inline">\(D_K * D_K
-* M*D_F * D_F + M*N*D_F * D_F\)</span></p>
+* M*D_W * D_H + M*N*D_W * D_H\)</span></p>
+<figure>
+<img
+src="https://pic1.zhimg.com/80/v2-2d11a371ccccc4716958e752ce6d423c_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <h4 id="与标准卷积对比">与标准卷积对比</h4>
 <h5 id="结构对比">结构对比</h5>
+<figure>
+<img
+src="https://pic4.zhimg.com/80/v2-9e51f4ea53e3ca29e134d913db8ead87_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>深度可分离卷积的每个块构成：首先是一个3x3的深度卷积，其次是BN、Relu层，接下来是1x1的逐点卷积，最后又是BN和Relu层。</p>
 <h5 id="计算量和参数量对比">计算量和参数量对比</h5>
+<figure>
+<img
+src="https://pic4.zhimg.com/80/v2-abb36872e97253589e659e6484e63423_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>参数量比值=计算量比值=<span
 class="math inline">\(\frac{1}{N}+\frac{1}{D_k^2}\)</span></p>
 <p>一般的，N较大，$ <span
@@ -594,6 +630,9 @@ groups 整除。当groups
 <li><p>当 groups=in_channels
 时，表示深度可分离卷积，每个通道都有一组自己的滤波器。</p></li>
 </ul>
+<h3 id="mobilenet-v2">MobileNet V2</h3>
+<p>对低维度做ReLU运算，很容易造成信息的丢失。而在高维度进行ReLU运算的话，信息的丢失则会很少。</p>
+<p>这就解释了为什么深度卷积的卷积核有不少是空。发现了问题，我们就能更好地解决问题。针对这个问题，可以这样解决：既然是ReLU导致的信息损耗，将ReLU替换成线性激活函数。</p>
 
   
   
@@ -625,7 +664,7 @@ groups 整除。当groups
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T21:49:38+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T22:27:31+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年8月23日</p>
@@ -816,7 +855,7 @@ ZFNet ：2013年ILSVRC比赛效果较...</p>
         <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF"><span class="toc-text">标准卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AFdepthwise-convolution"><span class="toc-text">逐深度卷积（Depthwise
 Convolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E7%82%B9%E5%8D%B7%E7%A7%AFpointwise-convolution"><span class="toc-text">逐点卷积（Pointwise
 Convolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AFdepthwise-separable-convolution"><span class="toc-text">深度可分离卷积（Depthwise
-Separable Convolution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">参数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F"><span class="toc-text">计算量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF%E5%AF%B9%E6%AF%94"><span class="toc-text">与标准卷积对比</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94"><span class="toc-text">结构对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">计算量和参数量对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">深度可分离卷积的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pytorch%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">(PyTorch)代码实现</span></a></li></ol>
+Separable Convolution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">参数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F"><span class="toc-text">计算量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF%E5%AF%B9%E6%AF%94"><span class="toc-text">与标准卷积对比</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94"><span class="toc-text">结构对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">计算量和参数量对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">深度可分离卷积的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pytorch%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">(PyTorch)代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mobilenet-v2"><span class="toc-text">MobileNet V2</span></a></li></ol>
     </div>
   </section>
 
