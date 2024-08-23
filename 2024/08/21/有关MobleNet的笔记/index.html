@@ -571,44 +571,33 @@ class="math inline">\(M *N\)</span></p>
 <p>因此，深度可分离卷积的参数量为：<span class="math inline">\(D_K * D_K
 * M+M * N\)</span></p>
 <h4 id="计算量">计算量</h4>
-<p>逐深度卷积：深度卷积的卷积核尺寸$ D_K * D_K * 1<span
-class="math inline">\(，卷积核个数为M，每个都要做\)</span>D_W * D_H<span
-class="math inline">\(次乘加运算，所以计算量为：\)</span>D_K * D_K * M
-<em>D_W </em> D_H$</p>
+<p>逐深度卷积：深度卷积的卷积核尺寸<span class="math inline">\(D_K * D_K
+* 1\)</span>，卷积核个数为M，每个都要做<span class="math inline">\(D_W *
+D_H\)</span>次乘加运算，所以计算量为：<span class="math inline">\(D_K *
+D_K * M *D_W * D_H\)</span></p>
 <p>逐点卷积：逐点卷积的卷积核尺寸为<span class="math inline">\(1 * 1 *
 M\)</span>，卷积核个数为N，每个都要做<span class="math inline">\(D_W *
 D_H\)</span>次乘加运算，所以计算量为：<span class="math inline">\(M*N *
 D_W * D_H\)</span></p>
 <p>因此，深度可分离卷积的计算量为：<span class="math inline">\(D_K * D_K
 * M*D_W * D_H + M*N*D_W * D_H\)</span></p>
-<figure>
-<img
-src="https://pic1.zhimg.com/80/v2-2d11a371ccccc4716958e752ce6d423c_720w.webp"
-alt="img" />
-<figcaption aria-hidden="true">img</figcaption>
-</figure>
+<p><img
+src="https://pic1.zhimg.com/80/v2-2d11a371ccccc4716958e752ce6d423c_720w.webp" /></p>
 <h4 id="与标准卷积对比">与标准卷积对比</h4>
 <h5 id="结构对比">结构对比</h5>
-<figure>
-<img
-src="https://pic4.zhimg.com/80/v2-9e51f4ea53e3ca29e134d913db8ead87_720w.webp"
-alt="img" />
-<figcaption aria-hidden="true">img</figcaption>
-</figure>
+<p><img
+src="https://pic4.zhimg.com/80/v2-9e51f4ea53e3ca29e134d913db8ead87_720w.webp" /></p>
 <p>深度可分离卷积的每个块构成：首先是一个3x3的深度卷积，其次是BN、Relu层，接下来是1x1的逐点卷积，最后又是BN和Relu层。</p>
 <h5 id="计算量和参数量对比">计算量和参数量对比</h5>
-<figure>
-<img
-src="https://pic4.zhimg.com/80/v2-abb36872e97253589e659e6484e63423_720w.webp"
-alt="img" />
-<figcaption aria-hidden="true">img</figcaption>
-</figure>
+<p><img
+src="https://pic4.zhimg.com/80/v2-abb36872e97253589e659e6484e63423_720w.webp" /></p>
 <p>参数量比值=计算量比值=<span
 class="math inline">\(\frac{1}{N}+\frac{1}{D_k^2}\)</span></p>
-<p>一般的，N较大，$ <span
-class="math inline">\(可忽略不计，\)</span>D_K<span
-class="math inline">\(表示卷积核的大小，若\)</span>D_K =3<span
-class="math inline">\(，\)</span>=$
+<p>一般的，N较大，<span
+class="math inline">\(\frac{1}{N}\)</span>可忽略不计，<span
+class="math inline">\(D_K\)</span>表示卷积核的大小，若<span
+class="math inline">\(D_K =3\)</span>，<span
+class="math inline">\(\frac{1}{D_k^2}=\frac{1}{9}\)</span>
 。也就是说，如果我们使用常见的3×3的卷积核，那么使用深度可分离卷积的参数量和计算量下降到原来的九分之一左右。</p>
 <h5 id="深度可分离卷积的优势">深度可分离卷积的优势</h5>
 <p>相比于传统的卷积神经网络，深度可分离卷积的显著优势在于：</p>
@@ -633,6 +622,55 @@ groups 整除。当groups
 <h3 id="mobilenet-v2">MobileNet V2</h3>
 <p>对低维度做ReLU运算，很容易造成信息的丢失。而在高维度进行ReLU运算的话，信息的丢失则会很少。</p>
 <p>这就解释了为什么深度卷积的卷积核有不少是空。发现了问题，我们就能更好地解决问题。针对这个问题，可以这样解决：既然是ReLU导致的信息损耗，将ReLU替换成线性激活函数。</p>
+<h4 id="linear-bottleneck">Linear bottleneck</h4>
+<p>当然不能把所有的激活层都换成线性的，所以就把最后的那个ReLU6换成Linear。</p>
+<figure>
+<img
+src="https://pic4.zhimg.com/80/v2-1670b59e3e783af66eb4e662f68218ef_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>Separable with linear bottleneck</p>
+<p>作者将这个部分称之为linear bottleneck。</p>
+<h4 id="expansion-layer">Expansion layer</h4>
+<p>现在还有个问题是，深度卷积本身没有改变通道的能力，来的是多少通道输出就是多少通道。如果来的通道很少的话，DW深度卷积只能在低维度上工作，这样效果并不会很好，所以我们要“扩张”通道。既然我们已经知道PW逐点卷积也就是1×1卷积可以用来升维和降维，那就可以在DW深度卷积之前使用PW卷积进行升维（升维倍数为t，t=6），再在一个更高维的空间中进行卷积操作来提取特征：</p>
+<figure>
+<img
+src="https://pic1.zhimg.com/80/v2-52de8b9c6bf90d6bf52299edf9fe09a4_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>也就是说，不管输入通道数是多少，经过第一个PW逐点卷积升维之后，深度卷积都是在相对的更高6倍维度上进行工作。</p>
+<figure>
+<img
+src="https://pic4.zhimg.com/80/v2-fb2496e6bed7551f49817d4e22202c17_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h4 id="inverted-residuals">Inverted residuals</h4>
+<p>回顾V1的网络结构，我们发现V1很像是一个直筒型的VGG网络。我们想像Resnet一样复用我们的特征，所以我们引入了<strong>shortcut结构</strong>，这样V2的block就是如下图形式：</p>
+<figure>
+<img
+src="https://pic3.zhimg.com/80/v2-27e7b6dd3d9a934d8f6af1a6bf23fa8a_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>对比一下V1和V2：</p>
+<figure>
+<img
+src="https://pic2.zhimg.com/80/v2-7b4422a0efcc89c46029052d29d538b5_720w.webp"
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>可以发现，都采用了 1×1 -&gt; 3 ×3 -&gt; 1 × 1
+的模式，以及都使用Shortcut结构。但是不同点呢：</p>
+<ul>
+<li>ResNet 先降维 (0.25倍)、卷积、再升维。</li>
+<li>MobileNetV2 则是 先升维 (6倍)、卷积、再降维。</li>
+</ul>
+<p>刚好V2的block刚好与Resnet的block相反，作者将其命名为<strong>Inverted
+residuals</strong>。就是论文名中的<strong>Inverted
+residuals</strong>。</p>
 
   
   
@@ -664,7 +702,7 @@ groups 整除。当groups
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T22:27:31+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2024-08-23T22:35:39+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2024年8月23日</p>
@@ -855,7 +893,7 @@ ZFNet ：2013年ILSVRC比赛效果较...</p>
         <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF"><span class="toc-text">标准卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AFdepthwise-convolution"><span class="toc-text">逐深度卷积（Depthwise
 Convolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%90%E7%82%B9%E5%8D%B7%E7%A7%AFpointwise-convolution"><span class="toc-text">逐点卷积（Pointwise
 Convolution）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AFdepthwise-separable-convolution"><span class="toc-text">深度可分离卷积（Depthwise
-Separable Convolution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">参数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F"><span class="toc-text">计算量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF%E5%AF%B9%E6%AF%94"><span class="toc-text">与标准卷积对比</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94"><span class="toc-text">结构对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">计算量和参数量对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">深度可分离卷积的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pytorch%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">(PyTorch)代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mobilenet-v2"><span class="toc-text">MobileNet V2</span></a></li></ol>
+Separable Convolution）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E9%87%8F"><span class="toc-text">参数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F"><span class="toc-text">计算量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%A0%87%E5%87%86%E5%8D%B7%E7%A7%AF%E5%AF%B9%E6%AF%94"><span class="toc-text">与标准卷积对比</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%AF%B9%E6%AF%94"><span class="toc-text">结构对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8F%E5%AF%B9%E6%AF%94"><span class="toc-text">计算量和参数量对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%8F%AF%E5%88%86%E7%A6%BB%E5%8D%B7%E7%A7%AF%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">深度可分离卷积的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pytorch%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">(PyTorch)代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mobilenet-v2"><span class="toc-text">MobileNet V2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#linear-bottleneck"><span class="toc-text">Linear bottleneck</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#expansion-layer"><span class="toc-text">Expansion layer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#inverted-residuals"><span class="toc-text">Inverted residuals</span></a></li></ol></li></ol>
     </div>
   </section>
 
